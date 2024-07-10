@@ -1,4 +1,4 @@
-# robots.txt generated at https://www.sojson.com/robots/
-Disallow:https://njmxye.github.io/sitemap%20(1).xml
+# robots.txt generated at http://www.w3cschool.cn/
 User-agent: *
-Disallow:
+Disallow: 
+Sitemap: https://njmxye.github.io/sitemap.xml
