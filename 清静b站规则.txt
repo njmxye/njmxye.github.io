@@ -1,0 +1,14 @@
+||api.live.bilibili.com^$important,app=com.bilibili.app.in
+||api.live.bilibili.com^$app=com.bilibili.app.in
+||192.168.3.1:49152/wps_device.xml
+||192.168.3.1^$app=com.bilibili.app.in
+||192.168.3.1^$important,app=com.bilibili.app.in
+||app.bilibili.com^$app=com.bilibili.app.in
+||api.bilibili.com^$app=com.bilibili.app.in
+||192.168.3.1^$app=com.bilibili.app.in
+||111.19.247.152^$app=com.bilibili.app.in
+||api.vc.bilibili.com^$app=com.bilibili.app.in
+||192.168.3.1^$app=com.bilibili.app.in
+||grpc.biliapi.net^$important,app=com.bilibili.app.in
+||192.168.3.1^$important,app=com.bilibili.app.in
+||biligame.com^$important,app=com.bilibili.app.in
