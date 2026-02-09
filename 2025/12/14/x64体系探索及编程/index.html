@@ -1,0 +1,2179 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>x64体系探索及编程 | 楠 寻 の 小 窝</title><meta name="author" content="楠寻njmxye"><meta name="copyright" content="楠寻njmxye"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="x86&#x2F;x64体系探索及编程第一篇 x86基础第1章 数与数据类型1.1 数 二进制数：计算机运算的基础，每个位（bit）只能表达0或1两种值。二进制数的值计算公式为：  (Dn−1×2n−1)+(Dn−2×2n−2)+...+(D1×21)+(D0×20)(D_{n-1} \times 2^{n-1}) + (D_{n-2} \times 2^{n-2}) + ... + (D_1 \times">
+<meta property="og:type" content="article">
+<meta property="og:title" content="x64体系探索及编程">
+<meta property="og:url" content="https://njmxye.de5.net/2025/12/14/x64%E4%BD%93%E7%B3%BB%E6%8E%A2%E7%B4%A2%E5%8F%8A%E7%BC%96%E7%A8%8B/index.html">
+<meta property="og:site_name" content="楠 寻 の 小 窝">
+<meta property="og:description" content="x86&#x2F;x64体系探索及编程第一篇 x86基础第1章 数与数据类型1.1 数 二进制数：计算机运算的基础，每个位（bit）只能表达0或1两种值。二进制数的值计算公式为：  (Dn−1×2n−1)+(Dn−2×2n−2)+...+(D1×21)+(D0×20)(D_{n-1} \times 2^{n-1}) + (D_{n-2} \times 2^{n-2}) + ... + (D_1 \times">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg">
+<meta property="article:published_time" content="2025-12-14T02:40:00.000Z">
+<meta property="article:modified_time" content="2026-02-09T13:35:41.283Z">
+<meta property="article:author" content="楠寻njmxye">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"><link rel="shortcut icon" href="https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/favicon.png"><link rel="canonical" href="https://njmxye.de5.net/2025/12/14/x64%E4%BD%93%E7%B3%BB%E6%8E%A2%E7%B4%A2%E5%8F%8A%E7%BC%96%E7%A8%8B/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="google-site-verification" content="cWyLZN3gSLDdjz3lqJl60UiBZnrX1fPVfGqm_rELJZA"/><link rel="stylesheet" href="/css/index.css?v=4.13.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.1/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'x64体系探索及编程',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2026-02-09 13:35:41'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.3.0"><link rel="stylesheet" href="/assets/css/APlayer.min.css" class="aplayer-style-marker">
+<script src="/assets/js/APlayer.min.js" class="aplayer-script-marker"></script>
+</head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">13</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr class="custom-hr"/></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://www.helloimg.com/i/2024/12/20/6764f5f231582.png')"><nav id="nav"><span id="blog-info"><a href="/" title="楠 寻 の 小 窝"><span class="site-name">楠 寻 の 小 窝</span></a></span><div id="menus"><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">x64体系探索及编程</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-12-14T02:40:00.000Z" title="发表于 2025-12-14 02:40:00">2025-12-14</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-02-09T13:35:41.283Z" title="更新于 2026-02-09 13:35:41">2026-02-09</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">18.4k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>65分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="x64体系探索及编程"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="x86-x64体系探索及编程"><a href="#x86-x64体系探索及编程" class="headerlink" title="x86/x64体系探索及编程"></a>x86/x64体系探索及编程</h1><h2 id="第一篇-x86基础"><a href="#第一篇-x86基础" class="headerlink" title="第一篇 x86基础"></a>第一篇 x86基础</h2><h3 id="第1章-数与数据类型"><a href="#第1章-数与数据类型" class="headerlink" title="第1章 数与数据类型"></a>第1章 数与数据类型</h3><h4 id="1-1-数"><a href="#1-1-数" class="headerlink" title="1.1 数"></a>1.1 数</h4><ul>
+<li><strong>二进制数</strong>：计算机运算的基础，每个位（bit）只能表达0或1两种值。二进制数的值计算公式为：</li>
+</ul>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><msub><mi>D</mi><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msub><mo>×</mo><msup><mn>2</mn><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msup><mo stretchy="false">)</mo><mo>+</mo><mo stretchy="false">(</mo><msub><mi>D</mi><mrow><mi>n</mi><mo>−</mo><mn>2</mn></mrow></msub><mo>×</mo><msup><mn>2</mn><mrow><mi>n</mi><mo>−</mo><mn>2</mn></mrow></msup><mo stretchy="false">)</mo><mo>+</mo><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi><mo>+</mo><mo stretchy="false">(</mo><msub><mi>D</mi><mn>1</mn></msub><mo>×</mo><msup><mn>2</mn><mn>1</mn></msup><mo stretchy="false">)</mo><mo>+</mo><mo stretchy="false">(</mo><msub><mi>D</mi><mn>0</mn></msub><mo>×</mo><msup><mn>2</mn><mn>0</mn></msup><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(D_{n-1} \times 2^{n-1}) + (D_{n-2} \times 2^{n-2}) + ... + (D_1 \times 2^1) + (D_0 \times 2^0)</annotation></semantics></math></span></span></p>
+
+<ul>
+<li><strong>MSB与LSB</strong>：MSB（Most Significant Bit）是最高有效位，LSB（Least Significant Bit）是最低有效位。在无符号数中MSB就是最高位，在有符号数中MSB用作符号位（1为负，0为正）</li>
+<li><strong>小端序与大端序</strong>：x86/x64体系使用小端序存储格式，即LSB存放在低地址，MSB存放在高地址。而某些RISC体系（如PowerPC）使用大端序</li>
+<li><strong>十六进制数</strong>：每个十六进制位能表达16个值（0-9，A-F），一个十六进制数字对应4个二进制数字，大大方便了书写和阅读</li>
+<li><strong>八进制与十进制数</strong>：常用后缀表示法：d或D表示十进制，b或B表示二进制，h或H表示十六进制，o或O表示八进制。C语言中常用0x前缀表示十六进制</li>
+<li><strong>Nasm中的数值表示</strong>：支持多种格式，如<code>mov ax, 200</code>（十进制）、<code>mov ax, 0c8h</code>（十六进制）、<code>mov ax, 11001000b</code>（二进制）</li>
+</ul>
+<h4 id="1-2-数据类型"><a href="#1-2-数据类型" class="headerlink" title="1.2 数据类型"></a>1.2 数据类型</h4><ul>
+<li><strong>基础类型</strong>：包括byte（8位）、word（16位）、doubleword（32位）、quadword（64位），代表指令能一次性处理的数据宽度</li>
+<li><strong>数值类型分类</strong>：<ul>
+<li><strong>整型数</strong>：包括signed（有符号）和unsigned（无符号）类型</li>
+<li><strong>浮点数</strong>：包括单精度（23位精度）、双精度（52位精度）、扩展双精度（64位精度）</li>
+<li><strong>BCD码</strong>：包括non-packed和packed-BCD码</li>
+<li><strong>SIMD数据</strong>：属于packed类型，在一个操作数中集成了多个integer、floating-point或BCD数据</li>
+</ul>
+</li>
+</ul>
+<p><strong>整型数的关键特点</strong>：</p>
+<ul>
+<li>计算机无法判断一个整数是signed还是unsigned，只有在使用场合中假定其类型</li>
+<li>signed数以二进制补码表示，MSB为符号位</li>
+<li>x86的加减法运算不会区分signed与unsigned，但会根据两种假设分别设置eflags标志位</li>
+<li>乘除指令进行了区分：mul/imul、div/idiv</li>
+<li>取值范围：<ul>
+<li>unsigned byte: 0~255, signed byte: -128~+127</li>
+<li>unsigned word: 0~65535, signed word: -32768~+32767</li>
+<li>unsigned dword: 0~4294967295, signed dword: -2147483648~+2147483647</li>
+<li>unsigned qword: 0~18446744073709551615, signed qword: -9223372036854775808~+9223372036854775807</li>
+</ul>
+</li>
+</ul>
+<p><strong>浮点数的关键特点</strong>：</p>
+<ul>
+<li>遵循IEEE754标准，分为sign（符号位）、exponent（指数位）、significand（有效数位）</li>
+<li><strong>规格化</strong>：正常情况下的浮点数使用规格化格式，significand部分第1位必须是1</li>
+<li><strong>biased notation</strong>：为解决浮点数比较问题引入的偏移值<ul>
+<li>单精度：127</li>
+<li>双精度：1023</li>
+<li>扩展双精度：16383</li>
+</ul>
+</li>
+<li><strong>浮点数分类</strong>：<ul>
+<li>zero：包括+0.0和-0.0</li>
+<li>denormal数：不合规的极小值</li>
+<li>normal数：合规的普通浮点数</li>
+<li>infinite数：包括+∞和-∞</li>
+<li>NaN数：包括SNaN（Signaling NaN）和QNaN（Quiet NaN）</li>
+</ul>
+</li>
+</ul>
+<p><strong>浮点数精度转换</strong>：</p>
+<ul>
+<li>单/双精度转换为扩展双精度：需要调整exponent部分</li>
+<li>扩展双精度转换为单/双精度：涉及精度舍入（rounded操作），有4种舍入模式</li>
+<li><strong>浮点数溢出</strong>：<ul>
+<li>overflow（向上溢出）：结果超出最大normal值</li>
+<li>underflow（向下溢出）：结果超出最小normal值</li>
+</ul>
+</li>
+</ul>
+<p><strong>BCD码</strong>：</p>
+<ul>
+<li>非压缩BCD码：每个十进制位用1个字节表示</li>
+<li>压缩BCD码：每个BCD数字使用4位表示，x87 FPU支持80位宽的packed BCD码</li>
+</ul>
+<p><strong>SIMD数据</strong>：</p>
+<ul>
+<li>SSE系列指令使用128位XMM寄存器，支持packed浮点数据和integer数据</li>
+<li>AVX/FMA指令使用256位YMM寄存器</li>
+<li>scalar类型只使用低32位（单精度）或低64位（双精度）</li>
+</ul>
+<hr>
+<h3 id="第2章-x86-x64编程基础"><a href="#第2章-x86-x64编程基础" class="headerlink" title="第2章 x86/x64编程基础"></a>第2章 x86/x64编程基础</h3><h4 id="2-1-编译器选择"><a href="#2-1-编译器选择" class="headerlink" title="2.1 编译器选择"></a>2.1 编译器选择</h4><ul>
+<li><strong>Nasm</strong>：语法简洁，更新快，适合裸机编程</li>
+<li><strong>Yasm</strong>：基于Nasm改进，更优秀但更新慢</li>
+<li><strong>Fasm</strong>：Windows平台支持好，可直接开发Windows程序</li>
+<li><strong>Masm</strong>：微软产品，已集成到Visual Studio中</li>
+<li><strong>Gas</strong>：Linux平台，使用AT&amp;T语法</li>
+<li>本书选择Nasm，因其语法简洁、更新快速</li>
+</ul>
+<h4 id="2-2-机器语言"><a href="#2-2-机器语言" class="headerlink" title="2.2 机器语言"></a>2.2 机器语言</h4><ul>
+<li>机器指令由二进制数标识，直接能被机器识别</li>
+<li>C语言不能直接转换为机器语言，需要经过编译器→汇编器→链接器</li>
+<li>x86是CISC体系，指令长度不固定（1-15字节）</li>
+<li>示例：<code>mov eax, [ebp-4]</code>对应的机器码为<code>8b 45 fc</code></li>
+</ul>
+<h4 id="2-3-Hello-World示例"><a href="#2-3-Hello-World示例" class="headerlink" title="2.3 Hello World示例"></a>2.3 Hello World示例</h4><ul>
+<li>16位实模式下的汇编程序</li>
+<li><strong>寄存器传递参数</strong>：比使用stack传递更高效<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mov si, hello_message</span><br><span class="line">call puts</span><br></pre></td></tr></table></figure></li>
+<li><strong>调用过程</strong>：call指令可以直接给出目标地址，也可以通过寄存器或内存操作数</li>
+<li><strong>定义变量</strong>：使用db、dw、dd、dq、dt、do等伪指令</li>
+</ul>
+<h4 id="2-4-16-32-64位编程差异"><a href="#2-4-16-32-64位编程差异" class="headerlink" title="2.4 16/32/64位编程差异"></a>2.4 16/32/64位编程差异</h4><p><strong>通用寄存器</strong>：</p>
+<ul>
+<li>16/32位编程：使用相同的通用寄存器集</li>
+<li>64位编程：新增8个寄存器（r8~r15），原有寄存器扩展为64位</li>
+<li>64位下可以使用spl、bpl、sil、dil等低8位寄存器</li>
+</ul>
+<p><strong>操作数大小</strong>：</p>
+<ul>
+<li>64位支持64位立即操作数：<code>mov rax, 0x1122334455667788</code></li>
+</ul>
+<p><strong>内存地址</strong>：</p>
+<ul>
+<li>64位使用canonical地址形式：高16位必须全0或全1</li>
+<li>non-canonical地址形式是非法的</li>
+</ul>
+<p><strong>内存寻址模式</strong>：</p>
+<ul>
+<li>16位寻址：基址只能用bx/bp，变址只能用si/di</li>
+<li>32位寻址：基址和变址可以是8个通用寄存器</li>
+<li>64位寻址：新增RIP-Relative寻址，易于构造PIC代码<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lea rbx, [rel __IMP_FUNCTION_TABLE]</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><strong>内存寻址范围</strong>：</p>
+<ul>
+<li>16位实模式：受64K限制</li>
+<li>32位保护模式：4G线性空间</li>
+<li>64位环境：64位寻址空间</li>
+</ul>
+<p><strong>指令限制</strong>：</p>
+<ul>
+<li>64位下无效的指令：push cs/ds/es/ss、pop ds/es/ss、les/lds等</li>
+<li>direct far call/jmp在64位下无效</li>
+</ul>
+<h4 id="2-5-编程基础"><a href="#2-5-编程基础" class="headerlink" title="2.5 编程基础"></a>2.5 编程基础</h4><p><strong>操作数寻址</strong>：</p>
+<ul>
+<li><strong>寄存器寻址</strong>：在寄存器里存取数据</li>
+<li><strong>内存操作数寻址</strong>：使用<code>[]</code>括号标识，支持多种寻址模式</li>
+<li><strong>立即数寻址</strong>：值从机器指令中获取</li>
+<li><strong>I/O端口寻址</strong>：使用IN/OUT指令访问64K I/O地址空间</li>
+</ul>
+<p><strong>地址形式</strong>：</p>
+<ul>
+<li><strong>逻辑地址</strong>：segment:offset形式，程序中使用的地址</li>
+<li><strong>线性地址</strong>：段base+offset，不被程序直接使用</li>
+<li><strong>物理地址</strong>：最终输出到address bus的地址</li>
+<li>在64位模式下，除了FS/GS段，其他段的base强制为0，线性地址等于offset</li>
+</ul>
+<p><strong>数据传送指令</strong>：</p>
+<ul>
+<li><strong>mov指令</strong>：不支持memory到memory的直接传送<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mov dword [mem1], 1  ; 必须明确指示操作数大小</span><br></pre></td></tr></table></figure></li>
+<li><strong>move/load/store操作</strong>：<ul>
+<li>move：寄存器内部传送</li>
+<li>load：内存到寄存器</li>
+<li>store：寄存器到内存</li>
+<li>load-and-store：先load再store（非原子操作）</li>
+</ul>
+</li>
+<li><strong>符号扩展与零扩展</strong>：<ul>
+<li>movsx：符号扩展</li>
+<li>movzx：零扩展</li>
+<li>movsxd：32位符号扩展到64位</li>
+</ul>
+</li>
+<li><strong>条件mov指令</strong>：CMOVcc，基于flags标志位进行传送</li>
+</ul>
+<p><strong>位操作指令</strong>：</p>
+<ul>
+<li><strong>逻辑指令</strong>：and、or、xor、not</li>
+<li><strong>位指令</strong>：bt（测试位）、bts（测试并置位）、btr（测试并清位）、btc（测试并取反）</li>
+<li><strong>位查询指令</strong>：bsf（向前查询）、bsr（反向查询）</li>
+<li><strong>位移指令</strong>：shl/sal、shr、sar、rol、ror、rcl、rcr、shld、shrd</li>
+</ul>
+<p><strong>算术指令</strong>：</p>
+<ul>
+<li>加减乘除运算，不区分signed/unsigned（除乘除法外）</li>
+<li>ADC/SBB用于大数运算</li>
+</ul>
+<p><strong>CALL与RET指令</strong>：</p>
+<ul>
+<li>call指令压入返回地址，ret指令弹出返回地址</li>
+<li>可以通过寄存器或内存提供目标地址</li>
+</ul>
+<p><strong>跳转指令</strong>：</p>
+<ul>
+<li>JMP：无条件跳转</li>
+<li>Jcc：条件跳转，基于标志位条件</li>
+</ul>
+<hr>
+<h3 id="第3章-编写本书的实验例子"><a href="#第3章-编写本书的实验例子" class="headerlink" title="第3章 编写本书的实验例子"></a>第3章 编写本书的实验例子</h3><h4 id="3-1-实验运行环境"><a href="#3-1-实验运行环境" class="headerlink" title="3.1 实验运行环境"></a>3.1 实验运行环境</h4><ul>
+<li><strong>Bochs模拟器</strong>、<strong>VMware虚拟机</strong>、<strong>真实机器</strong></li>
+<li>使用FAT32文件格式，便于在真实机器上使用U盘启动</li>
+</ul>
+<h4 id="3-2-生成空白映像文件"><a href="#3-2-生成空白映像文件" class="headerlink" title="3.2 生成空白映像文件"></a>3.2 生成空白映像文件</h4><ul>
+<li><strong>使用nasm</strong>：生成填满0的1.44MB文件</li>
+<li><strong>使用bximage</strong>：Bochs自带的工具，交互式生成</li>
+</ul>
+<h4 id="3-3-Bochs配置"><a href="#3-3-Bochs配置" class="headerlink" title="3.3 Bochs配置"></a>3.3 Bochs配置</h4><ul>
+<li>配置文件中指定启动介质（floppy或disk）</li>
+<li>示例配置：<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">floppya: 1_44=demo.img, status=inserted</span><br><span class="line">ata0-master: type=disk, path=&quot;c.img&quot;, mode=flat</span><br><span class="line">boot: disk</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="3-4-源码结构"><a href="#3-4-源码结构" class="headerlink" title="3.4 源码结构"></a>3.4 源码结构</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">x86\source\</span><br><span class="line">├── inc\          ; 头文件</span><br><span class="line">├── lib\          ; 库函数</span><br><span class="line">├── common\       ; 公共代码</span><br><span class="line">└── topic01..XX\  ; 各章实验代码</span><br></pre></td></tr></table></figure>
+<h4 id="3-5-编译源码"><a href="#3-5-编译源码" class="headerlink" title="3.5 编译源码"></a>3.5 编译源码</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nasm -I..\ ex3-2\setup.asm -o setup.bin</span><br></pre></td></tr></table></figure>
+<h4 id="3-6-映像文件组织"><a href="#3-6-映像文件组织" class="headerlink" title="3.6 映像文件组织"></a>3.6 映像文件组织</h4><ul>
+<li><strong>软盘映像</strong>：boot模块在0扇区，其他模块依次存放</li>
+<li><strong>硬盘映像</strong>：boot模块在63扇区，0扇区是FAT32的MBR代码</li>
+</ul>
+<h4 id="3-7-Merge工具"><a href="#3-7-Merge工具" class="headerlink" title="3.7 Merge工具"></a>3.7 Merge工具</h4><ul>
+<li>批量写入工具，读取config.txt配置文件</li>
+<li>配置格式：<code>源文件, 源偏移, 目标文件, 目标偏移, 扇区数</code></li>
+<li>可同时写入到多个目标文件</li>
+</ul>
+<h4 id="3-8-U盘启动"><a href="#3-8-U盘启动" class="headerlink" title="3.8 U盘启动"></a>3.8 U盘启动</h4><ul>
+<li>使用merge工具将c.img写入U盘</li>
+<li>或使用hex编辑软件（如HxD）手动写入</li>
+<li>编译boot代码时需要定义UBOOT符号：<code>nasm -d UBOOT</code></li>
+</ul>
+<h4 id="3-9-Boot代码编写"><a href="#3-9-Boot代码编写" class="headerlink" title="3.9 Boot代码编写"></a>3.9 Boot代码编写</h4><p><strong>主要功能</strong>：</p>
+<ul>
+<li>显示信息</li>
+<li>从磁盘读取扇区到内存</li>
+<li>支持LBA和CHS两种方式</li>
+</ul>
+<p><strong>关键函数</strong>：</p>
+<ul>
+<li><code>read_sector()</code>：读取单个扇区，自动选择最佳读取方式</li>
+<li><code>LBA_to_CHS()</code>：将LBA地址转换为CHS地址（用于旧式BIOS）</li>
+<li><code>check_int13h_extension()</code>：检测是否支持扩展int13h功能</li>
+<li><code>read_sector_extension()</code>：使用扩展功能读取扇区</li>
+<li><code>load_module()</code>：加载整个模块（多个扇区）</li>
+</ul>
+<p><strong>读取逻辑</strong>：<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">是否支持扩展int13h功能？</span><br><span class="line">├── 是：使用int13h扩展读（LBA方式）</span><br><span class="line">└── 否：使用传统int13h读（需转换为CHS方式）</span><br></pre></td></tr></table></figure></p>
+<hr>
+<h3 id="第4章-处理器的身份"><a href="#第4章-处理器的身份" class="headerlink" title="第4章 处理器的身份"></a>第4章 处理器的身份</h3><h4 id="4-1-测试CPUID支持"><a href="#4-1-测试CPUID支持" class="headerlink" title="4.1 测试CPUID支持"></a>4.1 测试CPUID支持</h4><ul>
+<li>检查eflags寄存器的bit 21（ID标志位）</li>
+<li>通过修改并恢复该位来测试是否支持CPUID指令</li>
+</ul>
+<h4 id="4-2-CPUID术语"><a href="#4-2-CPUID术语" class="headerlink" title="4.2 CPUID术语"></a>4.2 CPUID术语</h4><ul>
+<li><strong>leaf（叶）</strong>：主功能号，如01H leaf</li>
+<li><strong>sub-leaf（子叶）</strong>：辅助子号，用于复杂信息查询</li>
+<li><strong>描述形式</strong>：CPUID.01H:EDX[6]表示01H功能EDX寄存器的第6位</li>
+</ul>
+<h4 id="4-3-基本信息与扩展信息"><a href="#4-3-基本信息与扩展信息" class="headerlink" title="4.3 基本信息与扩展信息"></a>4.3 基本信息与扩展信息</h4><ul>
+<li><strong>查询最大功能号</strong>：<ul>
+<li>基本：CPUID(EAX=0)返回最大basic leaf</li>
+<li>扩展：CPUID(EAX=0x80000000)返回最大extended leaf</li>
+</ul>
+</li>
+<li>如果输入的功能号超过最大值，返回最大功能号的信息</li>
+</ul>
+<h4 id="4-4-处理器型号"><a href="#4-4-处理器型号" class="headerlink" title="4.4 处理器型号"></a>4.4 处理器型号</h4><ul>
+<li>通过CPUID.01H:EAX获取</li>
+<li><strong>DisplayFamily计算</strong>：<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (Family == <span class="number">0F</span>H)</span><br><span class="line">    DisplayFamily = ExtendedFamily + Family;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    DisplayFamily = Family;</span><br></pre></td></tr></table></figure></li>
+<li><strong>DisplayModel计算</strong>：<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (Family == <span class="number">06</span>H || Family == <span class="number">0F</span>H)</span><br><span class="line">    DisplayModel = (ExtendedModel &lt;&lt; <span class="number">4</span>) + Model;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    DisplayModel = Model;</span><br></pre></td></tr></table></figure></li>
+<li>Intel使用<code>DisplayFamily_DisplayModel</code>格式描述处理器模型</li>
+</ul>
+<h4 id="4-5-最大物理地址和线性地址"><a href="#4-5-最大物理地址和线性地址" class="headerlink" title="4.5 最大物理地址和线性地址"></a>4.5 最大物理地址和线性地址</h4><ul>
+<li>CPUID.80000008H返回</li>
+<li>EAX[7:0]：物理地址宽度（MAXPHYADDR）</li>
+<li>EAX[15:8]：线性地址宽度</li>
+<li>在long mode下，线性地址宽度为48位</li>
+</ul>
+<h4 id="4-6-处理器扩展状态信息"><a href="#4-6-处理器扩展状态信息" class="headerlink" title="4.6 处理器扩展状态信息"></a>4.6 处理器扩展状态信息</h4><ul>
+<li>CPUID.0DH功能号</li>
+<li><strong>Processor Extended State</strong>：64位位图，每1位对应一个扩展状态<ul>
+<li>Bit 0：X87 FPU状态</li>
+<li>Bit 1：SSE状态</li>
+<li>Bit 2：YMM状态（AVX支持）</li>
+</ul>
+</li>
+<li><strong>与XCR0的关系</strong>：XCR0是功能开关，CPUID返回的是处理器能力</li>
+<li><strong>状态保存</strong>：使用XSAVE指令，根据XCR0和MASK值决定保存哪些状态</li>
+<li><strong>状态恢复</strong>：使用XRSTOR指令，根据XSTATE_BV位图恢复状态</li>
+</ul>
+<h4 id="4-7-处理器特性"><a href="#4-7-处理器特性" class="headerlink" title="4.7 处理器特性"></a>4.7 处理器特性</h4><ul>
+<li>CPUID.01H返回ECX和EDX寄存器</li>
+<li><strong>重要标志位</strong>：<ul>
+<li>ECX[27]：OSXSAVE（由软件设置）</li>
+<li>ECX[28]：AVX支持</li>
+<li>ECX[26]：XSAVE支持</li>
+<li>EDX[6]：PAE支持</li>
+</ul>
+</li>
+<li>这些特性可能受到MSR设置的影响</li>
+</ul>
+<h4 id="4-8-Cache与TLB信息"><a href="#4-8-Cache与TLB信息" class="headerlink" title="4.8 Cache与TLB信息"></a>4.8 Cache与TLB信息</h4><ul>
+<li><strong>CPUID.02H</strong>：返回cache和TLB信息<ul>
+<li>EAX最低字节：需要执行CPUID.02H的次数</li>
+<li>寄存器每个字节（除EAX byte 0外）指示一个信息</li>
+</ul>
+</li>
+<li><strong>CPUID.04H</strong>：更详细的cache信息查询（子叶枚举）<ul>
+<li>从ECX=0开始查询，直至EAX[4:0]=0</li>
+<li>cache size计算：<code>(line_size+1) × (line_partition+1) × (way+1) × (set+1)</code></li>
+</ul>
+</li>
+<li>AMD机器使用扩展功能号80000005H、80000006H、8000001DH查询</li>
+</ul>
+<h4 id="4-9-MONITOR-MWAIT信息"><a href="#4-9-MONITOR-MWAIT信息" class="headerlink" title="4.9 MONITOR/MWAIT信息"></a>4.9 MONITOR/MWAIT信息</h4><ul>
+<li>用于监控线性地址范围，进入优化状态</li>
+<li>CPUID.05H返回monitor-line size信息</li>
+<li>典型应用：在Idle Loop中提高性能和减少能耗</li>
+</ul>
+<h4 id="4-10-处理器的long-mode"><a href="#4-10-处理器的long-mode" class="headerlink" title="4.10 处理器的long mode"></a>4.10 处理器的long mode</h4><ul>
+<li>CPUID.80000001H.EDX[29]：Long Mode标志位</li>
+<li>CPUID.80000001H.EDX[11]：SYSCALL/SYSRET支持</li>
+<li>CPUID.80000001H.EDX[26]：1G-page支持</li>
+</ul>
+<hr>
+<h3 id="第5章-了解Flags"><a href="#第5章-了解Flags" class="headerlink" title="第5章 了解Flags"></a>第5章 了解Flags</h3><h4 id="5-1-状态标志位"><a href="#5-1-状态标志位" class="headerlink" title="5.1 状态标志位"></a>5.1 状态标志位</h4><p><strong>PF标志位</strong>：</p>
+<ul>
+<li>检查结果值最低字节中1的数量</li>
+<li>偶数个1时PF=1，奇数个1时PF=0</li>
+</ul>
+<p><strong>AF标志位</strong>：</p>
+<ul>
+<li>bit 3发生进位或借位时置位</li>
+<li>用于BCD码运算调整</li>
+</ul>
+<p><strong>signed数运算</strong>：</p>
+<ul>
+<li><strong>溢出判断</strong>：<ul>
+<li>两个正数相加结果为负数：overflow</li>
+<li>两个负数相加结果为正数：underflow</li>
+<li>正负数相加：不会溢出</li>
+</ul>
+</li>
+<li><strong>比较操作</strong>：<ul>
+<li>使用cmp指令相减，根据标志位判断</li>
+<li>OF == SF 且 ZF=0：大于</li>
+<li>OF != SF：小于</li>
+<li>OF == SF：大于或等于</li>
+<li>OF != SF 或 ZF=1：小于或等于</li>
+</ul>
+</li>
+</ul>
+<p><strong>unsigned数运算</strong>：</p>
+<ul>
+<li><strong>比较操作</strong>：<ul>
+<li>CF=0 且 ZF=0：高于（above）</li>
+<li>CF=1：低于（below）</li>
+<li>CF=0：高于或等于</li>
+<li>CF=1 或 ZF=1：低于或等于</li>
+</ul>
+</li>
+</ul>
+<h4 id="5-2-IOPL标志位"><a href="#5-2-IOPL标志位" class="headerlink" title="5.2 IOPL标志位"></a>5.2 IOPL标志位</h4><ul>
+<li>指示访问I/O地址空间所需要的权限</li>
+<li>只有当CPL=0时可以修改IOPL值</li>
+<li>当CPL&lt;=IOPL时可以修改IF标志位</li>
+<li><strong>I/O Bitmap</strong>：在TSS段中，当CPL&gt;IOPL时，I/O Bitmap决定端口访问权</li>
+</ul>
+<h4 id="5-3-TF标志与RF标志"><a href="#5-3-TF标志与RF标志" class="headerlink" title="5.3 TF标志与RF标志"></a>5.3 TF标志与RF标志</h4><ul>
+<li><strong>TF标志</strong>：单步调试标志<ul>
+<li>TF置位后，执行完下一条指令进入#DB处理</li>
+<li>进入#DB处理程序前，TF被清0</li>
+</ul>
+</li>
+<li><strong>RF标志</strong>：控制指令重试<ul>
+<li>在#DB处理程序中，需要将stack中的RF置1</li>
+<li>处理器每条指令执行完后将RF清0</li>
+<li>确保fault类型异常能正确重试指令</li>
+</ul>
+</li>
+</ul>
+<h4 id="5-4-NT标志"><a href="#5-4-NT标志" class="headerlink" title="5.4 NT标志"></a>5.4 NT标志</h4><ul>
+<li><strong>嵌套任务标志</strong>：NT=1表示当前任务嵌套在另一个任务中</li>
+<li><strong>置位时机</strong>：<ul>
+<li>call指令进行任务切换时</li>
+<li>interrupt/exception任务切换时</li>
+</ul>
+</li>
+<li><strong>清位时机</strong>：<ul>
+<li>使用iret从嵌套任务返回时</li>
+<li>使用jmp进行任务切换时</li>
+</ul>
+</li>
+<li>64位模式下不支持任务切换，NT标志无效</li>
+</ul>
+<h4 id="5-5-AC标志"><a href="#5-5-AC标志" class="headerlink" title="5.5 AC标志"></a>5.5 AC标志</h4><ul>
+<li><strong>对齐检查标志</strong>：需同时开启CR0.AM和eflags.AC</li>
+<li>检查数据访问是否违反对齐粒度</li>
+<li>仅在3级权限下产生<code>#AC异常</code></li>
+<li><code>#AC异常</code>属于fault类型，处理程序需修正错误</li>
+</ul>
+<h4 id="5-6-VM标志"><a href="#5-6-VM标志" class="headerlink" title="5.6 VM标志"></a>5.6 VM标志</h4><ul>
+<li><strong>virtual-8086模式标志</strong>：VM=1进入，VM=0离开</li>
+<li>不能被popfd指令修改</li>
+<li><strong>置位途径</strong>：<ul>
+<li>任务切换时TSS中的eflags.VM=1</li>
+<li>iret返回时stack中的eflags.VM=1</li>
+</ul>
+</li>
+<li>64位模式下不支持virtual-8086模式</li>
+</ul>
+<h4 id="5-7-eflags其他事项"><a href="#5-7-eflags其他事项" class="headerlink" title="5.7 eflags其他事项"></a>5.7 eflags其他事项</h4><ul>
+<li>处理器初始化后，eflags=00000002H（Bit 1固定为1）</li>
+<li><strong>专用指令</strong>：<ul>
+<li>STC/CLC/CMC：操作CF标志</li>
+<li>STD/CLD：操作DF标志</li>
+<li>STI/CLI：操作IF标志（需要足够权限）</li>
+</ul>
+</li>
+<li><strong>权限差异</strong>：<ul>
+<li>popfd修改IF：不够权限时不产生异常</li>
+<li>sti/cli修改IF：不够权限时产生#GP异常</li>
+</ul>
+</li>
+<li>中断响应时机：sti指令后，ret返回前可能暂缓响应中断</li>
+</ul>
+<hr>
+<h3 id="第6章-处理器的控制寄存器"><a href="#第6章-处理器的控制寄存器" class="headerlink" title="第6章 处理器的控制寄存器"></a>第6章 处理器的控制寄存器</h3><h4 id="6-1-CR8"><a href="#6-1-CR8" class="headerlink" title="6.1 CR8"></a>6.1 CR8</h4><ul>
+<li><strong>任务优先级寄存器</strong>（64位模式下有效）</li>
+<li>低4位控制可响应的中断级别（0-15）</li>
+<li>值越大，阻塞的中断越多</li>
+<li>是local APIC的TPR对外编程接口</li>
+</ul>
+<h4 id="6-2-CR3"><a href="#6-2-CR3" class="headerlink" title="6.2 CR3"></a>6.2 CR3</h4><ul>
+<li><strong>页转换表基地址寄存器</strong></li>
+<li><strong>不同模式下的作用</strong>：<ul>
+<li>non-PAE模式：指向Page-Directory Table</li>
+<li>PAE模式：指向Page-Directory-Pointer Table</li>
+<li>long mode：指向Page-Map Level-4 Table</li>
+</ul>
+</li>
+<li><strong>结构特点</strong>：<ul>
+<li>32-bit paging：提供PDT基地址，4K对齐</li>
+<li>PAE模式：提供PDPT基地址，32字节对齐</li>
+<li>long mode：提供PML4表基地址，4K对齐</li>
+</ul>
+</li>
+<li>更新CR3会强制刷新TLB（Global页除外）</li>
+</ul>
+<h4 id="6-3-CR0"><a href="#6-3-CR0" class="headerlink" title="6.3 CR0"></a>6.3 CR0</h4><p><strong>PE控制位</strong>：</p>
+<ul>
+<li>PE=0：实模式</li>
+<li>PE=1：保护模式</li>
+</ul>
+<p><strong>x87 FPU控制位</strong>：</p>
+<ul>
+<li><strong>NE</strong>：x87 FPU异常处理模式<ul>
+<li>NE=1：native模式（处理器直接处理）</li>
+<li>NE=0：DOS-compatibility模式（通过IRQ13处理）</li>
+</ul>
+</li>
+<li><strong>EM</strong>：x87 FPU模拟位<ul>
+<li>EM=1：执行x87 FPU指令产生#NM异常（软件模拟）</li>
+<li>EM=0：正常执行</li>
+</ul>
+</li>
+<li><strong>TS</strong>：任务切换标志<ul>
+<li>处理器在任务切换时置位，软件负责清位</li>
+<li>TS=1时，执行x87 FPU/MMX/SSE指令产生#NM异常</li>
+</ul>
+</li>
+<li><strong>MP</strong>：监控协处理器位<ul>
+<li>MP=1且TS=1时，执行wait/fwait指令产生#NM异常</li>
+</ul>
+</li>
+</ul>
+<p><strong>组合影响</strong>：</p>
+<ul>
+<li>EM=0、TS=1、MP=1：x87 FPU/MMX/SSE和wait/fwait都产生#NM异常</li>
+<li>推荐设置：NE=1、MP=1、EM=0</li>
+</ul>
+<p><strong>其他控制位</strong>：</p>
+<ul>
+<li><strong>PG</strong>：分页机制开关（必须先开启保护模式）</li>
+<li><strong>CD/NW</strong>：cache控制<ul>
+<li>CD=0、NW=0：正常cache使用</li>
+<li>CD=0、NW=1：错误，产生#GP异常</li>
+<li>CD=1、NW=0：不进行新的cache fill，但维护现有cache</li>
+<li>CD=1、NW=1：不进行新的cache fill，也不维护memory一致性</li>
+</ul>
+</li>
+<li><strong>WP</strong>：写保护位<ul>
+<li>WP=1：supervisor程序也不能修改read-only页</li>
+</ul>
+</li>
+<li><strong>AM</strong>：对齐检查使能位（需配合eflags.AC）</li>
+</ul>
+<h4 id="6-4-CR4"><a href="#6-4-CR4" class="headerlink" title="6.4 CR4"></a>6.4 CR4</h4><p><strong>指令权限控制</strong>：</p>
+<ul>
+<li><strong>TSD</strong>：RDTSC/RDTSCP指令权限<ul>
+<li>TSD=1：只能在0级执行</li>
+<li>TSD=0：任何权限可执行</li>
+</ul>
+</li>
+<li><strong>PCE</strong>：RDPMC指令权限<ul>
+<li>PCE=1：任何权限可执行</li>
+<li>PCE=0：只能在0级执行</li>
+</ul>
+</li>
+</ul>
+<p><strong>调试与检查</strong>：</p>
+<ul>
+<li><strong>DE</strong>：调试扩展位<ul>
+<li>DE=1：使用dr4/dr5产生#UD异常</li>
+<li>DE=0：dr4/dr5映射到dr6/dr7</li>
+</ul>
+</li>
+<li><strong>MCE</strong>：机器检查使能位</li>
+</ul>
+<p><strong>执行环境准备</strong>：</p>
+<ul>
+<li><strong>OSFXSR</strong>：SSE执行环境准备<ul>
+<li>OSFXSR=1：SSE指令可用，FXSAVE/FXRSTOR可保存XMM状态</li>
+<li>OSFXSR=0：SSE指令产生#UD异常</li>
+</ul>
+</li>
+<li><strong>OSXSAVE</strong>：AVX执行环境准备<ul>
+<li>需要处理器支持XSAVE/AVX</li>
+<li>OS置位表示已为AVX指令做好准备</li>
+</ul>
+</li>
+</ul>
+<p><strong>虚拟化与安全</strong>：</p>
+<ul>
+<li><strong>VMXE</strong>：VMX功能使能（Intel）</li>
+<li><strong>SMXE</strong>：SMX功能使能（Intel）</li>
+<li><strong>PCIDE</strong>：进程上下文标识使能（Intel）</li>
+<li><strong>SMEP</strong>：supervisor模式执行保护（Intel）<ul>
+<li>控制supervisor程序只能执行supervisor权限的代码页</li>
+</ul>
+</li>
+</ul>
+<p><strong>页管理控制</strong>：</p>
+<ul>
+<li><strong>PSE</strong>：4M-page支持（32位页结构）</li>
+<li><strong>PAE</strong>：扩展物理地址支持（使用64位页表结构）</li>
+<li><strong>PGE</strong>：global页支持</li>
+<li><strong>PSE-36</strong>：在non-PAE模式下支持超过4G物理地址</li>
+</ul>
+<h4 id="6-5-EFER扩展功能寄存器"><a href="#6-5-EFER扩展功能寄存器" class="headerlink" title="6.5 EFER扩展功能寄存器"></a>6.5 EFER扩展功能寄存器</h4><ul>
+<li><strong>LME</strong>：Long Mode Enable</li>
+<li><strong>LMA</strong>：Long Mode Active（只读，由处理器设置）</li>
+<li><strong>NXE</strong>：No-Execute Enable（页执行禁止）</li>
+<li><strong>SCE</strong>：Syscall Enable</li>
+<li><strong>SVME</strong>：Secure Virtual Machine Enable（AMD）</li>
+<li><strong>LMSLE</strong>：Long Mode Segment Limit Enable（AMD）</li>
+<li><strong>FFXSR</strong>：Fast FXSAVE/FXRSTOR（AMD）</li>
+</ul>
+<p><strong>开启long mode步骤</strong>：</p>
+<ol>
+<li>设置CR0.PE=1（进入保护模式）</li>
+<li>设置CR4.PAE=1（启用PAE）</li>
+<li>设置EFER.LME=1（启用long mode）</li>
+<li>设置CR0.PG=1（启用分页）</li>
+<li>处理器自动设置EFER.LMA=1</li>
+</ol>
+<hr>
+<h3 id="第7章-MSR"><a href="#第7章-MSR" class="headerlink" title="第7章 MSR"></a>第7章 MSR</h3><h4 id="MSR概述"><a href="#MSR概述" class="headerlink" title="MSR概述"></a>MSR概述</h4><ul>
+<li><strong>MSR</strong> 是<strong>处理器特定寄存器</strong>，数量庞大，Intel和AMD的实现不同，不同架构也可能不同。</li>
+<li>主要作用：提供对硬件和软件功能的控制，常用于BIOS初始化设置。</li>
+</ul>
+<h5 id="MSR功能（Intel列出）："><a href="#MSR功能（Intel列出）：" class="headerlink" title="MSR功能（Intel列出）："></a>MSR功能（Intel列出）：</h5><ol>
+<li>性能监视计数器</li>
+<li>调试扩展支持</li>
+<li>机器检查异常能力</li>
+<li>MTRR（内存类型与范围定义）</li>
+<li>功耗与温控管理</li>
+<li>特殊指令支持</li>
+<li>处理器特性/模式支持</li>
+</ol>
+<h4 id="MSR使用方法"><a href="#MSR使用方法" class="headerlink" title="MSR使用方法"></a>MSR使用方法</h4><ul>
+<li>每个MSR有地址（编号），使用<code>rdmsr</code>（读）和<code>wrmsr</code>（写）指令。</li>
+<li><code>rdmsr</code>：将MSR内容读到<code>EDX:EAX</code>（64位，高32位在EDX，低32位在EAX）。</li>
+<li><code>wrmsr</code>：将<code>EDX:EAX</code>的值写入MSR。</li>
+<li>地址无效时会产生#GP异常。</li>
+</ul>
+<h4 id="MTRR（Memory-Type-Range-Register）"><a href="#MTRR（Memory-Type-Range-Register）" class="headerlink" title="MTRR（Memory Type Range Register）"></a>MTRR（Memory Type Range Register）</h4><h5 id="作用："><a href="#作用：" class="headerlink" title="作用："></a>作用：</h5><ul>
+<li>将物理内存划分为不同区域，定义内存类型（如缓存策略）。</li>
+</ul>
+<h5 id="内存类型编码："><a href="#内存类型编码：" class="headerlink" title="内存类型编码："></a>内存类型编码：</h5><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>编码</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Uncacheable (UC)</td>
+<td>00H</td>
+</tr>
+<tr>
+<td>WriteCombining (WC)</td>
+<td>01H</td>
+</tr>
+<tr>
+<td>WriteThrough (WT)</td>
+<td>04H</td>
+</tr>
+<tr>
+<td>WriteProtected (WP)</td>
+<td>05H</td>
+</tr>
+<tr>
+<td>WriteBack (WB)</td>
+<td>06H</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h5 id="内存区域类型："><a href="#内存区域类型：" class="headerlink" title="内存区域类型："></a>内存区域类型：</h5><ol>
+<li><strong>Fixed区域</strong>：仅限最低1M内存，由11个固定MTRR映射（共88个固定区域）。</li>
+<li><strong>Variable区域</strong>：可自定义范围，最多支持10对PHYSBASE/PHYSMASK寄存器。</li>
+<li><strong>Default区域</strong>：未划分区域，类型由IA32_MTRR_DEF_TYPE寄存器定义。</li>
+</ol>
+<h5 id="MTRR功能寄存器："><a href="#MTRR功能寄存器：" class="headerlink" title="MTRR功能寄存器："></a>MTRR功能寄存器：</h5><ul>
+<li><strong>IA32_MTRRCAP</strong>：指示支持的MTRR功能（如Fixed区域、WC类型、SMRR支持）。</li>
+<li><strong>IA32_MTRR_DEF_TYPE</strong>：启用MTRR和定义Default区域类型。</li>
+<li><strong>PHYSBASE/PHYSMASK寄存器对</strong>：每对描述一个Variable区域（基地址和掩码）。</li>
+</ul>
+<h4 id="特殊指令支持的MSR"><a href="#特殊指令支持的MSR" class="headerlink" title="特殊指令支持的MSR"></a>特殊指令支持的MSR</h4><h5 id="1-sysenter-sysexit（Intel平台）"><a href="#1-sysenter-sysexit（Intel平台）" class="headerlink" title="1. sysenter/sysexit（Intel平台）"></a>1. <strong>sysenter/sysexit</strong>（Intel平台）</h5><ul>
+<li>相关MSR：<ul>
+<li>IA32_SYSENTER_CS（174H）</li>
+<li>IA32_SYSENTER_ESP（175H）</li>
+<li>IA32_SYSENTER_EIP（176H）</li>
+</ul>
+</li>
+<li>在32位/64位模式下使用，AMD在long mode下无效。</li>
+</ul>
+<h5 id="2-syscall-sysret（AMD引入，Intel仅64位支持）"><a href="#2-syscall-sysret（AMD引入，Intel仅64位支持）" class="headerlink" title="2. syscall/sysret（AMD引入，Intel仅64位支持）"></a>2. <strong>syscall/sysret</strong>（AMD引入，Intel仅64位支持）</h5><ul>
+<li>相关MSR：<ul>
+<li>STAR（定义CS/SS和32位入口）</li>
+<li>LSTAR（64位入口）</li>
+<li>CSTAR（兼容模式入口）</li>
+<li>SFMASK（屏蔽rflags标志位）</li>
+</ul>
+</li>
+</ul>
+<h5 id="3-swapgs（64位专用）"><a href="#3-swapgs（64位专用）" class="headerlink" title="3. swapgs（64位专用）"></a>3. <strong>swapgs</strong>（64位专用）</h5><ul>
+<li>交换GS.base与IA32_KERNEL_GS_BASE的值。</li>
+<li>用于系统服务例程中获取内核数据结构。</li>
+</ul>
+<h5 id="4-monitor-mwait"><a href="#4-monitor-mwait" class="headerlink" title="4. monitor/mwait"></a>4. <strong>monitor/mwait</strong></h5><ul>
+<li>相关MSR：<ul>
+<li>IA32_MISC_ENABLE[18]：启用/禁用指令。</li>
+<li>IA32_MONITOR_FILTER_LINE_SIZE：设置监视行大小（默认64字节）。</li>
+</ul>
+</li>
+</ul>
+<h4 id="处理器特性管理MSR"><a href="#处理器特性管理MSR" class="headerlink" title="处理器特性管理MSR"></a>处理器特性管理MSR</h4><ul>
+<li><strong>IA32_APIC_BASE</strong>：配置local APIC基地址。</li>
+<li><strong>IA32_FEATURE_CONTROL</strong>：虚拟化技术配置。</li>
+<li><strong>IA32_MISC_ENABLE</strong>：控制多种功能（如monitor/mwait、XD功能、PEBS等）。</li>
+<li><strong>IA32_EFER</strong>：启用/禁用long mode。</li>
+</ul>
+<h4 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h4><ol>
+<li>MSR是处理器相关的，使用前需查阅手册确认支持情况。</li>
+<li>Intel与AMD实现差异大，AMD详细信息应查阅BKDG文档。</li>
+<li>实验建议在真实机器进行，虚拟机可能屏蔽某些功能。</li>
+<li>某些MSR与CPUID查询结果互相影响，BIOS会进行初始化设置。</li>
+</ol>
+<h2 id="第二篇-处理器的工作模式"><a href="#第二篇-处理器的工作模式" class="headerlink" title="第二篇 处理器的工作模式"></a>第二篇 处理器的工作模式</h2><h3 id="第8章-实地址模式（Real-Address-Mode）"><a href="#第8章-实地址模式（Real-Address-Mode）" class="headerlink" title="第8章 实地址模式（Real-Address Mode）"></a>第8章 实地址模式（Real-Address Mode）</h3><h4 id="8-1-真实的地址"><a href="#8-1-真实的地址" class="headerlink" title="8.1 真实的地址"></a>8.1 真实的地址</h4><ul>
+<li>实模式下，经过段机制转换的线性地址即物理地址。</li>
+<li>8086/8088/80188处理器工作于此模式，后续处理器保留该模式作为启动后首个进入的模式。</li>
+</ul>
+<h4 id="8-2-real-mode-的编址"><a href="#8-2-real-mode-的编址" class="headerlink" title="8.2 real mode 的编址"></a>8.2 real mode 的编址</h4><ul>
+<li>使用逻辑地址 <code>segment:offset</code> 编址，段基址存于段寄存器，偏移量称为有效地址。</li>
+<li>段基址计算：<code>segment &lt;&lt; 4 + offset</code>，形成20位物理地址，段基址为16字节边界对齐。</li>
+<li>最大访问地址为 <code>F000:FFFF = FFFFFH</code>（1MB）。</li>
+</ul>
+<h4 id="8-3-real-mode-的状态"><a href="#8-3-real-mode-的状态" class="headerlink" title="8.3 real mode 的状态"></a>8.3 real mode 的状态</h4><ul>
+<li>由 <code>CR0.PE=0</code> 指示处于实模式。</li>
+<li>典型行为：20位物理寻址、16位默认操作数和地址、0级权限。</li>
+<li>段寄存器初始值限制：段限为64KB（limit=FFFFH），默认16位操作数，权限为0级。</li>
+</ul>
+<h4 id="8-4-段基址的计算"><a href="#8-4-段基址的计算" class="headerlink" title="8.4 段基址的计算"></a>8.4 段基址的计算</h4><ul>
+<li>实模式下段基址计算：<code>base = selector &lt;&lt; 4</code>。</li>
+<li>保护模式下段基址从段描述符加载。</li>
+</ul>
+<h4 id="8-5-第1条执行的指令"><a href="#8-5-第1条执行的指令" class="headerlink" title="8.5 第1条执行的指令"></a>8.5 第1条执行的指令</h4><ul>
+<li>处理器初始化后，CS.base = FFFF0000H，EIP = 0000FFF0H。</li>
+<li>第一条指令位于物理地址 FFFFFFF0H（BIOS ROM区域），执行远程分支指令后CS.base更新为实模式基址。</li>
+</ul>
+<h4 id="8-6-实模式下的执行环境"><a href="#8-6-实模式下的执行环境" class="headerlink" title="8.6 实模式下的执行环境"></a>8.6 实模式下的执行环境</h4><ul>
+<li>16位IP和默认SP指针。</li>
+<li>16位和32位通用寄存器可用。</li>
+<li>6个段寄存器、16位标志寄存器、4个控制寄存器。</li>
+<li>实模式可用通用指令和系统指令。</li>
+</ul>
+<h4 id="8-7-实模式下的IVT（中断向量表）"><a href="#8-7-实模式下的IVT（中断向量表）" class="headerlink" title="8.7 实模式下的IVT（中断向量表）"></a>8.7 实模式下的IVT（中断向量表）</h4><ul>
+<li>IVT位于物理地址0处，每个中断向量为4字节（16:16远指针格式），共256个向量占1KB。</li>
+<li>可使用 <code>lidt</code> 指令重定位IVT。</li>
+</ul>
+<h4 id="8-8-突破64K段限"><a href="#8-8-突破64K段限" class="headerlink" title="8.8 突破64K段限"></a>8.8 突破64K段限</h4><ul>
+<li>实模式下无法直接修改段限，可通过进入保护模式修改段限为4GB，再返回实模式实现。</li>
+</ul>
+<h4 id="8-9-A20地址线"><a href="#8-9-A20地址线" class="headerlink" title="8.9 A20地址线"></a>8.9 A20地址线</h4><ul>
+<li>逻辑地址 <code>FFFF:FFFF</code> 线性地址为 <code>10FFFFH</code>，在8086上因只有20位地址线，第21位（A20）丢失，产生回绕现象。</li>
+<li>A20M#信号用于在286以上处理器模拟回绕。</li>
+</ul>
+<hr>
+<h3 id="第9章-SMM系统管理模式探索（System-Management-Mode）"><a href="#第9章-SMM系统管理模式探索（System-Management-Mode）" class="headerlink" title="第9章 SMM系统管理模式探索（System Management Mode）"></a>第9章 SMM系统管理模式探索（System Management Mode）</h3><h4 id="9-1-进入SMM"><a href="#9-1-进入SMM" class="headerlink" title="9.1 进入SMM"></a>9.1 进入SMM</h4><ul>
+<li>仅能通过SMI（System Management Interrupt）信号进入。</li>
+<li>SMI来源：SMI# pin 或 system bus 上的 SMI message。</li>
+<li>可从任何模式进入，使用 <code>rsm</code> 指令退出。</li>
+</ul>
+<h4 id="9-2-SMM的运行环境"><a href="#9-2-SMM的运行环境" class="headerlink" title="9.2 SMM的运行环境"></a>9.2 SMM的运行环境</h4><ul>
+<li><strong>SMRAM区域</strong>：默认基址 SMBASE=30000H，SMI处理程序入口点为 SMBASE+8000H。</li>
+<li><strong>State Save Map</strong>：保存处理器状态，位于SMBASE+FE00H至SMBASE+FFFFH。</li>
+<li><strong>寄存器初始化</strong>：<ul>
+<li>CR0.PE/PG、CR4、EFER被清0，进入类实模式。</li>
+<li>段寄存器limit设为4GB，base为0（平坦内存模型），但CS.base=SMBASE。</li>
+</ul>
+</li>
+<li><strong>操作数与地址</strong>：默认16位，可通过操作数/地址大小覆盖前缀使用32位访问。</li>
+</ul>
+<h4 id="9-3-SMM里的中断"><a href="#9-3-SMM里的中断" class="headerlink" title="9.3 SMM里的中断"></a>9.3 SMM里的中断</h4><ul>
+<li>使用IVT而非IDT，需在SMM内用 <code>lidt</code> 重新定位IVT。</li>
+<li>Intel建议避免在SMM中使用中断。</li>
+</ul>
+<h4 id="9-4-SMI的Back-to-Back响应"><a href="#9-4-SMI的Back-to-Back响应" class="headerlink" title="9.4 SMI的Back-to-Back响应"></a>9.4 SMI的Back-to-Back响应</h4><ul>
+<li>SMI不可重入，新SMI请求会被锁存，待当前SMI处理完毕后再响应。</li>
+</ul>
+<h4 id="9-5-SMM里开启保护模式"><a href="#9-5-SMM里开启保护模式" class="headerlink" title="9.5 SMM里开启保护模式"></a>9.5 SMM里开启保护模式</h4><ul>
+<li>理论上可行，可在SMM内加载GDT并设置CR0.PE进入保护模式。</li>
+</ul>
+<h4 id="9-6-SMM的版本"><a href="#9-6-SMM的版本" class="headerlink" title="9.6 SMM的版本"></a>9.6 SMM的版本</h4><ul>
+<li>SMM Revision ID指示版本和支持特性（如SMBASE重定位、I/O指令重启）。</li>
+</ul>
+<h4 id="9-7-I-O指令的重启及Halt重启"><a href="#9-7-I-O指令的重启及Halt重启" class="headerlink" title="9.7 I/O指令的重启及Halt重启"></a>9.7 I/O指令的重启及Halt重启</h4><ul>
+<li>通过State Save区域中的域控制I/O指令是否重启、Halt状态是否恢复。</li>
+</ul>
+<h4 id="9-8-SMM的退出"><a href="#9-8-SMM的退出" class="headerlink" title="9.8 SMM的退出"></a>9.8 SMM的退出</h4><ul>
+<li>使用 <code>rsm</code> 指令退出，处理器检查State Save区域的合法性，非法组合会导致shutdown。</li>
+</ul>
+<h4 id="9-9-SMBASE的重定位"><a href="#9-9-SMBASE的重定位" class="headerlink" title="9.9 SMBASE的重定位"></a>9.9 SMBASE的重定位</h4><ul>
+<li>SMBASE可重定位至4GB内任意位置，影响CS.base和CS.selector。</li>
+</ul>
+<h4 id="9-10-SMI处理程序的初始化"><a href="#9-10-SMI处理程序的初始化" class="headerlink" title="9.10 SMI处理程序的初始化"></a>9.10 SMI处理程序的初始化</h4><ul>
+<li>BIOS负责加载SMI处理程序至SMRAM，并可能重定位SMBASE。</li>
+</ul>
+<h4 id="9-11-SMM的安全"><a href="#9-11-SMM的安全" class="headerlink" title="9.11 SMM的安全"></a>9.11 SMM的安全</h4><ul>
+<li><strong>芯片组控制</strong>：通过SMRAM控制器（D_OPEN、D_LCK）控制SMRAM访问。</li>
+<li><strong>处理器限制</strong>：SMRR（System Management Range Register）可在SMM内锁定SMRAM区域，防止外部访问。</li>
+<li><strong>Cache控制</strong>：需防止SMI处理程序代码/数据在Cache中被篡改。</li>
+</ul>
+<hr>
+<h3 id="第10章-x86-x64保护模式体系（上）"><a href="#第10章-x86-x64保护模式体系（上）" class="headerlink" title="第10章 x86/x64保护模式体系（上）"></a>第10章 x86/x64保护模式体系（上）</h3><h4 id="10-1-x86-x64的权限"><a href="#10-1-x86-x64的权限" class="headerlink" title="10.1 x86/x64的权限"></a>10.1 x86/x64的权限</h4><ul>
+<li>4个权限级别（0-3），0级最高。</li>
+<li>权限类型：<ul>
+<li>CPL（当前权限）：存于CS.RPL。</li>
+<li>DPL（描述符权限）：访问段或门所需最低权限。</li>
+<li>RPL（请求权限）：访问者使用的权限。</li>
+</ul>
+</li>
+</ul>
+<h4 id="10-2-保护模式下的环境"><a href="#10-2-保护模式下的环境" class="headerlink" title="10.2 保护模式下的环境"></a>10.2 保护模式下的环境</h4><ul>
+<li><strong>段式管理必需</strong>，分页管理可选。</li>
+<li><strong>段式管理资源</strong>：GDTR、LDTR、IDTR、TR、段选择子寄存器。</li>
+<li><strong>分页管理资源</strong>：CR0/CR2/CR3/CR4、IA32_EFER、页转换表。</li>
+</ul>
+<h4 id="10-3-物理地址的产生"><a href="#10-3-物理地址的产生" class="headerlink" title="10.3 物理地址的产生"></a>10.3 物理地址的产生</h4><ul>
+<li>逻辑地址 →（段式转换）→ 线性地址 →（若分页开启）→ 物理地址。</li>
+</ul>
+<h4 id="10-4-段式管理机制"><a href="#10-4-段式管理机制" class="headerlink" title="10.4 段式管理机制"></a>10.4 段式管理机制</h4><ul>
+<li><strong>内存管理</strong>：线性地址 = base + offset（base来自段描述符）。</li>
+<li><strong>保护措施</strong>：段限检查、类型检查、权限检查。</li>
+</ul>
+<h4 id="10-5-段式管理的数据结构"><a href="#10-5-段式管理的数据结构" class="headerlink" title="10.5 段式管理的数据结构"></a>10.5 段式管理的数据结构</h4><h5 id="10-5-1-段选择子（Segment-Selector）"><a href="#10-5-1-段选择子（Segment-Selector）" class="headerlink" title="10.5.1 段选择子（Segment Selector）"></a>10.5.1 段选择子（Segment Selector）</h5><ul>
+<li>16位结构：RPL（2位）、TI（1位）、Index（13位）。</li>
+<li>Null selector（index=0, TI=0）无效，加载至CS/SS会产生#GP异常。</li>
+<li>64位模式下，Null selector可加载至SS（除3级权限外）。</li>
+</ul>
+<h5 id="10-5-2-描述符表（Descriptor-Table）"><a href="#10-5-2-描述符表（Descriptor-Table）" class="headerlink" title="10.5.2 描述符表（Descriptor Table）"></a>10.5.2 描述符表（Descriptor Table）</h5><ul>
+<li><strong>GDT</strong>、<strong>LDT</strong>（可选）、<strong>IDT</strong>。</li>
+<li><strong>GDTR</strong>：base（32/64位） + limit（16位）。</li>
+<li>使用 <code>lgdt</code> 指令加载GDTR。</li>
+</ul>
+<h5 id="10-5-3-段选择子寄存器（Segment-Selector-Register）"><a href="#10-5-3-段选择子寄存器（Segment-Selector-Register）" class="headerlink" title="10.5.3 段选择子寄存器（Segment Selector Register）"></a>10.5.3 段选择子寄存器（Segment Selector Register）</h5><ul>
+<li>包含可见部分（selector）和不可见部分（base、limit、attribute）。</li>
+<li>加载段选择子时，对应描述符被缓存至不可见部分。</li>
+</ul>
+<h5 id="10-5-4-段描述符（Segment-Descriptor）"><a href="#10-5-4-段描述符（Segment-Descriptor）" class="headerlink" title="10.5.4 段描述符（Segment Descriptor）"></a>10.5.4 段描述符（Segment Descriptor）</h5><p>段描述符定义了内存段的属性，包括基地址、大小、访问权限等。</p>
+<h6 id="10-5-4-1-描述符的种类"><a href="#10-5-4-1-描述符的种类" class="headerlink" title="10.5.4.1 描述符的种类"></a>10.5.4.1 描述符的种类</h6><ul>
+<li><strong>System Descriptor（系统描述符）</strong><ul>
+<li>System Segment descriptor（系统段描述符）<ul>
+<li>LDT descriptor</li>
+<li>TSS descriptor</li>
+</ul>
+</li>
+<li>Gate descriptor（门描述符）<ul>
+<li>Call-gate</li>
+<li>Interrupt-gate</li>
+<li>Trap-gate</li>
+<li>Task-gate</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Non-system segment descriptor（非系统描述符）</strong><ul>
+<li>Code segment descriptor（代码段描述符）</li>
+<li>Data segment descriptor（数据段描述符）</li>
+</ul>
+</li>
+</ul>
+<p><strong>S标志位</strong>：S=0 为系统描述符，S=1 为代码/数据描述符。</p>
+<p><strong>描述符宽度</strong>：</p>
+<ul>
+<li>Legacy模式：8字节（64位）</li>
+<li>Long mode：门描述符为16字节（128位），代码/数据段仍为8字节</li>
+</ul>
+<h6 id="10-5-4-2-代码段描述符"><a href="#10-5-4-2-代码段描述符" class="headerlink" title="10.5.4.2 代码段描述符"></a>10.5.4.2 代码段描述符</h6><p><strong>类型字段（Type field）</strong>：4位，值8-F，表示代码段的不同属性：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Code/Data</th>
+<th>C</th>
+<th>R</th>
+<th>A</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>可执行，不可读，未访问</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>可执行，不可读，已访问</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>可执行，可读，未访问</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>可执行，可读，已访问</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>可执行，conforming类型，不可读，未访问</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>可执行，conforming类型，不可读，已访问</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>可执行，conforming类型，可读，未访问</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>可执行，conforming类型，可读，已访问</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>关键标志位</strong>：</p>
+<ul>
+<li><strong>C（Conforming）</strong>：C=1为conforming段，允许低权限调用；C=0为non-conforming段</li>
+<li><strong>R（Readable）</strong>：R=1可读，R=0不可读</li>
+<li><strong>A（Accessed）</strong>：访问标志，A=1表示已访问</li>
+</ul>
+<p><strong>Conforming vs Non-conforming</strong>：</p>
+<ul>
+<li><strong>Conforming段</strong>：允许低权限或相等权限访问（CPL &gt;= DPL），不改变CPL值</li>
+<li><strong>Non-conforming段</strong>：要求相同权限（CPL == DPL），高权限代码需通过gate调用</li>
+</ul>
+<p><strong>属性位</strong>：</p>
+<ul>
+<li><strong>DPL</strong>：所需最低访问权限</li>
+<li><strong>P（Present）</strong>：P=1表示段在内存中，P=0会产生#NP异常</li>
+<li><strong>D/B</strong>：对代码段指示默认操作数大小（D=1为32位，D=0为16位）</li>
+<li><strong>L</strong>：Long mode下代码段的模式标志</li>
+<li><strong>G（Granularity）</strong>：段限粒度（G=1为4KB，G=0为1字节）</li>
+</ul>
+<h6 id="10-5-4-3-Long-mode下的代码段描述符"><a href="#10-5-4-3-Long-mode下的代码段描述符" class="headerlink" title="10.5.4.3 Long mode下的代码段描述符"></a>10.5.4.3 Long mode下的代码段描述符</h6><p><strong>L标志</strong>：</p>
+<ul>
+<li>L=1：进入64位模式</li>
+<li>L=0：进入compatibility模式</li>
+</ul>
+<p><strong>D标志配合</strong>：</p>
+<ul>
+<li>L=1, D=0：64位模式</li>
+<li>L=0, D=0：compatibility模式（16位默认操作数）</li>
+<li>L=0, D=1：compatibility模式（32位默认操作数）</li>
+</ul>
+<p><strong>简化特性</strong>：</p>
+<ul>
+<li>64位模式下，大部分描述符域无效</li>
+<li>段基地址强制为0，段限为FFFFFFFFH（FS和GS除外）</li>
+</ul>
+<h6 id="10-5-4-4-代码段寄存器的加载"><a href="#10-5-4-4-代码段寄存器的加载" class="headerlink" title="10.5.4.4 代码段寄存器的加载"></a>10.5.4.4 代码段寄存器的加载</h6><p>CS寄存器不能直接通过mov/pop加载，必须通过控制权转移隐式加载。</p>
+<ul>
+<li><p>常规检查</p>
+<ul>
+<li>检查selector是否为Null selector</li>
+<li>检查selector是否超出GDT/LDT表限</li>
+<li>检查描述符类型：S=1，Code/Data=1，P=1</li>
+</ul>
+</li>
+<li><p>用far pointer加载CS<br><strong>语法</strong>：jmp/call selector:offset</p>
+<ul>
+<li><strong>Non-conforming段</strong>：需要CPL == DPL 且 RPL &lt;= DPL</li>
+<li><strong>Conforming段</strong>：需要CPL &gt;= DPL（RPL被忽略）</li>
+<li><strong>64位模式</strong>：必须使用间接far pointer</li>
+</ul>
+</li>
+<li><p>使用call gate加载CS<br>Call-gate描述符（System descriptor，S=0）结构：</p>
+<ul>
+<li>offset：目标代码偏移量</li>
+<li>selector：目标代码段选择子</li>
+<li>cnt：参数个数（caller→callee传递参数）</li>
+<li><p>DPL：gate描述符的访问权限</p>
+</li>
+<li><p><strong>权限检查</strong>：</p>
+<ul>
+<li>CPL &lt;= Call-gate.DPL 且 RPL &lt;= Call-gate.DPL</li>
+<li>CPL &gt;= Code segment.DPL（低权限进入高权限）</li>
+</ul>
+</li>
+<li><p><strong>特殊处理</strong>：</p>
+<ul>
+<li>目标段为conforming类型时，不改变CPL</li>
+<li>发生权限切换时，会进行stack切换</li>
+<li>jmp指令调用call gate不会发生权限切换</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>使用TSS selector加载CS<br>通过call/jmp指令提供TSS选择子进行任务切换：</p>
+<ul>
+<li>TSS描述符必须available（非Busy状态）</li>
+<li>权限检查：RPL &lt;= TSS.DPL 且 CPL &lt;= TSS.DPL</li>
+<li>任务切换时保存原任务状态，加载新任务状态</li>
+</ul>
+</li>
+<li><p>使用IRET指令进行任务切换</p>
+<ul>
+<li>当EFLAGS.NT=1时，IRET会从当前TSS的Link域读取原TSS选择子进行任务切换</li>
+<li>可用于伪造任务嵌套环境，实现权限切换</li>
+</ul>
+</li>
+<li><p>使用Task-gate加载CS<br>Task-gate描述符更简单，仅包含TSS选择子和属性域：</p>
+<ul>
+<li>可放在GDT、LDT或IDT中</li>
+<li>权限检查：RPL &lt;= Task-gate.DPL 且 CPL &lt;= Task-gate.DPL</li>
+</ul>
+</li>
+<li><p>在Long mode下的TSS</p>
+<ul>
+<li>不支持任务切换机制</li>
+<li>TSS结构简化，仅保留各级权限的RSP指针和7个IST指针</li>
+<li>64位模式下TSS描述符为16字节</li>
+</ul>
+</li>
+<li><p>使用INT指令加载CS<br>通过中断向量访问IDT中的门描述符：</p>
+<ul>
+<li><strong>权限检查</strong>：CPL &lt;= gate.DPL 且 CPL &gt;= code.DPL</li>
+<li>中断调用不使用selector，因此不检查RPL</li>
+</ul>
+</li>
+<li><p>使用INT3、INTO、BOUND指令加载CS</p>
+<ul>
+<li><strong>INT3</strong>：断点异常（#BP）</li>
+<li><strong>INTO</strong>：溢出异常（#OF），当OF标志置位时触发</li>
+<li><strong>BOUND</strong>：边界检查异常（#BR），当值超出范围时触发</li>
+</ul>
+</li>
+<li><p>使用RETF指令加载CS/SS<br>从高权限返回低权限时：</p>
+<ul>
+<li>检查CPL与CS.RPL的关系</li>
+<li>CPL &gt; CS.RPL时产生#GP异常</li>
+<li>CPL &lt; CS.RPL时发生权限切换和stack切换</li>
+</ul>
+</li>
+<li><p>Long mode下的RETF指令</p>
+<ul>
+<li>根据目标代码段描述符的L标志决定返回模式</li>
+<li>64位模式下需使用REX前缀处理64位操作数</li>
+</ul>
+</li>
+<li><p>使用IRET指令加载CS/SS<br>与RETF类似，但会额外处理EFLAGS寄存器：</p>
+<ul>
+<li>检查权限和stack切换条件</li>
+<li>从异常/中断返回的标准方式</li>
+</ul>
+</li>
+<li><p>Long mode下的IRETQ指令</p>
+<ul>
+<li>64位模式下无条件压入/弹出SS和RSP值</li>
+<li>根据目标代码段描述符决定返回模式</li>
+</ul>
+</li>
+<li><p>使用SYSENTER/SYSEXIT指令<br>快速系统调用指令：</p>
+<ul>
+<li><strong>SYSENTER</strong>：从用户态进入内核态</li>
+<li><strong>SYSEXIT</strong>：从内核态返回用户态</li>
+<li>通过MSR寄存器配置执行环境</li>
+</ul>
+</li>
+<li><p>Long mode下的SYSENTER/SYSEXIT</p>
+<ul>
+<li><strong>SYSEXIT</strong>根据操作数大小决定返回模式</li>
+<li>64位操作数返回64位模式</li>
+<li>32位操作数返回compatibility模式</li>
+</ul>
+</li>
+<li><p>使用SYSCALL/SYSRET指令<br>AMD引入的快速系统调用指令：</p>
+<ul>
+<li>功能与SYSENTER/SYSEXIT类似</li>
+<li>通过STAR、LSTAR、CSTAR、SFMASK等MSR配置</li>
+<li>64位模式下使用swapgs指令切换GS基址</li>
+</ul>
+</li>
+</ul>
+<h6 id="10-5-4-5-Stack结构及切换"><a href="#10-5-4-5-Stack结构及切换" class="headerlink" title="10.5.4.5 Stack结构及切换"></a>10.5.4.5 Stack结构及切换</h6><ul>
+<li><p>Legacy模式下的Stack</p>
+<ul>
+<li>栈指针大小受SS.B标志影响（B=1为32位ESP，B=0为16位SP）</li>
+<li><strong>Expand-up段</strong>：有效区域0到limit</li>
+<li><strong>Expand-down段</strong>：有效区域limit+1到最大偏移量</li>
+</ul>
+</li>
+<li><p>64位模式下的Stack</p>
+<ul>
+<li>栈指针固定为64位RSP</li>
+<li>仅支持Expand-up类型</li>
+<li>中断handler调用时RSP对齐到16字节边界</li>
+</ul>
+</li>
+<li><p>Data段描述符</p>
+<ul>
+<li>类型标志：E（Expand方向）、W（可写）、A（已访问）</li>
+<li>D/B标志：作为B标志影响栈指针大小</li>
+</ul>
+</li>
+<li><p>Long mode下的Data段描述符</p>
+<ul>
+<li>大部分域无效</li>
+<li>除FS/GS外，段基址强制为0</li>
+<li>可加载Null selector到段寄存器</li>
+</ul>
+</li>
+<li><p>Stack的使用</p>
+<ul>
+<li>隐式使用SS段：SP/ESP/RSP、BP/EBP/RBP访问</li>
+<li>显式使用SS段：通过段前缀</li>
+<li>栈操作和控制权转移指令默认使用SS段</li>
+</ul>
+</li>
+<li><p>SS寄存器显式加载</p>
+<ul>
+<li>可通过mov、lss、pop指令加载</li>
+<li>权限要求：RPL == DPL 且 CPL == DPL</li>
+<li>64位模式非3级权限下可加载Null selector</li>
+</ul>
+</li>
+<li><p>TR的显式加载</p>
+<ul>
+<li>使用ltr指令加载TSS描述符</li>
+<li>加载后TSS描述符置为Busy状态</li>
+</ul>
+</li>
+<li><p>Call-gate调用下的Stack切换</p>
+<ul>
+<li>权限切换时从TSS加载新权限的SS:ESP</li>
+<li>保存原SS:ESP到新栈中</li>
+</ul>
+</li>
+<li><p>Long mode下的Stack切换</p>
+<ul>
+<li>TSS中不保存SS选择子</li>
+<li>切换到高权限时加载Null selector到SS</li>
+<li>Compatibility模式切换到64位模式时，32位值零扩展压栈</li>
+</ul>
+</li>
+</ul>
+<h6 id="10-5-4-6-Data段"><a href="#10-5-4-6-Data段" class="headerlink" title="10.5.4.6 Data段"></a>10.5.4.6 Data段</h6><ul>
+<li><p>Data段寄存器加载</p>
+<ul>
+<li>ES、DS、FS、GS可通过mov指令加载</li>
+<li>权限要求：RPL &lt;= DPL 且 CPL &lt;= DPL</li>
+<li>可加载Null selector</li>
+</ul>
+</li>
+<li><p>加载Code段到Data寄存器</p>
+<ul>
+<li>需为可读代码段（R=1）</li>
+<li>Non-conforming段：正常权限检查</li>
+<li>Conforming段：总是成功</li>
+</ul>
+</li>
+<li><p>Long mode下的Data段访问</p>
+<ul>
+<li>除FS/GS外，段寄存器前缀被忽略</li>
+<li>不进行段限检查（除非开启EFER.LMSLE）</li>
+<li>FS/GS的64位基址通过MSR设置</li>
+</ul>
+</li>
+</ul>
+<h4 id="10-6-开启保护模式"><a href="#10-6-开启保护模式" class="headerlink" title="10.6 开启保护模式"></a>10.6 开启保护模式</h4><h5 id="必要步骤"><a href="#必要步骤" class="headerlink" title="必要步骤"></a>必要步骤</h5><ol>
+<li>关闭中断响应</li>
+<li>加载GDTR（建立GDT）</li>
+<li>置CR0.PE=1进入保护模式</li>
+<li>执行far jmp刷新CS寄存器</li>
+<li>加载LDTR（可选）</li>
+<li>加载TR</li>
+<li>更新数据段寄存器</li>
+<li>加载IDTR</li>
+<li>打开中断响应</li>
+</ol>
+<h5 id="关键数据结构"><a href="#关键数据结构" class="headerlink" title="关键数据结构"></a>关键数据结构</h5><ul>
+<li><strong>GDT</strong>：全局描述符表</li>
+<li><strong>IDT</strong>：中断描述符表  </li>
+<li><strong>TSS</strong>：任务状态段</li>
+</ul>
+<h5 id="初始化示例"><a href="#初始化示例" class="headerlink" title="初始化示例"></a>初始化示例</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">; 16位实模式代码</span><br><span class="line">cli</span><br><span class="line">lgdt [gdt_pointer]</span><br><span class="line">mov eax, cr0</span><br><span class="line">or eax, 1</span><br><span class="line">mov cr0, eax</span><br><span class="line">jmp CODE_SEL:protected_mode</span><br><span class="line"></span><br><span class="line">; 32位保护模式代码</span><br><span class="line">protected_mode:</span><br><span class="line">mov ax, DATA_SEL</span><br><span class="line">mov ds, ax</span><br><span class="line">mov ss, ax</span><br><span class="line">mov esp, 0x7ff0</span><br><span class="line">mov ax, TSS_SEL</span><br><span class="line">ltr ax</span><br><span class="line">sti</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="第11章-x86-x64-保护模式体系（下）"><a href="#第11章-x86-x64-保护模式体系（下）" class="headerlink" title="第11章 x86/x64 保护模式体系（下）"></a>第11章 x86/x64 保护模式体系（下）</h3><h4 id="11-1-物理页面"><a href="#11-1-物理页面" class="headerlink" title="11.1 物理页面"></a><strong>11.1 物理页面</strong></h4><ul>
+<li><strong>线性地址到物理地址的转换</strong>：在开启分页机制后，逻辑地址经段式管理转换为线性地址，再通过页式管理映射到物理地址。</li>
+<li><strong>物理地址空间</strong>：包含ROM、DRAM以及内存映射I/O设备（如VGA、PCI、APIC等）。</li>
+<li><strong>MAXPHYADDR</strong>：处理器的最大物理地址位数，可通过CPUID指令获取，常见值为36位、40位或52位。</li>
+<li><strong>页面大小</strong>：<ul>
+<li>4K和4M页面用于32位分页模式。</li>
+<li>4K和2M页面用于PAE模式。</li>
+<li>4K、2M和1G页面用于IA-32e（Long Mode）模式。</li>
+</ul>
+</li>
+</ul>
+<h4 id="11-2-分页机制使用的资源"><a href="#11-2-分页机制使用的资源" class="headerlink" title="11.2 分页机制使用的资源"></a><strong>11.2 分页机制使用的资源</strong></h4><ul>
+<li><strong>寄存器</strong>：CR0、CR2、CR3、CR4以及IA32_EFER。</li>
+<li><strong>CPUID查询</strong>：用于检测是否支持PSE、PAE、PAT、PGE、XD、SMEP、PCID等功能。</li>
+<li><strong>控制位</strong>：如CR0.PG（开启分页）、CR4.PAE（开启PAE）、IA32_EFER.LME（开启Long Mode）等。</li>
+<li><strong>页转换表</strong>：根据分页模式不同，使用不同级别的表格（如PDT、PT、PDPT、PML4T等）。</li>
+</ul>
+<h4 id="11-3-32位分页模式（Non-PAE模式）"><a href="#11-3-32位分页模式（Non-PAE模式）" class="headerlink" title="11.3 32位分页模式（Non-PAE模式）"></a><strong>11.3 32位分页模式（Non-PAE模式）</strong></h4><ul>
+<li><strong>地址转换</strong>：使用一级（4M页）或两级（4K页）页表结构。</li>
+<li><strong>CR3结构</strong>：提供页目录表（PDT）的物理基地址，包含PWT和PCD控制位。</li>
+<li><strong>PDE与PTE结构</strong>：<ul>
+<li>PDE可指向页表（4K页）或直接指向4M页面。</li>
+<li>PTE指向4K物理页面。</li>
+</ul>
+</li>
+</ul>
+<h4 id="11-4-PAE分页模式"><a href="#11-4-PAE分页模式" class="headerlink" title="11.4 PAE分页模式"></a><strong>11.4 PAE分页模式</strong></h4><ul>
+<li><strong>地址转换</strong>：使用两级（2M页）或三级（4K页）页表结构，支持最高52位物理地址。</li>
+<li><strong>CR3与PDPTE寄存器</strong>：Intel64引入PDPTE寄存器优化页表加载。</li>
+<li><strong>PDE与PTE结构</strong>：支持2M和4K页面，引入XD（执行禁用）位。</li>
+</ul>
+<h4 id="11-5-IA-32e分页模式（Long-Mode分页）"><a href="#11-5-IA-32e分页模式（Long-Mode分页）" class="headerlink" title="11.5 IA-32e分页模式（Long Mode分页）"></a><strong>11.5 IA-32e分页模式（Long Mode分页）</strong></h4><ul>
+<li><strong>地址转换</strong>：使用二级到四级页表，支持4K、2M和1G页面，线性地址为48位。</li>
+<li><strong>CR3结构</strong>：支持PCID功能，可关联不同进程的TLB缓存。</li>
+<li><strong>PML4E、PDPTE、PDE、PTE结构</strong>：各级条目扩展为64位，支持XD权限控制。</li>
+<li><strong>SMEP机制</strong>：防止Supervisor执行User权限的代码页。</li>
+</ul>
+<h4 id="11-6-TLB与缓存"><a href="#11-6-TLB与缓存" class="headerlink" title="11.6 TLB与缓存"></a><strong>11.6 TLB与缓存</strong></h4><ul>
+<li><strong>TLB（转换后备缓冲区）</strong>：缓存线性地址到物理地址的映射，提高转换效率。</li>
+<li><strong>Paging-Structure Cache</strong>：缓存页表条目（如PDE、PDPTE等），减少内存访问次数。</li>
+<li><strong>TLB条目管理</strong>：<ul>
+<li>建立：首次成功访问页面时建立。</li>
+<li>刷新：通过INVLPG指令或更新CR3/CR4实现，需在页表更改后主动刷新以避免错误。</li>
+</ul>
+</li>
+</ul>
+<h4 id="11-7-页面的内存缓存类型"><a href="#11-7-页面的内存缓存类型" class="headerlink" title="11.7 页面的内存缓存类型"></a><strong>11.7 页面的内存缓存类型</strong></h4><ul>
+<li><strong>PAT（页面属性表）</strong>：通过PAT、PCD、PWT标志定义页面的缓存类型（如WB、WT、UC等）。</li>
+<li><strong>IA32_PAT MSR</strong>：可编程设置8种缓存类型。</li>
+<li><strong>各级条目的PCD/PWT</strong>：控制页表结构自身的缓存行为。</li>
+</ul>
+<h4 id="11-8-页的保护措施"><a href="#11-8-页的保护措施" class="headerlink" title="11.8 页的保护措施"></a><strong>11.8 页的保护措施</strong></h4><p>处理器通过以下机制实施页面级保护：</p>
+<ul>
+<li><strong>U/S（用户/管理员）位</strong>：控制页面访问权限。</li>
+<li><strong>R/W（读/写）位</strong>：控制页面读写权限，受CR0.WP影响。</li>
+<li><strong>XD（执行禁用）位</strong>：控制页面是否可执行，需IA32_EFER.NXE=1生效。</li>
+<li><strong>P（存在）位</strong>：页面是否在内存中，否则触发#PF异常。</li>
+<li><strong>保留位检查</strong>：保留位非零将触发#PF或#GP异常。</li>
+</ul>
+<p>权限的最终生效遵循“从严原则”，即：</p>
+<ul>
+<li>U/S和R/W位：所有相关条目的对应位进行AND操作。</li>
+<li>XD位：所有相关条目的对应位进行OR操作。</li>
+<li>P位：所有相关条目的对应位进行AND操作。</li>
+</ul>
+<h3 id="第12章-Long-mode"><a href="#第12章-Long-mode" class="headerlink" title="第12章 Long-mode"></a>第12章 Long-mode</h3><p>Long-mode 是 x86-64（x64）架构的核心扩展模式，支持 64 位执行环境，同时保持对传统 x86 代码的兼容。</p>
+<h4 id="x64-体系结构概述"><a href="#x64-体系结构概述" class="headerlink" title="x64 体系结构概述"></a>x64 体系结构概述</h4><ul>
+<li><strong>Long-mode（IA-32e）</strong>：分为两个子模式：<ul>
+<li><strong>64-bit mode</strong>：纯 64 位执行环境。</li>
+<li><strong>Compatibility mode</strong>：内核为 64 位，用户层兼容 16/32 位代码。</li>
+</ul>
+</li>
+<li><strong>Legacy mode</strong>：包括传统的实模式和保护模式。</li>
+</ul>
+<h4 id="Long-mode-的开启与检测"><a href="#Long-mode-的开启与检测" class="headerlink" title="Long-mode 的开启与检测"></a>Long-mode 的开启与检测</h4><ol>
+<li><strong>检测处理器支持</strong>：<ul>
+<li>使用 CPUID 指令检查 <code>80000001H</code> leaf 的 bit 29（Long-mode 支持位）。</li>
+</ul>
+</li>
+<li><strong>EFER 寄存器</strong>：<ul>
+<li><code>LME</code> 位：开启 Long-mode。</li>
+<li><code>LMA</code> 位：只读位，表示 Long-mode 已激活。</li>
+<li><code>NXE</code> 位：启用页表项的 NX（不可执行）保护。</li>
+</ul>
+</li>
+<li><strong>开启条件</strong>：<ul>
+<li><code>CR0.PE=1</code>（保护模式）。</li>
+<li><code>CR4.PAE=1</code>（物理地址扩展）。</li>
+<li><code>CR0.PG=1</code>（启用分页）。</li>
+<li><code>EFER.LME=1</code>（启用 Long-mode）。</li>
+</ul>
+</li>
+</ol>
+<h4 id="Long-mode-的执行环境"><a href="#Long-mode-的执行环境" class="headerlink" title="Long-mode 的执行环境"></a>Long-mode 的执行环境</h4><ol>
+<li><strong>模式判断</strong>：<ul>
+<li>通过 <code>IA32_EFER.LMA</code> 判断是否处于 Long-mode。</li>
+<li>通过 <code>CS.L</code> 和 <code>CS.D</code> 判断是 64 位模式还是 Compatibility 模式。</li>
+</ul>
+</li>
+<li><strong>段描述符与门描述符</strong>：<ul>
+<li>64 位模式下段描述符的 <code>L</code> 和 <code>D</code> 标志控制操作数大小。</li>
+<li>门描述符（Call-gate、Interrupt-gate、Trap-gate）均为 16 字节，且仅支持 64 位形式。</li>
+</ul>
+</li>
+<li><strong>段寄存器与基址</strong>：<ul>
+<li><code>FS</code> 和 <code>GS</code> 的基址可通过 <code>IA32_FS_BASE</code> 和 <code>IA32_GS_BASE</code> MSR 设置。</li>
+<li><code>IA32_KERNEL_GS_BASE</code> 用于系统调用时快速切换内核数据结构。</li>
+</ul>
+</li>
+<li><strong>分页机制</strong>：<ul>
+<li>仅支持 IA-32e paging（4 级页表），支持 4K、2M、1G 页面。</li>
+</ul>
+</li>
+</ol>
+<h4 id="Long-mode-的指令环境"><a href="#Long-mode-的指令环境" class="headerlink" title="Long-mode 的指令环境"></a>Long-mode 的指令环境</h4><ol>
+<li><strong>操作数大小</strong>：<ul>
+<li>64 位模式下默认操作数多为 32 位，部分指令（如 <code>CALL</code>、<code>PUSH</code>、<code>JMP</code>）默认为 64 位。</li>
+<li>使用 <code>REX.W</code> 前缀可强制使用 64 位操作数。</li>
+</ul>
+</li>
+<li><strong>无效指令</strong>：<ul>
+<li>如 <code>AAA</code>、<code>DAA</code>、<code>BOUND</code>、<code>PUSHA</code> 等在 64 位模式下无效。</li>
+</ul>
+</li>
+<li><strong>寻址模式</strong>：<ul>
+<li>默认地址大小为 64 位，可通过 <code>67H</code> 前缀使用 32 位地址。</li>
+<li>栈地址大小固定为 64 位（<code>RSP</code>），不可更改。</li>
+</ul>
+</li>
+</ol>
+<h4 id="模式切换编程"><a href="#模式切换编程" class="headerlink" title="模式切换编程"></a>模式切换编程</h4><ol>
+<li><strong>64 位模式 → Compatibility 模式</strong>：<ul>
+<li>使用远跳转指令加载 Compatibility 模式的段描述符。</li>
+<li>建议使用 <code>DWORD far</code> 形式以保证兼容性。</li>
+</ul>
+</li>
+<li><strong>Compatibility 模式 → 64 位模式</strong>：<ul>
+<li>可直接使用远跳转指令加载 64 位代码段。</li>
+</ul>
+</li>
+<li><strong>调用传统 32 位库</strong>：<ul>
+<li>可通过 Call-gate 切换到 Compatibility 模式执行 32 位函数，再切换回 64 位模式。</li>
+<li>可封装为宏调用，提高代码复用性。</li>
+</ul>
+</li>
+</ol>
+<h4 id="退出-Long-mode"><a href="#退出-Long-mode" class="headerlink" title="退出 Long-mode"></a>退出 Long-mode</h4><ul>
+<li>必须先切换到 Compatibility 模式，再关闭分页（<code>CR0.PG=0</code>），最后关闭 <code>EFER.LME</code>。</li>
+<li>需确保关闭分页后指令流仍能正确执行，通常需保持一对一页映射。</li>
+</ul>
+<hr>
+<h2 id="第三篇-调试与性能监控"><a href="#第三篇-调试与性能监控" class="headerlink" title="第三篇 调试与性能监控"></a>第三篇 调试与性能监控</h2><h3 id="第13章-断点调试"><a href="#第13章-断点调试" class="headerlink" title="第13章 断点调试"></a>第13章 断点调试</h3><p>在 x86/x64 体系中，调试机制主要分为三类：单步调试模式、断点模式、内存和 I/O 地址调试模式。其中，单步调试和内存/I/O地址调试使用#DB（中断向量1）处理程序响应调试事件，而断点调试使用#BP（中断向量3）处理程序响应。</p>
+<h4 id="13-1-单步调试模式"><a href="#13-1-单步调试模式" class="headerlink" title="13.1 单步调试模式"></a>13.1 单步调试模式</h4><ul>
+<li>通过设置 <code>Eflags</code> 寄存器中的 <code>TF</code>（Trap Flag）标志位进入单步调试模式。</li>
+<li>当 <code>TF=1</code> 时，处理器每执行一条指令后即触发#DB异常。</li>
+<li>使用 <code>POPF</code> 指令设置 <code>TF</code> 时，处理器会执行完该指令后的第一条指令才触发#DB。</li>
+<li>进入#DB处理程序后，处理器会自动清除 <code>TF</code> 和 <code>RF</code>（Resume Flag）标志位，因此在处理程序内部单步调试被暂停。</li>
+<li>示例代码通过 <code>POPF</code> 设置 <code>TF</code>，执行 <code>mov eax, 1</code> 后进入#DB处理程序。</li>
+</ul>
+<h4 id="13-2-断点调试模式"><a href="#13-2-断点调试模式" class="headerlink" title="13.2 断点调试模式"></a>13.2 断点调试模式</h4><ul>
+<li>执行 <code>INT3</code> 指令（机器码 <code>0xCC</code>）会触发#BP异常。</li>
+<li>调试器通常通过将目标指令的第一个字节替换为 <code>0xCC</code> 来设置软件断点，并在触发后恢复原字节。</li>
+<li>示例展示了如何在代码中动态插入 <code>INT3</code> 指令以实现断点。</li>
+</ul>
+<h4 id="13-3-内存和I-O地址调试模式"><a href="#13-3-内存和I-O地址调试模式" class="headerlink" title="13.3 内存和I/O地址调试模式"></a>13.3 内存和I/O地址调试模式</h4><p>处理器提供了一组调试寄存器（Debug Registers）来支持更灵活的硬件断点：</p>
+<ul>
+<li><strong>断点寄存器</strong>：<code>DR0</code>–<code>DR3</code>，用于设置断点的线性地址。</li>
+<li><strong>状态寄存器</strong>：<code>DR6</code>，记录最近一次#DB异常触发的原因。</li>
+<li><strong>控制寄存器</strong>：<code>DR7</code>，控制调试异常的触发条件。</li>
+</ul>
+<h5 id="13-3-1-断点寄存器-DR0–DR3"><a href="#13-3-1-断点寄存器-DR0–DR3" class="headerlink" title="13.3.1 断点寄存器 DR0–DR3"></a>13.3.1 断点寄存器 DR0–DR3</h5><ul>
+<li>每个寄存器可保存一个线性地址，用于设置数据访问、代码执行或I/O访问断点。</li>
+<li>在64位模式下，这些寄存器为64位宽。</li>
+</ul>
+<h5 id="13-3-2-状态寄存器-DR6"><a href="#13-3-2-状态寄存器-DR6" class="headerlink" title="13.3.2 状态寄存器 DR6"></a>13.3.2 状态寄存器 DR6</h5><ul>
+<li><code>B0–B3</code>：指示 <code>DR0–DR3</code> 中的哪个断点被触发。</li>
+<li><code>BD</code>：当 <code>DR7.GD=1</code> 时，访问调试寄存器会触发#DB，<code>BD</code> 置位。</li>
+<li><code>BS</code>：由 <code>TF</code> 标志触发的单步调试会置位 <code>BS</code>。</li>
+<li><code>BT</code>：任务切换时若TSS中的T标志置位，会触发Trap调试并置位 <code>BT</code>。</li>
+</ul>
+<h5 id="13-3-3-控制寄存器-DR7"><a href="#13-3-3-控制寄存器-DR7" class="headerlink" title="13.3.3 控制寄存器 DR7"></a>13.3.3 控制寄存器 DR7</h5><ul>
+<li><code>L0–L3</code> / <code>G0–G3</code>：分别控制局部和全局断点使能。</li>
+<li><code>R/W0–R/W3</code>：设置断点访问类型（执行、写、读/写、I/O访问）。</li>
+<li><code>LEN0–LEN3</code>：设置断点地址的有效范围（字节、字、双字、四字）。</li>
+<li><code>GD</code>（General Detect）：置位时，访问任何调试寄存器都会触发#DB异常，常用于模拟器环境。</li>
+</ul>
+<h5 id="13-3-4-Fault与Trap类型的调试异常"><a href="#13-3-4-Fault与Trap类型的调试异常" class="headerlink" title="13.3.4 Fault与Trap类型的调试异常"></a>13.3.4 Fault与Trap类型的调试异常</h5><ul>
+<li><strong>Fault类型</strong>：在指令执行前触发，如访问调试寄存器或执行断点指令。</li>
+<li><strong>Trap类型</strong>：在指令执行后触发，如单步调试、任务切换调试、地址访问断点。</li>
+</ul>
+<h5 id="13-3-5-General-Detect产生的-DB异常"><a href="#13-3-5-General-Detect产生的-DB异常" class="headerlink" title="13.3.5 General Detect产生的#DB异常"></a>13.3.5 General Detect产生的#DB异常</h5><ul>
+<li>条件：<code>DR7.GD=1</code> 且后续访问调试寄存器。</li>
+<li>处理器在进入#DB处理程序前会清除 <code>GD</code> 位，以允许在处理程序内访问调试寄存器。</li>
+<li>实验13-1演示了 <code>GD</code> 触发#DB的过程。</li>
+</ul>
+<h5 id="13-3-6-执行断点指令产生的-DB异常"><a href="#13-3-6-执行断点指令产生的-DB异常" class="headerlink" title="13.3.6 执行断点指令产生的#DB异常"></a>13.3.6 执行断点指令产生的#DB异常</h5><ul>
+<li>条件：<code>DR7</code> 中对应断点使能位置位，<code>R/Wn=00B</code>（执行访问），<code>LENn=00B</code>（字节宽度）。</li>
+<li>属于Fault类型，在指令执行前触发。</li>
+<li>实验13-2测试了执行断点的触发。</li>
+</ul>
+<h5 id="13-3-7-访问数据断点产生的-DB异常"><a href="#13-3-7-访问数据断点产生的-DB异常" class="headerlink" title="13.3.7 访问数据断点产生的#DB异常"></a>13.3.7 访问数据断点产生的#DB异常</h5><ul>
+<li>可监控对特定地址的读或写访问。</li>
+<li><code>R/Wn</code> 设置为 <code>01B</code>（仅写）或 <code>11B</code>（读/写）。</li>
+<li>断点地址必须按 <code>LENn</code> 设置对齐（如字对齐、双字对齐）。</li>
+<li>实验13-7测试了数据断点的有效范围。</li>
+</ul>
+<h5 id="13-3-8-访问I-O断点产生的-DB异常"><a href="#13-3-8-访问I-O断点产生的-DB异常" class="headerlink" title="13.3.8 访问I/O断点产生的#DB异常"></a>13.3.8 访问I/O断点产生的#DB异常</h5><ul>
+<li>需要设置 <code>CR4.DE=1</code> 以启用I/O调试扩展。</li>
+<li><code>R/Wn</code> 设置为 <code>10B</code> 表示I/O访问断点。</li>
+<li>地址对齐规则与数据断点类似。</li>
+</ul>
+<h5 id="13-3-9-任务切换时产生的Trap调试异常"><a href="#13-3-9-任务切换时产生的Trap调试异常" class="headerlink" title="13.3.9 任务切换时产生的Trap调试异常"></a>13.3.9 任务切换时产生的Trap调试异常</h5><ul>
+<li>在TSS段中设置T标志位后，任务切换完成时会触发#DB异常。</li>
+<li>属于Trap类型，优先级高于SMI中断。</li>
+<li>实验13-10测试了任务切换调试。</li>
+</ul>
+<hr>
+<h3 id="第14章-分支记录"><a href="#第14章-分支记录" class="headerlink" title="第14章 分支记录"></a>第14章 分支记录</h3><p>Intel处理器中的分支记录功能，用于记录最近的跳转、中断和异常轨迹。AMD处理器在此功能上相对较弱。</p>
+<h4 id="14-1-检测处理器的家族和型号"><a href="#14-1-检测处理器的家族和型号" class="headerlink" title="14.1 检测处理器的家族和型号"></a>14.1 检测处理器的家族和型号</h4><ul>
+<li>通过CPUID指令获取 <code>DisplayFamily</code> 和 <code>DisplayModel</code>，以确定处理器微架构。</li>
+</ul>
+<h4 id="14-2-初识分支记录"><a href="#14-2-初识分支记录" class="headerlink" title="14.2 初识分支记录"></a>14.2 初识分支记录</h4><ul>
+<li>记录位置：LBR栈、系统总线（BTM）、内存BTS缓冲区。</li>
+<li>记录形式：<code>from</code>（源地址）和 <code>to</code>（目标地址）对。</li>
+<li>记录时机：通过 <code>IA32_DEBUGCTL</code> 寄存器控制开启。</li>
+</ul>
+<h4 id="14-3-IA32-DEBUGCTL寄存器"><a href="#14-3-IA32-DEBUGCTL寄存器" class="headerlink" title="14.3 IA32_DEBUGCTL寄存器"></a>14.3 IA32_DEBUGCTL寄存器</h4><ul>
+<li><code>LBR</code>：启用LBR栈记录。</li>
+<li><code>BTF</code>：启用基于分支的单步调试（而非指令级单步）。</li>
+<li><code>TR</code>：启用BTM记录到系统总线或BTS缓冲区。</li>
+<li><code>BTS</code>：启用BTS缓冲区记录。</li>
+<li><code>BTINT</code>：BTS缓冲区满时产生中断。</li>
+</ul>
+<h4 id="14-4-LBR栈"><a href="#14-4-LBR栈" class="headerlink" title="14.4 LBR栈"></a>14.4 LBR栈</h4><ul>
+<li>由多对 <code>MSR_LASTBRANCH_n_FROM_IP</code> 和 <code>MSR_LASTBRANCH_n_TO_IP</code> 寄存器组成。</li>
+<li><code>IA32_LASTBRANCH_TOS</code> 寄存器指向栈顶。</li>
+<li>栈满后自动回绕（覆盖最早记录）。</li>
+</ul>
+<h4 id="14-5-使用LBR捕捉分支轨迹"><a href="#14-5-使用LBR捕捉分支轨迹" class="headerlink" title="14.5 使用LBR捕捉分支轨迹"></a>14.5 使用LBR捕捉分支轨迹</h4><ul>
+<li>实验14-1和14-2展示了如何启用LBR并捕获分支记录。</li>
+<li>LBR可过滤特定类型的分支（如近调用、远跳转等），通过 <code>MSR_LBR_SELECT</code> 寄存器配置。</li>
+</ul>
+<h4 id="14-6-DB异常下的LBR"><a href="#14-6-DB异常下的LBR" class="headerlink" title="14.6 #DB异常下的LBR"></a>14.6 #DB异常下的LBR</h4><ul>
+<li>发生#DB异常时，处理器会清除 <code>LBR</code> 位，因此无法捕获#DB本身的分支。</li>
+<li><code>TR</code> 位保持不变，BTM记录可能继续。</li>
+</ul>
+<h4 id="14-7-IA-32e模式下的LBR栈"><a href="#14-7-IA-32e模式下的LBR栈" class="headerlink" title="14.7 IA-32e模式下的LBR栈"></a>14.7 IA-32e模式下的LBR栈</h4><ul>
+<li>在64位模式下，LBR记录支持64位地址格式。</li>
+<li>实验14-6和14-7测试了64位和兼容模式下的LBR行为。</li>
+</ul>
+<h4 id="14-8-使用Single-step-on-branch功能"><a href="#14-8-使用Single-step-on-branch功能" class="headerlink" title="14.8 使用Single-step on branch功能"></a>14.8 使用Single-step on branch功能</h4><ul>
+<li>设置 <code>BTF=1</code> 和 <code>TF=1</code> 后，单步调试基于分支触发，而非每条指令。</li>
+<li>实验14-8演示了该功能。</li>
+</ul>
+<h4 id="14-9-BTS机制"><a href="#14-9-BTS机制" class="headerlink" title="14.9 BTS机制"></a>14.9 BTS机制</h4><ul>
+<li>BTS允许将分支记录存储到内存的Debug Store区域。</li>
+<li>DS区域包括管理区、BTS缓冲区和PEBS缓冲区。</li>
+</ul>
+<h5 id="14-9-1-检测DS支持"><a href="#14-9-1-检测DS支持" class="headerlink" title="14.9.1 检测DS支持"></a>14.9.1 检测DS支持</h5><ul>
+<li>通过CPUID检测是否支持Debug Store和64位格式。</li>
+</ul>
+<h5 id="14-9-2-DS区域设置"><a href="#14-9-2-DS区域设置" class="headerlink" title="14.9.2 DS区域设置"></a>14.9.2 DS区域设置</h5><ul>
+<li><code>IA32_DS_AREA</code> 寄存器指向DS区域的基地址。</li>
+<li>BTS缓冲区可配置为环形（循环覆盖）或满时触发中断。</li>
+</ul>
+<h5 id="14-9-3-BTS记录格式"><a href="#14-9-3-BTS记录格式" class="headerlink" title="14.9.3 BTS记录格式"></a>14.9.3 BTS记录格式</h5><ul>
+<li>每条记录包含源地址、目标地址和预测标志位。</li>
+<li>32位格式每条12字节，64位格式每条24字节。</li>
+</ul>
+<h5 id="14-9-4-使用BTS缓冲区"><a href="#14-9-4-使用BTS缓冲区" class="headerlink" title="14.9.4 使用BTS缓冲区"></a>14.9.4 使用BTS缓冲区</h5><ul>
+<li>实验14-9测试了环形BTS缓冲区。</li>
+<li>实验14-10测试了BTS缓冲区满时触发DS中断。</li>
+</ul>
+<h5 id="14-9-5-DS中断处理"><a href="#14-9-5-DS中断处理" class="headerlink" title="14.9.5 DS中断处理"></a>14.9.5 DS中断处理</h5><ul>
+<li>DS中断与PMI共享同一中断向量。</li>
+<li>中断处理程序需判断触发原因（BTS满、PEBS满、计数器溢出等）并相应处理。</li>
+</ul>
+<h5 id="14-9-6-过滤BTS记录"><a href="#14-9-6-过滤BTS记录" class="headerlink" title="14.9.6 过滤BTS记录"></a>14.9.6 过滤BTS记录</h5><ul>
+<li>通过 <code>BTS_OFF_OS</code> 和 <code>BTS_OFF_USR</code> 位可过滤内核层或用户层的分支记录。</li>
+<li>实验14-11演示了过滤功能。</li>
+</ul>
+<h5 id="14-9-7-64位模式下的BTS"><a href="#14-9-7-64位模式下的BTS" class="headerlink" title="14.9.7 64位模式下的BTS"></a>14.9.7 64位模式下的BTS</h5><ul>
+<li>实验14-12和14-13展示了64位模式下BTS的工作机制，与32位模式类似。</li>
+</ul>
+<hr>
+<h3 id="第15章-性能监控"><a href="#第15章-性能监控" class="headerlink" title="第15章 性能监控"></a>第15章 性能监控</h3><p>Intel处理器上的性能监控（Performance Monitoring）机制，在Nehalem、Westmere及Sandy Bridge等架构上的实现与应用，涵盖性能监控机制的核心概念、配置与使用方式。</p>
+<h4 id="15-1-性能监控机制概述"><a href="#15-1-性能监控机制概述" class="headerlink" title="15.1 性能监控机制概述"></a>15.1 性能监控机制概述</h4><ul>
+<li>性能监控以事件监控为核心，通过计数器（Counter）对特定事件进行计数。</li>
+<li>使用通用性能监控计数器（General-Purpose PMC）和固定用途计数器（Fixed-Function Counter）。</li>
+<li>计数器溢出时可触发PMI（Performance Monitoring Interrupt）或PEBS（Precise Event Based Sampling）中断。</li>
+<li>性能监控机制分为架构化（architectural）和非架构化（non-architectural）两类，架构化机制具有向下兼容性。</li>
+</ul>
+<h4 id="15-2-性能监控机制的版本与功能"><a href="#15-2-性能监控机制的版本与功能" class="headerlink" title="15.2 性能监控机制的版本与功能"></a>15.2 性能监控机制的版本与功能</h4><ul>
+<li>通过CPUID指令的0AH leaf查询性能监控功能细节，包括版本ID、计数器数量、宽度及预定义事件支持情况。</li>
+<li>不同处理器型号支持的PMC计数器数量和宽度不同，如Core i7支持4个48位PMC。</li>
+<li>IA32_PMCx寄存器的写入宽度受IA32_PERF_CAPABILITIES[13]（FW_WRITE）标志控制。</li>
+<li>预定义architectural事件（如核心周期、指令退休等）通过IA32_PERFEVTSELx寄存器配置。</li>
+</ul>
+<h4 id="15-3-Nehalem架构下的性能监控机制"><a href="#15-3-Nehalem架构下的性能监控机制" class="headerlink" title="15.3 Nehalem架构下的性能监控机制"></a>15.3 Nehalem架构下的性能监控机制</h4><ul>
+<li>支持版本3的性能监控，提供4个PMC和3个Fixed计数器，宽度均为48位。</li>
+<li>使用IA32_PERF_GLOBAL_CTRL作为全局控制器，与IA32_PERFEVTSELx或IA32_FIXED_CTR_CTRL配合启用计数器。</li>
+<li>IA32_PERF_GLOBAL_STATUS记录计数器溢出状态，IA32_PERF_GLOBAL_OVF_CTRL用于清除溢出标志。</li>
+<li>通过实验演示如何使用PMC统计指令数、处理PMI中断，以及利用IA32_DEBUGCTL[12]实现PMI中冻结计数器。</li>
+</ul>
+<h4 id="15-4-PEBS（Precise-Event-Based-Sampling）机制"><a href="#15-4-PEBS（Precise-Event-Based-Sampling）机制" class="headerlink" title="15.4 PEBS（Precise Event Based Sampling）机制"></a>15.4 PEBS（Precise Event Based Sampling）机制</h4><ul>
+<li>PEBS基于事件采样，在计数器溢出时触发PEBS中断，并在DS（Debug Store）区域的PEBS buffer中保存处理器上下文。</li>
+<li>检测PEBS可用性需先确认DS机制支持（CPUID.01:EDX[21]）及IA32_MISC_ENABLE[12]未置位。</li>
+<li>PEBS记录格式分为32位、64位及增强64位格式，增强格式包含IA32_PERF_GLOBAL_STATUS、数据线性地址、数据源编码和延迟值等额外信息。</li>
+<li>IA32_PEBS_ENABLE寄存器控制哪些PMC支持PEBS，PEBS事件限于特定非架构化事件（如指令退休、内存加载未命中等）。</li>
+<li>PEBS中断触发条件较复杂，通常在计数器溢出后的第一个PEBS事件（counter从0到1）时触发，但具体行为可能因指令和情境而异。</li>
+<li>PEBS记录的报告方式（trap或fault）由IA32_PERF_CAPABILITIES[6]（PEBS_TRAP）决定，影响EIP指向。</li>
+<li>PEBS buffer满时会产生DS中断，通过IA32_PERF_GLOBAL_STATUS[62]（OvfBuffer）标志检测。</li>
+<li>多个PMI（包括PMI、PEBS、PEBS buffer溢出、BTS buffer溢出）可能同时触发，需在中断处理程序中妥善判断与处理。</li>
+</ul>
+<h4 id="15-5-使用Fixed计数器"><a href="#15-5-使用Fixed计数器" class="headerlink" title="15.5 使用Fixed计数器"></a>15.5 使用Fixed计数器</h4><ul>
+<li>Fixed计数器专用于特定架构化事件：IA32_FIXED_CTR0（指令退休）、IA32_FIXED_CTR1（核心非停止周期）、IA32_FIXED_CTR2（总线非停止周期）。</li>
+<li>通过IA32_FIXED_CTR_CTRL配置并配合IA32_PERF_GLOBAL_CTRL启用。</li>
+<li>实验显示INST_RETIRED.ANY事件在PMC和Fixed计数器上结果一致，而其他Fixed事件专用于Fixed计数器。</li>
+</ul>
+<h4 id="15-6-Time-Stamp-Counter（TSC）与Clock"><a href="#15-6-Time-Stamp-Counter（TSC）与Clock" class="headerlink" title="15.6 Time-Stamp Counter（TSC）与Clock"></a>15.6 Time-Stamp Counter（TSC）与Clock</h4><ul>
+<li>TSC用于统计处理器自启动以来的时钟周期数，计数频率恒定，与CPU_CLK_UNHALTED.REF事件一致。</li>
+<li>Invariant TSC功能（CPUID.80000007H:EDX[8]）确保在P-state、C-state等状态下计数频率不变。</li>
+<li>通过RDTSC/RDTSCP指令读取TSC值，后者支持基于特定逻辑处理器的时钟统计。</li>
+<li>CPI（Clock Per Instruction）是衡量处理器效率的重要指标，分为：<ul>
+<li>Non-halted CPI：使用CPU_CLK_UNHALTED.CORE事件（IA32_FIXED_CTR1）。</li>
+<li>Nominal CPI：使用TSC或CPU_CLK_UNHALTED.REF事件（IA32_FIXED_CTR2）。</li>
+</ul>
+</li>
+<li>实验演示如何测量CPI值，并展示了在实际代码段中测得的CPI结果。</li>
+</ul>
+<h2 id="第四篇-中断体系"><a href="#第四篇-中断体系" class="headerlink" title="第四篇 中断体系"></a>第四篇 中断体系</h2><h3 id="第16章-中断与异常处理"><a href="#第16章-中断与异常处理" class="headerlink" title="第16章 中断与异常处理"></a>第16章 中断与异常处理</h3><p>x86/x64 体系中的中断与异常机制，包括其来源、类型、处理流程及相关编程细节。中断与异常使用相同机制（IDT/IVT、Vector 范围、处理流程）。</p>
+<h4 id="16-1-中断源"><a href="#16-1-中断源" class="headerlink" title="16.1 中断源"></a>16.1 中断源</h4><p>分为硬件中断与软件中断。</p>
+<ul>
+<li><p><strong>硬件中断</strong>：</p>
+<ul>
+<li><strong>可屏蔽中断</strong>：来自处理器的 INTR pin（通常连接 8259A PIC）、Local APIC、I/O APIC。可通过 EFLAGS.IF、中断控制器（如 8259A 的 IMR、APIC 的 mask 位）进行屏蔽。</li>
+<li><strong>不可屏蔽中断 (NMI)</strong>：来自 NMI pin（通常连接至 LINT1），一般不可屏蔽，但可通过芯片组的 NMI_EN 寄存器或 LVT_LINT1 寄存器的 mask 位进行屏蔽。</li>
+</ul>
+</li>
+<li><p><strong>软件中断</strong>：使用 <code>INT</code> 指令（如 <code>INT 0x40</code>）主动发起。</p>
+</li>
+</ul>
+<h4 id="16-2-异常源"><a href="#16-2-异常源" class="headerlink" title="16.2 异常源"></a>16.2 异常源</h4><p>分为运行错误、软件主动引发和 Machine-Check 异常。<strong>异常不可屏蔽</strong>。</p>
+<ul>
+<li><strong>运行错误</strong>：如除零（#DE）、无效指令（#UD）、页错误（#PF）、通用保护（#GP）等。</li>
+<li><strong>软件主动引发</strong>：如 <code>INT3</code> 触发断点（#BP）、<code>INTO</code> 触发溢出（#OF）、<code>BOUND</code> 触发越界（#BR）。</li>
+<li><strong>Machine-Check 异常 (#MC)</strong>：处理器检测到内部或外部硬件错误。</li>
+</ul>
+<h4 id="16-3-异常的类型与恢复"><a href="#16-3-异常的类型与恢复" class="headerlink" title="16.3 异常的类型与恢复"></a>16.3 异常的类型与恢复</h4><p>异常分为三类，决定处理器能否以及如何恢复执行。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">类型</th>
+<th style="text-align:left">描述</th>
+<th style="text-align:left">返回地址</th>
+<th style="text-align:left">示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>Fault</strong></td>
+<td style="text-align:left">通常可恢复，处理器保存异常指令之前的状态。</td>
+<td style="text-align:left">指向引发异常的指令。</td>
+<td style="text-align:left">#GP, #PF, #DE</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Trap</strong></td>
+<td style="text-align:left">通常不重要，处理器保存异常指令之后的状态。</td>
+<td style="text-align:left">指向下一条指令。</td>
+<td style="text-align:left">#BP, #OF</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Abort</strong></td>
+<td style="text-align:left">严重错误，通常无法恢复，可能导致系统复位。</td>
+<td style="text-align:left">无法返回。</td>
+<td style="text-align:left">#DF, #MC</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul>
+<li><strong>#DF (Double Fault) 异常</strong>：当处理器在调用一个异常处理程序时（未成功执行），又发生了另一个符合条件的异常（主要是某些 fault 异常组合）时产生。</li>
+<li><strong>实验 16-1</strong>：通过访问未映射地址（触发 #PF）且未设置 #PF 处理程序（导致 #GP），最终引发 #DF 异常。</li>
+</ul>
+<h4 id="16-4-中断向量-Vector"><a href="#16-4-中断向量-Vector" class="headerlink" title="16.4 中断向量 (Vector)"></a>16.4 中断向量 (Vector)</h4><p>共 256 个（0-255）。Vector 0-31 为 Intel 预定义或保留（用于异常和 NMI）。Vector 32-255 可供用户自定义使用。<strong>用户不应使用 0-31 号 Vector</strong>，APIC 使用 0-15 号是非法的。</p>
+<h4 id="16-5-中断的屏蔽"><a href="#16-5-中断的屏蔽" class="headerlink" title="16.5 中断的屏蔽"></a>16.5 中断的屏蔽</h4><ul>
+<li><strong>可屏蔽中断的屏蔽方法</strong>：<ol>
+<li>清 EFLAGS.IF 标志（<code>CLI</code> 等指令）。</li>
+<li>在 8259A PIC 的 IMR 寄存器中屏蔽相应 IRQ。</li>
+<li>在 Local APIC LVT 或 I/O APIC Redirection Table 中设置 mask 位。</li>
+</ol>
+</li>
+<li><strong>自动屏蔽</strong>：通过 Interrupt-gate 进入 ISR 时，处理器自动清 IF 标志（屏蔽可屏蔽中断），通过 Trap-gate 则不会。</li>
+<li><strong>使用保留 Vector 的问题</strong>：硬件中断若使用 0-31 号 Vector，可能引发错误或执行错误的异常处理程序（如错误处理 Error Code）。</li>
+<li><strong>特殊情况处理</strong>：<ul>
+<li>设置 EFLAGS.RF=1 可暂时抑制一次 fault 类型的 #DB 异常。</li>
+<li>在执行 <code>MOV SS, AX</code> 后、下条指令前，处理器会抑制硬件中断和 #DB 异常，推荐使用 <code>LSS</code> 指令。</li>
+</ul>
+</li>
+</ul>
+<h4 id="16-6-IDTR-寄存器"><a href="#16-6-IDTR-寄存器" class="headerlink" title="16.6 IDTR 寄存器"></a>16.6 IDTR 寄存器</h4><p>存储 IDT/IVT 的基地址和段限长。实模式下指向 IVT，保护/长模式下指向 IDT。使用 <code>LIDT</code> 指令加载。</p>
+<h4 id="16-7-IVT-中断向量表-实模式"><a href="#16-7-IVT-中断向量表-实模式" class="headerlink" title="16.7 IVT (中断向量表) - 实模式"></a>16.7 IVT (中断向量表) - 实模式</h4><ul>
+<li>位于线性地址 0（默认），每个表项 4 字节（16位段:16位偏移）。</li>
+<li>可通过 <code>LIDT</code> 指令重定位 IVT。</li>
+</ul>
+<h4 id="16-8-IDT-中断描述符表-保护-长模式"><a href="#16-8-IDT-中断描述符表-保护-长模式" class="headerlink" title="16.8 IDT (中断描述符表) - 保护/长模式"></a>16.8 IDT (中断描述符表) - 保护/长模式</h4><ul>
+<li>存储门描述符，而非直接地址。</li>
+<li><strong>门描述符大小</strong>：Legacy 保护模式为 8 字节；IA-32e（长）模式为 16 字节。</li>
+<li><strong>IDT Limit</strong>：需满足 <code>Limit &gt;= (Vector * 描述符大小) + (描述符大小 - 1)</code>。</li>
+</ul>
+<h4 id="16-9-门描述符-Gate-Descriptor"><a href="#16-9-门描述符-Gate-Descriptor" class="headerlink" title="16.9 门描述符 (Gate Descriptor)"></a>16.9 门描述符 (Gate Descriptor)</h4><ul>
+<li><strong>Legacy 保护模式</strong>：支持<strong>中断门 (Interrupt-gate)</strong>、<strong>陷阱门 (Trap-gate)</strong>、<strong>任务门 (Task-gate)</strong>。</li>
+<li><strong>IA-32e 模式 (长模式)</strong>：仅支持<strong>中断门</strong>和<strong>陷阱门</strong>（无任务门）。</li>
+<li><strong>关键区别</strong>：<ul>
+<li><strong>中断门</strong>：进入处理程序时，处理器会自动清 EFLAGS.IF 以屏蔽可屏蔽中断。</li>
+<li><strong>陷阱门</strong>：进入处理程序时，EFLAGS.IF 保持不变。</li>
+</ul>
+</li>
+<li><strong>IA-32e 模式新增</strong>：门描述符包含 <strong>IST (Interrupt Stack Table) 指针域</strong>，用于在中断处理时切换到指定的栈。</li>
+</ul>
+<h4 id="16-10-中断-异常处理流程（保护模式）"><a href="#16-10-中断-异常处理流程（保护模式）" class="headerlink" title="16.10 中断/异常处理流程（保护模式）"></a>16.10 中断/异常处理流程（保护模式）</h4><p>处理器通过 IDT 查找门描述符，最终调用处理程序。主要步骤包括：</p>
+<ol>
+<li><strong>描述符检查</strong>：检查 IDT Limit、门描述符类型/P位/S位、目标代码段选择子/描述符（类型、DPL、P位等）。</li>
+<li><strong>权限检查</strong>：<strong>仅对 <code>INT</code>、<code>INT3</code>、<code>INTO</code> 指令发起的调用进行</strong>。要求 <code>CPL &lt;= 门描述符.DPL</code> 且 <code>CPL &gt;= 目标代码段.DPL</code>。</li>
+<li><strong>权限处理</strong>：根据目标代码段类型（Conforming/Non-conforming）和当前 CPL，分三种情况：<ul>
+<li><strong>同级调用 (CPL = 目标段.DPL)</strong>：不切换栈和权限。</li>
+<li><strong>权限提升 (CPL &gt; 目标段.DPL)</strong>：切换到更高权限栈（从 TSS 中加载）。</li>
+<li><strong>Conforming 段</strong>：切换代码段，但不切换栈和权限。</li>
+</ul>
+</li>
+<li><strong>保存状态</strong>：根据门类型（16/32/64位）将 EFLAGS、CS、EIP、Error Code（如有）及可能的 SS/ESP 压入栈。</li>
+<li><strong>加载新上下文</strong>：加载新的 CS:EIP（指向处理程序），必要时加载新的 SS:ESP。</li>
+<li><strong>清除标志位</strong>：进入处理程序前，处理器清 TF、VM、RF、NT 标志。若通过中断门进入，还会清 IF 标志。</li>
+</ol>
+<h4 id="16-11-任务切换（仅-Legacy-模式）"><a href="#16-11-任务切换（仅-Legacy-模式）" class="headerlink" title="16.11 任务切换（仅 Legacy 模式）"></a>16.11 任务切换（仅 Legacy 模式）</h4><p>如果门描述符是 Task-gate，处理器会进行任务切换（IA-32e 模式不支持）。</p>
+<h4 id="16-12-中断-异常返回-IRET-IRETQ"><a href="#16-12-中断-异常返回-IRET-IRETQ" class="headerlink" title="16.12 中断/异常返回 (IRET/IRETQ)"></a>16.12 中断/异常返回 (IRET/IRETQ)</h4><p>返回流程复杂，涉及从栈中弹出状态、权限检查与切换。</p>
+<ul>
+<li><strong>操作数大小</strong>：由指令前缀和当前模式决定（16位 <code>IRET</code>、32位 <code>IRET</code>/<code>IRETD</code>、64位 <code>IRETQ</code>）。</li>
+<li><strong>返回检查</strong>：检查弹出的 CS 选择子及代码段描述符的权限和类型，决定是同级返回还是切换到更低权限。</li>
+<li><strong>关键规则</strong>：只能返回到同级或更低权限代码（<code>CPL &lt;= 返回的 CS.RPL</code>）。</li>
+<li><strong>切换至低权限时</strong>：<ol>
+<li>从栈中弹出新的 SS 和 ESP/RSP。</li>
+<li>检查新的 SS 选择子及数据段描述符的权限和类型。</li>
+<li>加载新的 CS、EIP、SS、ESP/RSP。</li>
+<li>根据权限更新 EFLAGS（IF、IOPL 的更新受权限限制）。</li>
+<li>更新 CPL。</li>
+<li>根据需要，将 ES、DS、FS、GS 等段寄存器加载为 Null 选择子（防止低权限代码访问高权限数据）。</li>
+</ol>
+</li>
+<li><strong>长模式下的不同</strong>：在 64 位模式下执行 <code>IRETQ</code>，处理器<strong>总是无条件从栈中弹出 SS 和 RSP 值</strong>，无论权限是否改变。</li>
+</ul>
+<h4 id="16-13-错误码-Error-Code"><a href="#16-13-错误码-Error-Code" class="headerlink" title="16.13 错误码 (Error Code)"></a>16.13 错误码 (Error Code)</h4><p>部分异常（如 #GP、#PF、#DF）会在栈中压入错误码，帮助诊断异常原因。</p>
+<ul>
+<li><strong>格式</strong>：类似段选择子，包含 EXT（外部事件）、IDT（指向IDT）、TI（GDT/LDT）和 Selector Index。</li>
+<li><strong>#PF 异常错误码</strong>：格式特殊，包含 P（页是否存在）、W/R（读/写）、U/S（用户/管理员）、RSVD（保留位）、I/D（指令取指）等位，指示页错误的具体原因。</li>
+</ul>
+<hr>
+<h3 id="第17章-8259中断控制器"><a href="#第17章-8259中断控制器" class="headerlink" title="第17章 8259中断控制器"></a>第17章 8259中断控制器</h3><p>传统的外部中断控制器，通常由一片 Master 和一片 Slave 串联使用，通过处理器的 INTR pin 提交中断请求。</p>
+<h4 id="17-1-8259-结构"><a href="#17-1-8259-结构" class="headerlink" title="17.1 8259 结构"></a>17.1 8259 结构</h4><ul>
+<li><strong>连接</strong>：Slave 片的 INT 输出连接到 Master 片的 IR2 引脚。</li>
+<li><strong>优先级</strong>：Master 片 IR0 最高，IR7 最低。Slave 片中断优先级等同于 IRQ2。</li>
+<li><strong>内部寄存器</strong>：<ul>
+<li><strong>IRR (Interrupt Request Register)</strong>：记录哪些 IRQ 引脚有中断请求。</li>
+<li><strong>ISR (In-Service Register)</strong>：记录哪些中断请求正在被处理器服务。</li>
+<li><strong>IMR (Interrupt Mask Register)</strong>：控制哪些 IRQ 引脚的中断被屏蔽。</li>
+</ul>
+</li>
+</ul>
+<h4 id="17-2-8259-编程"><a href="#17-2-8259-编程" class="headerlink" title="17.2 8259 编程"></a>17.2 8259 编程</h4><p>通过 I/O 端口访问其寄存器（Master: 20h/21h；Slave: A0h/A1h）。</p>
+<ol>
+<li><p><strong>初始化</strong>：依次写入 4 个初始化命令字 (ICW)。</p>
+<ul>
+<li><strong>ICW1</strong>：固定值 11h。</li>
+<li><strong>ICW2</strong>：设置中断向量基值（如 Master 设为 20h，则 IRQ0 对应向量 20h）。</li>
+<li><strong>ICW3</strong>：Master 片指定 Slave 连接引脚（固定为 04h），Slave 片设置标识码（固定为 02h）。</li>
+<li><strong>ICW4</strong>：设置模式，如是否自动结束中断 (AEOI)、是否特殊全嵌套模式 (SFNM)。</li>
+</ul>
+</li>
+<li><p><strong>操作控制字 (OCW)</strong>：</p>
+<ul>
+<li><strong>OCW1</strong>：写入 IMR，屏蔽或允许特定 IRQ。</li>
+<li><strong>OCW2</strong>：发送 EOI 命令或设置优先级旋转模式。</li>
+<li><strong>OCW3</strong>：设置特殊屏蔽模式 (SMM)、查询模式，或读取 IRR/ISR。</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li><strong>特殊屏蔽模式 (SMM)</strong>：允许在中断服务程序中，动态地根据 IMR（而非固定的 ISR 优先级）来决定是否响应其他中断。这使得低优先级中断可以中断高优先级中断的服务程序。</li>
+<li><strong>触发模式设置</strong>：通过 <strong>ELCR (Edge/Level Control Register)</strong> 寄存器（端口 4D0h/4D1h）设置每个 IRQ 是边沿触发还是电平触发。某些 IRQ（如 IRQ0, IRQ1, IRQ2, IRQ8, IRQ13）必须为边沿触发。</li>
+</ul>
+<h3 id="第18章-Local-APIC体系"><a href="#第18章-Local-APIC体系" class="headerlink" title="第18章 Local APIC体系"></a>第18章 Local APIC体系</h3><h4 id="18-1-APIC体系概述"><a href="#18-1-APIC体系概述" class="headerlink" title="18.1 APIC体系概述"></a>18.1 APIC体系概述</h4><p>APIC（高级可编程中断控制器）是Intel为多处理器环境引入的中断管理机制。整个体系分为：</p>
+<ul>
+<li><strong>Local APIC</strong>：集成于每个逻辑处理器内，负责处理本处理器及外部中断。</li>
+<li><strong>I/O APIC</strong>：位于芯片组（如PCH）中，负责接收和转发外部设备中断到指定处理器。</li>
+</ul>
+<h4 id="18-1-1-Local-APIC的中断源"><a href="#18-1-1-Local-APIC的中断源" class="headerlink" title="18.1.1 Local APIC的中断源"></a>18.1.1 Local APIC的中断源</h4><p>Local APIC可以接收以下中断源：</p>
+<ol>
+<li><strong>本地中断</strong>：通过LVT寄存器产生，包括：<ul>
+<li>LINTO和LINT1：连接外部中断源（如8259控制器或NMI）。</li>
+<li>APIC Timer中断。</li>
+<li>Thermal传感器中断。</li>
+<li>Performance监控计数器中断。</li>
+<li>APIC内部错误中断。</li>
+</ul>
+</li>
+<li><strong>外部中断</strong>：由I/O APIC通过系统总线发送。</li>
+<li><strong>处理器间中断（IPI）</strong>：处理器间通过ICR寄存器发送的中断消息。</li>
+</ol>
+<h4 id="18-1-2-APIC版本演进"><a href="#18-1-2-APIC版本演进" class="headerlink" title="18.1.2 APIC版本演进"></a>18.1.2 APIC版本演进</h4><p>APIC经历了四个主要版本：</p>
+<ul>
+<li><strong>APIC</strong>：外部芯片形式（如82489DX）。</li>
+<li><strong>xAPIC</strong>：集成于处理器内部，使用系统总线通信（取代APIC总线），寄存器内存映射到物理地址。</li>
+<li><strong>x2APIC</strong>：向下兼容xAPIC，扩展至32位APIC ID，寄存器通过MSR访问，增强了扩展性。</li>
+</ul>
+<h4 id="18-2-Local-APIC的使用"><a href="#18-2-Local-APIC的使用" class="headerlink" title="18.2 Local APIC的使用"></a>18.2 Local APIC的使用</h4><h5 id="18-2-1-检测与启用"><a href="#18-2-1-检测与启用" class="headerlink" title="18.2.1 检测与启用"></a>18.2.1 检测与启用</h5><ul>
+<li><strong>检测支持</strong>：通过CPUID指令检查EDX[9]（APIC支持位）和ECX[21]（x2APIC支持位）。</li>
+<li><strong>启用/关闭</strong>：<ul>
+<li>通过IA32_APIC_BASE寄存器的APIC Enable位（bit 11）全局控制。</li>
+<li>通过SVR（伪中断向量寄存器）的APIC Enable位（bit 8）临时开关。</li>
+<li>启用x2APIC需同时置位IA32_APIC_BASE寄存器的bit 10和bit 11。</li>
+</ul>
+</li>
+</ul>
+<h4 id="18-3-Local-APIC寄存器"><a href="#18-3-Local-APIC寄存器" class="headerlink" title="18.3 Local APIC寄存器"></a>18.3 Local APIC寄存器</h4><ul>
+<li><strong>寄存器基址</strong>：由IA32_APIC_BASE指定，默认为FEE00000H，可重定位。</li>
+<li><strong>寄存器列表</strong>：包括APIC ID、版本、TPR、EOI、LVT寄存器组、ICR、IRR、ISR、TMR等，共占据4K页空间。</li>
+<li><strong>访问方式</strong>：<ul>
+<li>xAPIC模式：通过内存映射地址访问。</li>
+<li>x2APIC模式：通过RDMSR/WRMSR指令访问MSR寄存器。</li>
+</ul>
+</li>
+</ul>
+<h4 id="18-4-Local-APIC-ID"><a href="#18-4-Local-APIC-ID" class="headerlink" title="18.4 Local APIC ID"></a>18.4 Local APIC ID</h4><ul>
+<li><strong>作用</strong>：唯一标识逻辑处理器，用于处理器间通信和中断路由。</li>
+<li><strong>结构</strong>：<ul>
+<li>xAPIC ID：8位，分为Package ID、Core ID、SMT ID三级拓扑结构。</li>
+<li>x2APIC ID：32位，可支持多级拓扑（如包含Cluster ID）。</li>
+</ul>
+</li>
+<li><strong>查询方式</strong>：<ul>
+<li>支持CPUID 0B leaf时，通过CPUID.0B:EDX获取32位ID。</li>
+<li>否则通过CPUID.01:EBX[31:24]获取8位ID。</li>
+</ul>
+</li>
+<li><strong>拓扑提取</strong>：<ul>
+<li>使用CPUID 0B leaf枚举SMT_MASK_WIDTH和CORE_MASK_WIDTH。</li>
+<li>通过掩码计算提取Package/Core/SMT ID值。</li>
+</ul>
+</li>
+</ul>
+<h4 id="18-4-3-多线程处理器编程"><a href="#18-4-3-多线程处理器编程" class="headerlink" title="18.4.3 多线程处理器编程"></a>18.4.3 多线程处理器编程</h4><ul>
+<li><strong>Logical Processor资源</strong>：<ul>
+<li>私有资源：通用寄存器、段寄存器、控制寄存器、调试寄存器、FPU/MMX/SSE/AVX寄存器、local APIC寄存器、大部分MSR。</li>
+<li>共享资源：MTRR（内存类型范围寄存器）。</li>
+<li>实现依赖资源：IA32_MISC_ENABLE、Machine Check、Performance Monitoring相关MSR。</li>
+</ul>
+</li>
+<li><strong>处理器初始化与枚举</strong>：<ul>
+<li>系统加电或复位后，硬件选择一个BSP（自举处理器），其余为AP（应用处理器）。</li>
+<li>BSP负责初始化系统数据结构（如GDT、IDT、页表），并发送INIT-SIPI-SIPI消息序列唤醒AP处理器。</li>
+<li>所有处理器可共享或独立运行环境（GDT/IDT/页表）。</li>
+</ul>
+</li>
+</ul>
+<h4 id="18-5-LVT寄存器"><a href="#18-5-LVT寄存器" class="headerlink" title="18.5 LVT寄存器"></a>18.5 LVT寄存器</h4><p>LVT（本地向量表）寄存器用于配置本地中断源，包括：</p>
+<ul>
+<li><strong>LVT CMCI</strong>：已纠正机器检查错误中断。</li>
+<li><strong>LVT Timer</strong>：APIC定时器中断。</li>
+<li><strong>LVT Thermal</strong>：温度传感器中断。</li>
+<li><strong>LVT Performance</strong>：性能监控计数器中断。</li>
+<li><strong>LVT LINT0/LINT1</strong>：连接外部中断（如8259或NMI）。</li>
+<li><strong>LVT Error</strong>：APIC内部错误中断。</li>
+</ul>
+<p>每个LVT寄存器包含中断向量、交付模式、触发模式、屏蔽位等字段。</p>
+<h4 id="18-6-ICR寄存器"><a href="#18-6-ICR寄存器" class="headerlink" title="18.6 ICR寄存器"></a>18.6 ICR寄存器</h4><p>ICR（中断命令寄存器）用于发送处理器间中断（IPI），支持多种交付模式（如Fixed、NMI、INIT、Start-Up等）和目标模式（Physical、Logical）。</p>
+<h4 id="18-7-中断处理与仲裁"><a href="#18-7-中断处理与仲裁" class="headerlink" title="18.7 中断处理与仲裁"></a>18.7 中断处理与仲裁</h4><ul>
+<li><strong>中断优先级</strong>：基于中断向量号，优先级分为16个等级（2~15为有效）。</li>
+<li><strong>TPR与PPR</strong>：<ul>
+<li>TPR（任务优先级寄存器）设置中断响应阈值。</li>
+<li>PPR（处理器优先级寄存器）反映当前处理器实际优先级（取TPR和ISR中最高优先级）。</li>
+</ul>
+</li>
+<li><strong>中断仲裁流程</strong>：<ol>
+<li>中断请求记录于IRR。</li>
+<li>Local APIC选择IRR中优先级最高的请求。</li>
+<li>与PPR比较，若优先级更高则提交至处理器，并置位ISR相应位。</li>
+<li>中断处理程序执行完毕后，发送EOI命令清ISR位。</li>
+</ol>
+</li>
+</ul>
+<h4 id="18-8-APIC-Timer"><a href="#18-8-APIC-Timer" class="headerlink" title="18.8 APIC Timer"></a>18.8 APIC Timer</h4><p>Local APIC内置定时器，支持三种计数模式：</p>
+<ul>
+<li><strong>One-shot</strong>：单次计数，计数到0产生中断。</li>
+<li><strong>Periodic</strong>：周期性计数，计数到0后自动重载初始值。</li>
+<li><strong>TSC-deadline</strong>：基于TSC值的截止时间中断。</li>
+</ul>
+<p>定时器通过Divide Configuration寄存器配置时钟分频。</p>
+<h4 id="18-9-错误处理"><a href="#18-9-错误处理" class="headerlink" title="18.9 错误处理"></a>18.9 错误处理</h4><ul>
+<li><strong>ESR寄存器</strong>：记录APIC内部错误类型，如非法向量、非法寄存器访问等。</li>
+<li><strong>LVT Error寄存器</strong>：配置APIC错误中断处理程序。</li>
+<li>错误发生后，若未屏蔽错误中断，将触发相应的错误处理流程。</li>
+</ul>
+<h4 id="18-10-LINT0与LINT1"><a href="#18-10-LINT0与LINT1" class="headerlink" title="18.10 LINT0与LINT1"></a>18.10 LINT0与LINT1</h4><ul>
+<li><strong>LINT0</strong>：通常连接外部8259中断控制器，支持ExtINT交付模式。</li>
+<li><strong>LINT1</strong>：连接外部NMI信号，支持NMI交付模式。</li>
+<li>可通过屏蔽LVT LINT0/LINT1寄存器来屏蔽外部中断或NMI请求。</li>
+</ul>
+<h4 id="18-11-Performance-Monitoring"><a href="#18-11-Performance-Monitoring" class="headerlink" title="18.11 Performance Monitoring"></a>18.11 Performance Monitoring</h4><ul>
+<li><strong>LVT Performance Monitor寄存器</strong>：配置性能监控中断（PMI），支持Fixed、SMI、NMI交付模式。</li>
+<li>PMI由性能计数器溢出触发，用于监控处理器性能事件。</li>
+</ul>
+<h4 id="18-12-小结"><a href="#18-12-小结" class="headerlink" title="18.12 小结"></a>18.12 小结</h4><p>Local APIC是x86/x64多处理器系统的核心中断管理部件，负责处理本地中断、外部中断和处理器间通信。理解其寄存器结构、中断仲裁机制、多处理器初始化流程对于开发系统软件（如操作系统、虚拟化管理程序）至关重要。</p>
+<hr>
+<h3 id="第19章-I-O-APIC"><a href="#第19章-I-O-APIC" class="headerlink" title="第19章 I/O APIC"></a>第19章 I/O APIC</h3><p>I/O APIC是APIC体系的外部中断控制器部分，位于芯片组中，负责接收和转发外部设备中断到系统总线上的目标处理器。</p>
+<h4 id="19-1-I-O-APIC寄存器"><a href="#19-1-I-O-APIC寄存器" class="headerlink" title="19.1 I/O APIC寄存器"></a>19.1 I/O APIC寄存器</h4><ul>
+<li><strong>访问方式</strong>：通过内存映射的Index和Data寄存器间接访问。</li>
+<li><strong>寄存器基址</strong>：由OIC（Other Interrupt Controller）寄存器配置，默认为FEC00000H。</li>
+<li><strong>主要寄存器</strong>：<ul>
+<li>I/O APIC ID寄存器：标识I/O APIC芯片。</li>
+<li>Version寄存器：指明I/O APIC版本和支持的Redirection Table条目数。</li>
+<li>Redirection Table寄存器（24个）：每个对应一条IRQ线，配置中断向量、交付模式、触发模式和目标处理器。</li>
+</ul>
+</li>
+</ul>
+<h4 id="19-1-3-I-O-APIC的IRQ线"><a href="#19-1-3-I-O-APIC的IRQ线" class="headerlink" title="19.1.3 I/O APIC的IRQ线"></a>19.1.3 I/O APIC的IRQ线</h4><p>I/O APIC支持24条IRQ线，其中：</p>
+<ul>
+<li>IRQ0连接8259中断控制器（需使用ExtINT交付模式）。</li>
+<li>IRQ1~IRQ15对应传统设备（如键盘、定时器、串口等）。</li>
+<li>IRQ16~IRQ23用于PCI设备中断（PIRQA#~PIRQH#）。</li>
+</ul>
+<h4 id="19-1-4-中断处理流程"><a href="#19-1-4-中断处理流程" class="headerlink" title="19.1.4 中断处理流程"></a>19.1.4 中断处理流程</h4><ol>
+<li>设备在IRQ线上产生中断请求。</li>
+<li>I/O APIC读取对应Redirection Table条目，组装中断消息。</li>
+<li>通过系统总线发送中断消息到目标处理器。</li>
+<li>目标处理器的Local APIC接收并处理中断（遵循Local APIC中断仲裁流程）。</li>
+</ol>
+<h4 id="19-2-HPET（高精度定时器）"><a href="#19-2-HPET（高精度定时器）" class="headerlink" title="19.2 HPET（高精度定时器）"></a>19.2 HPET（高精度定时器）</h4><p>HPET提供高精度定时功能，通过内存映射寄存器直接访问。</p>
+<h5 id="19-2-1-HPET寄存器"><a href="#19-2-1-HPET寄存器" class="headerlink" title="19.2.1 HPET寄存器"></a>19.2.1 HPET寄存器</h5><ul>
+<li><strong>基址</strong>：由HPET配置寄存器选择，默认为FED00000H。</li>
+<li><strong>主要组件</strong>：<ul>
+<li>主计数器（Main Counter）：按固定频率计数。</li>
+<li>定时器（Timer 0~7）：每个包含配置寄存器和比较值寄存器，可配置产生中断。</li>
+</ul>
+</li>
+</ul>
+<h5 id="19-2-2-工作原理"><a href="#19-2-2-工作原理" class="headerlink" title="19.2.2 工作原理"></a>19.2.2 工作原理</h5><p>HPET计数器持续计数，当计数值达到某个Timer的比较值时，触发中断。Timer可配置为周期模式或单次模式，并支持路由到特定IRQ线（如Timer 0到IRQ2，Timer 1到IRQ8）。</p>
+<h5 id="19-2-3-初始化与使用"><a href="#19-2-3-初始化与使用" class="headerlink" title="19.2.3 初始化与使用"></a>19.2.3 初始化与使用</h5><ul>
+<li>通过RCBA（Root Complex Base Address）配置HPET基址和启用。</li>
+<li>配置Timer的触发模式、中断启用、目标IRQ等。</li>
+<li>示例：使用Timer 0实现周期性中断（如每秒一次），用于系统计时。</li>
+</ul>
+<h4 id="19-3-小结"><a href="#19-3-小结" class="headerlink" title="19.3 小结"></a>19.3 小结</h4><p>I/O APIC和HPET是现代x86/x64系统管理外部中断和高精度定时的关键组件。I/O APIC通过Redirection Table灵活路由中断，支持多处理器环境；HPET提供微秒级精度的定时能力，适用于实时系统和性能监控。</p>
+<h2 id="第五篇-浮点与SIMD指令环境"><a href="#第五篇-浮点与SIMD指令环境" class="headerlink" title="第五篇 浮点与SIMD指令环境"></a>第五篇 浮点与SIMD指令环境</h2><h3 id="第20章-x87-FPU单元与MMX技术"><a href="#第20章-x87-FPU单元与MMX技术" class="headerlink" title="第20章 x87 FPU单元与MMX技术"></a>第20章 x87 FPU单元与MMX技术</h3><h4 id="x87-FPU概述"><a href="#x87-FPU概述" class="headerlink" title="x87 FPU概述"></a>x87 FPU概述</h4><p>x87 FPU最初是独立的数字协处理器（如8087、287、387），从486DX开始集成到CPU内。软件可通过CPUID.01H:EDX[0]位检测其存在。CR0寄存器的ET位（早期指示协处理器类型）和NE位（控制浮点异常处理模式）用于管理FPU。</p>
+<h4 id="MMX技术简介"><a href="#MMX技术简介" class="headerlink" title="MMX技术简介"></a>MMX技术简介</h4><p>Intel于1996年在Pentium处理器中引入MMX技术，开创了x86体系的SIMD先河。MMX指令基于x87 FPU环境，主要处理压缩整数数据。CPUID.01H:EDX[23]位用于检测MMX支持。</p>
+<h4 id="x87-FPU执行环境"><a href="#x87-FPU执行环境" class="headerlink" title="x87 FPU执行环境"></a>x87 FPU执行环境</h4><p>FPU提供以下硬件资源：</p>
+<ul>
+<li>8个80位浮点数据寄存器（R0~R7）。</li>
+<li>状态寄存器、控制寄存器、标记字寄存器。</li>
+<li>最后指令指针、操作数指针及操作码寄存器。</li>
+<li>支持两种浮点异常处理模式：Native模式（使用#MF异常）和DOS兼容模式（通过外部PIC处理）。</li>
+</ul>
+<h4 id="数据类型与指令分类"><a href="#数据类型与指令分类" class="headerlink" title="数据类型与指令分类"></a>数据类型与指令分类</h4><p><strong>支持的数据类型</strong>：</p>
+<ul>
+<li>单精度、双精度、扩展双精度浮点数。</li>
+<li>16/32/64位整数。</li>
+<li>80位压缩BCD码。</li>
+</ul>
+<p><strong>指令分类</strong>：</p>
+<ul>
+<li>数据传送、算术运算、比较、超越函数、控制指令（含wait/non-wait版本）。</li>
+</ul>
+<h4 id="x87-FPU数据寄存器与栈结构"><a href="#x87-FPU数据寄存器与栈结构" class="headerlink" title="x87 FPU数据寄存器与栈结构"></a>x87 FPU数据寄存器与栈结构</h4><ul>
+<li>8个80位寄存器以环形栈结构组织，栈顶指针ST(0)由状态寄存器的TOP域指示。</li>
+<li>栈可向上溢出（overflow）或向下溢出（underflow），由Tag寄存器标识寄存器状态（Valid、Zero、Special、Empty）。</li>
+<li>加载数据时自动转换为扩展双精度格式，存储时自动转换回目标格式。</li>
+</ul>
+<h4 id="状态寄存器与条件码"><a href="#状态寄存器与条件码" class="headerlink" title="状态寄存器与条件码"></a>状态寄存器与条件码</h4><p>状态寄存器包含：</p>
+<ul>
+<li>Busy位（保留兼容）、TOP指针、条件码（C0-C3）、异常标志位（IE、DE、ZE、OE、UE、PE）及错误总结状态（ES）。</li>
+<li>FXAM指令可检测ST(0)值的类型（如NaN、无穷大、规格化数等）。</li>
+<li>比较指令（FCOM/FUCOM系列）结果反映在条件码中，可通过FSTSW指令读取并用于程序分支。</li>
+</ul>
+<h4 id="x87-FPU异常处理"><a href="#x87-FPU异常处理" class="headerlink" title="x87 FPU异常处理"></a>x87 FPU异常处理</h4><p><strong>异常类型</strong>：</p>
+<ul>
+<li>#I（无效操作）、#D（非规格化操作数）、#Z（除零）、#O（上溢）、#U（下溢）、#P（精度损失）。</li>
+<li>#I异常分为#IS（栈溢出）和#IA（无效算术操作数）。</li>
+</ul>
+<p><strong>异常处理模式</strong>：</p>
+<ul>
+<li>Native模式：通过#MF异常向量处理。</li>
+<li>DOS兼容模式：通过外部8259中断控制器处理。</li>
+<li>异常可屏蔽，屏蔽时处理器使用默认修复方法（如返回QNaN值）。</li>
+</ul>
+<h4 id="MMX指令环境"><a href="#MMX指令环境" class="headerlink" title="MMX指令环境"></a>MMX指令环境</h4><ul>
+<li>MMX与x87 FPU共享物理寄存器，MMX寄存器（MM0~MM7）对应FPU数据寄存器的低64位。</li>
+<li>执行MMX指令会重置TOP指针和Tag寄存器。</li>
+<li>支持压缩整数的回绕（wrapround）和饱和（saturation）运算模式。</li>
+<li>提供比较、解包（unpack）、数据交错等操作。</li>
+</ul>
+<h4 id="x87-FPU与MMX状态保存与切换"><a href="#x87-FPU与MMX状态保存与切换" class="headerlink" title="x87 FPU与MMX状态保存与切换"></a>x87 FPU与MMX状态保存与切换</h4><ul>
+<li>使用FSTENV/FNSTENV保存环境信息，FSAVE/FNSAVE保存完整状态（含数据寄存器）。</li>
+<li>进程切换时，通过CR0.TS位实现延迟上下文切换，遇到第一条FPU/MMX指令时触发#NM异常，在异常处理程序中完成状态保存与恢复。</li>
+</ul>
+<h4 id="推荐设置"><a href="#推荐设置" class="headerlink" title="推荐设置"></a>推荐设置</h4><ul>
+<li>初始化FPU（FINIT/FNINIT），默认屏蔽所有异常，使用扩展双精度运算。</li>
+<li>设置CR0.NE=1（Native异常模式）、CR0.EM=0（允许FPU/MMX指令）、CR0.MP=1（监控WAIT指令）。</li>
+<li>进程切换时置CR0.TS位，实现延迟上下文切换。</li>
+</ul>
+<hr>
+<h3 id="第21章-SSE系列指令环境"><a href="#第21章-SSE系列指令环境" class="headerlink" title="第21章 SSE系列指令环境"></a>第21章 SSE系列指令环境</h3><h4 id="SSE系列概述"><a href="#SSE系列概述" class="headerlink" title="SSE系列概述"></a>SSE系列概述</h4><p>SSE系列指令从Pentium III开始引入，逐步扩展至SSE4.2，提供丰富的SIMD浮点与整数操作，包括：</p>
+<ul>
+<li>压缩/标量单/双精度浮点运算。</li>
+<li>128位整数运算。</li>
+<li>水平运算、数据重排、混合、插入/提取、字符串处理等。</li>
+</ul>
+<h4 id="处理器与操作系统支持"><a href="#处理器与操作系统支持" class="headerlink" title="处理器与操作系统支持"></a>处理器与操作系统支持</h4><ul>
+<li>需处理器物理支持（通过CPUID检测）和操作系统软件支持（设置CR4相关位）。</li>
+<li>缺少任一项支持时，执行SSE指令会触发#UD异常。</li>
+</ul>
+<h4 id="XMM寄存器与MXCSR"><a href="#XMM寄存器与MXCSR" class="headerlink" title="XMM寄存器与MXCSR"></a>XMM寄存器与MXCSR</h4><ul>
+<li>16个128位XMM寄存器（XMM0~XMM15，64位模式下全部可用）。</li>
+<li>MXCSR寄存器：包含浮点异常状态位、异常屏蔽位、舍入控制、DAZ（非规格化数为零）、FZ（刷新为零）模式控制。</li>
+</ul>
+<h4 id="数据类型与异常处理"><a href="#数据类型与异常处理" class="headerlink" title="数据类型与异常处理"></a>数据类型与异常处理</h4><p><strong>数据类型</strong>：</p>
+<ul>
+<li>浮点：压缩/标量单/双精度。</li>
+<li>整数：字节、字、双字、四字压缩格式。</li>
+</ul>
+<p><strong>异常类型</strong>：</p>
+<ul>
+<li>与x87 FPU类似的6类数值异常（#I、#D、#Z、#O、#U、#P），无栈溢出子类。</li>
+<li>异常可屏蔽，未屏蔽时通过#XM异常处理（向量19）。</li>
+</ul>
+<h4 id="SSE指令操作类型"><a href="#SSE指令操作类型" class="headerlink" title="SSE指令操作类型"></a>SSE指令操作类型</h4><ol>
+<li><strong>压缩/标量/水平运算</strong>：支持垂直与水平方向的浮点和整数运算。</li>
+<li><strong>数据传送</strong>：支持对齐/非对齐、临时/非临时加载存储操作。</li>
+<li><strong>数据重排</strong>：包括洗牌（shuffle）、解包（unpack）、混合（blend）等。</li>
+<li><strong>插入与提取</strong>：INSERTPS、PINSRB/PEXTRB等指令实现数据插入与提取。</li>
+<li><strong>比较操作</strong>：浮点比较结果可写入目标操作数或EFLAGS标志位；整数比较支持等于与大于。</li>
+<li><strong>逻辑与移位操作</strong>：支持AND、OR、XOR、AND-NOT及位移位。</li>
+<li><strong>数据转换</strong>：浮点与整数间转换、整数扩展（零扩展/符号扩展）。</li>
+<li><strong>字符串处理</strong>：SSE4.2引入PCMPESTRI/PCMPISTRI等指令，高效处理字符串比较、搜索、长度计算等。</li>
+</ol>
+<h4 id="状态保存与恢复"><a href="#状态保存与恢复" class="headerlink" title="状态保存与恢复"></a>状态保存与恢复</h4><ul>
+<li>可使用MOVDQA/MOVDQU保存XMM寄存器，STMXCSR/LDMXCSR保存MXCSR。</li>
+<li>或使用FXSAVE/FXRSTOR指令保存x87 FPU、MMX及SSE完整状态（512字节镜像，需16字节对齐）。</li>
+</ul>
+<h4 id="环境设置与进程切换"><a href="#环境设置与进程切换" class="headerlink" title="环境设置与进程切换"></a>环境设置与进程切换</h4><ul>
+<li>设置CR4.OSFXSR=1（允许FXSAVE/FXRSTOR）、CR4.OSXMMEXCPT=1（允许#XM异常）。</li>
+<li>设置CR0.EM=0（允许SSE指令）、CR0.MP=1（监控WAIT）、CR0.TS用于延迟上下文切换。</li>
+<li>进程切换时置CR0.TS位，遇到第一条SSE指令时触发#NM异常，在异常处理程序中使用FXSAVE/FXRSTOR完成状态切换。</li>
+</ul>
+<h4 id="字符串处理指令应用"><a href="#字符串处理指令应用" class="headerlink" title="字符串处理指令应用"></a>字符串处理指令应用</h4><ul>
+<li>SSE4.2的字符串指令可高效实现子串搜索、字符串比较、长度计算等，显著提升文本处理性能。</li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://njmxye.de5.net">楠寻njmxye</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://njmxye.de5.net/2025/12/14/x64%E4%BD%93%E7%B3%BB%E6%8E%A2%E7%B4%A2%E5%8F%8A%E7%BC%96%E7%A8%8B/">https://njmxye.de5.net/2025/12/14/x64%E4%BD%93%E7%B3%BB%E6%8E%A2%E7%B4%A2%E5%8F%8A%E7%BC%96%E7%A8%8B/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://njmxye.de5.net" target="_blank">楠 寻 の 小 窝</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2025/12/19/%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%95%B0%E5%AD%A6%E7%AC%94%E8%AE%B0/" title="计算机数学笔记"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">计算机数学笔记</div></div></a></div><div class="next-post pull-right"><a href="/2025/12/13/%E6%B8%B8%E6%88%8F%E9%80%86%E5%90%91%E5%AD%A6%E4%B9%A0%E7%BB%8F%E5%8E%86/" title="游戏逆向"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">游戏逆向</div></div></a></div></nav><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">楠寻njmxye</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">13</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://space.bilibili.com/1289795105"><i class="fab fa-bilibili"></i><span>关注我</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/njmxye" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="https://njmxye.de5.net/njmxye.github.io.apk" target="_blank" title="Apks"><i class="fas fa-download" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">带我走吧，我没法适应人类的生活，像个小孩一样，好痛苦，好想死。派一个人，收走我吧，我快撑不住了，我不再抱任何的希望了。</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#x86-x64%E4%BD%93%E7%B3%BB%E6%8E%A2%E7%B4%A2%E5%8F%8A%E7%BC%96%E7%A8%8B"><span class="toc-number">1.</span> <span class="toc-text">x86&#x2F;x64体系探索及编程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E7%AF%87-x86%E5%9F%BA%E7%A1%80"><span class="toc-number">1.1.</span> <span class="toc-text">第一篇 x86基础</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC1%E7%AB%A0-%E6%95%B0%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-number">1.1.1.</span> <span class="toc-text">第1章 数与数据类型</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-%E6%95%B0"><span class="toc-number">1.1.1.1.</span> <span class="toc-text">1.1 数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-2-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-number">1.1.1.2.</span> <span class="toc-text">1.2 数据类型</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC2%E7%AB%A0-x86-x64%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80"><span class="toc-number">1.1.2.</span> <span class="toc-text">第2章 x86&#x2F;x64编程基础</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-%E7%BC%96%E8%AF%91%E5%99%A8%E9%80%89%E6%8B%A9"><span class="toc-number">1.1.2.1.</span> <span class="toc-text">2.1 编译器选择</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-%E6%9C%BA%E5%99%A8%E8%AF%AD%E8%A8%80"><span class="toc-number">1.1.2.2.</span> <span class="toc-text">2.2 机器语言</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3-Hello-World%E7%A4%BA%E4%BE%8B"><span class="toc-number">1.1.2.3.</span> <span class="toc-text">2.3 Hello World示例</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-4-16-32-64%E4%BD%8D%E7%BC%96%E7%A8%8B%E5%B7%AE%E5%BC%82"><span class="toc-number">1.1.2.4.</span> <span class="toc-text">2.4 16&#x2F;32&#x2F;64位编程差异</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-5-%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80"><span class="toc-number">1.1.2.5.</span> <span class="toc-text">2.5 编程基础</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC3%E7%AB%A0-%E7%BC%96%E5%86%99%E6%9C%AC%E4%B9%A6%E7%9A%84%E5%AE%9E%E9%AA%8C%E4%BE%8B%E5%AD%90"><span class="toc-number">1.1.3.</span> <span class="toc-text">第3章 编写本书的实验例子</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-1-%E5%AE%9E%E9%AA%8C%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83"><span class="toc-number">1.1.3.1.</span> <span class="toc-text">3.1 实验运行环境</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2-%E7%94%9F%E6%88%90%E7%A9%BA%E7%99%BD%E6%98%A0%E5%83%8F%E6%96%87%E4%BB%B6"><span class="toc-number">1.1.3.2.</span> <span class="toc-text">3.2 生成空白映像文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-3-Bochs%E9%85%8D%E7%BD%AE"><span class="toc-number">1.1.3.3.</span> <span class="toc-text">3.3 Bochs配置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-4-%E6%BA%90%E7%A0%81%E7%BB%93%E6%9E%84"><span class="toc-number">1.1.3.4.</span> <span class="toc-text">3.4 源码结构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-5-%E7%BC%96%E8%AF%91%E6%BA%90%E7%A0%81"><span class="toc-number">1.1.3.5.</span> <span class="toc-text">3.5 编译源码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-6-%E6%98%A0%E5%83%8F%E6%96%87%E4%BB%B6%E7%BB%84%E7%BB%87"><span class="toc-number">1.1.3.6.</span> <span class="toc-text">3.6 映像文件组织</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-7-Merge%E5%B7%A5%E5%85%B7"><span class="toc-number">1.1.3.7.</span> <span class="toc-text">3.7 Merge工具</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-8-U%E7%9B%98%E5%90%AF%E5%8A%A8"><span class="toc-number">1.1.3.8.</span> <span class="toc-text">3.8 U盘启动</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-9-Boot%E4%BB%A3%E7%A0%81%E7%BC%96%E5%86%99"><span class="toc-number">1.1.3.9.</span> <span class="toc-text">3.9 Boot代码编写</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC4%E7%AB%A0-%E5%A4%84%E7%90%86%E5%99%A8%E7%9A%84%E8%BA%AB%E4%BB%BD"><span class="toc-number">1.1.4.</span> <span class="toc-text">第4章 处理器的身份</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#4-1-%E6%B5%8B%E8%AF%95CPUID%E6%94%AF%E6%8C%81"><span class="toc-number">1.1.4.1.</span> <span class="toc-text">4.1 测试CPUID支持</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-2-CPUID%E6%9C%AF%E8%AF%AD"><span class="toc-number">1.1.4.2.</span> <span class="toc-text">4.2 CPUID术语</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-3-%E5%9F%BA%E6%9C%AC%E4%BF%A1%E6%81%AF%E4%B8%8E%E6%89%A9%E5%B1%95%E4%BF%A1%E6%81%AF"><span class="toc-number">1.1.4.3.</span> <span class="toc-text">4.3 基本信息与扩展信息</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-4-%E5%A4%84%E7%90%86%E5%99%A8%E5%9E%8B%E5%8F%B7"><span class="toc-number">1.1.4.4.</span> <span class="toc-text">4.4 处理器型号</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-5-%E6%9C%80%E5%A4%A7%E7%89%A9%E7%90%86%E5%9C%B0%E5%9D%80%E5%92%8C%E7%BA%BF%E6%80%A7%E5%9C%B0%E5%9D%80"><span class="toc-number">1.1.4.5.</span> <span class="toc-text">4.5 最大物理地址和线性地址</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-6-%E5%A4%84%E7%90%86%E5%99%A8%E6%89%A9%E5%B1%95%E7%8A%B6%E6%80%81%E4%BF%A1%E6%81%AF"><span class="toc-number">1.1.4.6.</span> <span class="toc-text">4.6 处理器扩展状态信息</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-7-%E5%A4%84%E7%90%86%E5%99%A8%E7%89%B9%E6%80%A7"><span class="toc-number">1.1.4.7.</span> <span class="toc-text">4.7 处理器特性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-8-Cache%E4%B8%8ETLB%E4%BF%A1%E6%81%AF"><span class="toc-number">1.1.4.8.</span> <span class="toc-text">4.8 Cache与TLB信息</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-9-MONITOR-MWAIT%E4%BF%A1%E6%81%AF"><span class="toc-number">1.1.4.9.</span> <span class="toc-text">4.9 MONITOR&#x2F;MWAIT信息</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-10-%E5%A4%84%E7%90%86%E5%99%A8%E7%9A%84long-mode"><span class="toc-number">1.1.4.10.</span> <span class="toc-text">4.10 处理器的long mode</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC5%E7%AB%A0-%E4%BA%86%E8%A7%A3Flags"><span class="toc-number">1.1.5.</span> <span class="toc-text">第5章 了解Flags</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#5-1-%E7%8A%B6%E6%80%81%E6%A0%87%E5%BF%97%E4%BD%8D"><span class="toc-number">1.1.5.1.</span> <span class="toc-text">5.1 状态标志位</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-2-IOPL%E6%A0%87%E5%BF%97%E4%BD%8D"><span class="toc-number">1.1.5.2.</span> <span class="toc-text">5.2 IOPL标志位</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-3-TF%E6%A0%87%E5%BF%97%E4%B8%8ERF%E6%A0%87%E5%BF%97"><span class="toc-number">1.1.5.3.</span> <span class="toc-text">5.3 TF标志与RF标志</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-4-NT%E6%A0%87%E5%BF%97"><span class="toc-number">1.1.5.4.</span> <span class="toc-text">5.4 NT标志</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-5-AC%E6%A0%87%E5%BF%97"><span class="toc-number">1.1.5.5.</span> <span class="toc-text">5.5 AC标志</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-6-VM%E6%A0%87%E5%BF%97"><span class="toc-number">1.1.5.6.</span> <span class="toc-text">5.6 VM标志</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-7-eflags%E5%85%B6%E4%BB%96%E4%BA%8B%E9%A1%B9"><span class="toc-number">1.1.5.7.</span> <span class="toc-text">5.7 eflags其他事项</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC6%E7%AB%A0-%E5%A4%84%E7%90%86%E5%99%A8%E7%9A%84%E6%8E%A7%E5%88%B6%E5%AF%84%E5%AD%98%E5%99%A8"><span class="toc-number">1.1.6.</span> <span class="toc-text">第6章 处理器的控制寄存器</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#6-1-CR8"><span class="toc-number">1.1.6.1.</span> <span class="toc-text">6.1 CR8</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-2-CR3"><span class="toc-number">1.1.6.2.</span> <span class="toc-text">6.2 CR3</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-3-CR0"><span class="toc-number">1.1.6.3.</span> <span class="toc-text">6.3 CR0</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-4-CR4"><span class="toc-number">1.1.6.4.</span> <span class="toc-text">6.4 CR4</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-5-EFER%E6%89%A9%E5%B1%95%E5%8A%9F%E8%83%BD%E5%AF%84%E5%AD%98%E5%99%A8"><span class="toc-number">1.1.6.5.</span> <span class="toc-text">6.5 EFER扩展功能寄存器</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC7%E7%AB%A0-MSR"><span class="toc-number">1.1.7.</span> <span class="toc-text">第7章 MSR</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#MSR%E6%A6%82%E8%BF%B0"><span class="toc-number">1.1.7.1.</span> <span class="toc-text">MSR概述</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#MSR%E5%8A%9F%E8%83%BD%EF%BC%88Intel%E5%88%97%E5%87%BA%EF%BC%89%EF%BC%9A"><span class="toc-number">1.1.7.1.1.</span> <span class="toc-text">MSR功能（Intel列出）：</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#MSR%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95"><span class="toc-number">1.1.7.2.</span> <span class="toc-text">MSR使用方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#MTRR%EF%BC%88Memory-Type-Range-Register%EF%BC%89"><span class="toc-number">1.1.7.3.</span> <span class="toc-text">MTRR（Memory Type Range Register）</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%BD%9C%E7%94%A8%EF%BC%9A"><span class="toc-number">1.1.7.3.1.</span> <span class="toc-text">作用：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%86%85%E5%AD%98%E7%B1%BB%E5%9E%8B%E7%BC%96%E7%A0%81%EF%BC%9A"><span class="toc-number">1.1.7.3.2.</span> <span class="toc-text">内存类型编码：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F%E7%B1%BB%E5%9E%8B%EF%BC%9A"><span class="toc-number">1.1.7.3.3.</span> <span class="toc-text">内存区域类型：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#MTRR%E5%8A%9F%E8%83%BD%E5%AF%84%E5%AD%98%E5%99%A8%EF%BC%9A"><span class="toc-number">1.1.7.3.4.</span> <span class="toc-text">MTRR功能寄存器：</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%89%B9%E6%AE%8A%E6%8C%87%E4%BB%A4%E6%94%AF%E6%8C%81%E7%9A%84MSR"><span class="toc-number">1.1.7.4.</span> <span class="toc-text">特殊指令支持的MSR</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-sysenter-sysexit%EF%BC%88Intel%E5%B9%B3%E5%8F%B0%EF%BC%89"><span class="toc-number">1.1.7.4.1.</span> <span class="toc-text">1. sysenter&#x2F;sysexit（Intel平台）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-syscall-sysret%EF%BC%88AMD%E5%BC%95%E5%85%A5%EF%BC%8CIntel%E4%BB%8564%E4%BD%8D%E6%94%AF%E6%8C%81%EF%BC%89"><span class="toc-number">1.1.7.4.2.</span> <span class="toc-text">2. syscall&#x2F;sysret（AMD引入，Intel仅64位支持）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-swapgs%EF%BC%8864%E4%BD%8D%E4%B8%93%E7%94%A8%EF%BC%89"><span class="toc-number">1.1.7.4.3.</span> <span class="toc-text">3. swapgs（64位专用）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-monitor-mwait"><span class="toc-number">1.1.7.4.4.</span> <span class="toc-text">4. monitor&#x2F;mwait</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%84%E7%90%86%E5%99%A8%E7%89%B9%E6%80%A7%E7%AE%A1%E7%90%86MSR"><span class="toc-number">1.1.7.5.</span> <span class="toc-text">处理器特性管理MSR</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="toc-number">1.1.7.6.</span> <span class="toc-text">注意事项</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E7%AF%87-%E5%A4%84%E7%90%86%E5%99%A8%E7%9A%84%E5%B7%A5%E4%BD%9C%E6%A8%A1%E5%BC%8F"><span class="toc-number">1.2.</span> <span class="toc-text">第二篇 处理器的工作模式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC8%E7%AB%A0-%E5%AE%9E%E5%9C%B0%E5%9D%80%E6%A8%A1%E5%BC%8F%EF%BC%88Real-Address-Mode%EF%BC%89"><span class="toc-number">1.2.1.</span> <span class="toc-text">第8章 实地址模式（Real-Address Mode）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#8-1-%E7%9C%9F%E5%AE%9E%E7%9A%84%E5%9C%B0%E5%9D%80"><span class="toc-number">1.2.1.1.</span> <span class="toc-text">8.1 真实的地址</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#8-2-real-mode-%E7%9A%84%E7%BC%96%E5%9D%80"><span class="toc-number">1.2.1.2.</span> <span class="toc-text">8.2 real mode 的编址</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#8-3-real-mode-%E7%9A%84%E7%8A%B6%E6%80%81"><span class="toc-number">1.2.1.3.</span> <span class="toc-text">8.3 real mode 的状态</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#8-4-%E6%AE%B5%E5%9F%BA%E5%9D%80%E7%9A%84%E8%AE%A1%E7%AE%97"><span class="toc-number">1.2.1.4.</span> <span class="toc-text">8.4 段基址的计算</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#8-5-%E7%AC%AC1%E6%9D%A1%E6%89%A7%E8%A1%8C%E7%9A%84%E6%8C%87%E4%BB%A4"><span class="toc-number">1.2.1.5.</span> <span class="toc-text">8.5 第1条执行的指令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#8-6-%E5%AE%9E%E6%A8%A1%E5%BC%8F%E4%B8%8B%E7%9A%84%E6%89%A7%E8%A1%8C%E7%8E%AF%E5%A2%83"><span class="toc-number">1.2.1.6.</span> <span class="toc-text">8.6 实模式下的执行环境</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#8-7-%E5%AE%9E%E6%A8%A1%E5%BC%8F%E4%B8%8B%E7%9A%84IVT%EF%BC%88%E4%B8%AD%E6%96%AD%E5%90%91%E9%87%8F%E8%A1%A8%EF%BC%89"><span class="toc-number">1.2.1.7.</span> <span class="toc-text">8.7 实模式下的IVT（中断向量表）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#8-8-%E7%AA%81%E7%A0%B464K%E6%AE%B5%E9%99%90"><span class="toc-number">1.2.1.8.</span> <span class="toc-text">8.8 突破64K段限</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#8-9-A20%E5%9C%B0%E5%9D%80%E7%BA%BF"><span class="toc-number">1.2.1.9.</span> <span class="toc-text">8.9 A20地址线</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC9%E7%AB%A0-SMM%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86%E6%A8%A1%E5%BC%8F%E6%8E%A2%E7%B4%A2%EF%BC%88System-Management-Mode%EF%BC%89"><span class="toc-number">1.2.2.</span> <span class="toc-text">第9章 SMM系统管理模式探索（System Management Mode）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#9-1-%E8%BF%9B%E5%85%A5SMM"><span class="toc-number">1.2.2.1.</span> <span class="toc-text">9.1 进入SMM</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#9-2-SMM%E7%9A%84%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83"><span class="toc-number">1.2.2.2.</span> <span class="toc-text">9.2 SMM的运行环境</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#9-3-SMM%E9%87%8C%E7%9A%84%E4%B8%AD%E6%96%AD"><span class="toc-number">1.2.2.3.</span> <span class="toc-text">9.3 SMM里的中断</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#9-4-SMI%E7%9A%84Back-to-Back%E5%93%8D%E5%BA%94"><span class="toc-number">1.2.2.4.</span> <span class="toc-text">9.4 SMI的Back-to-Back响应</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#9-5-SMM%E9%87%8C%E5%BC%80%E5%90%AF%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F"><span class="toc-number">1.2.2.5.</span> <span class="toc-text">9.5 SMM里开启保护模式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#9-6-SMM%E7%9A%84%E7%89%88%E6%9C%AC"><span class="toc-number">1.2.2.6.</span> <span class="toc-text">9.6 SMM的版本</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#9-7-I-O%E6%8C%87%E4%BB%A4%E7%9A%84%E9%87%8D%E5%90%AF%E5%8F%8AHalt%E9%87%8D%E5%90%AF"><span class="toc-number">1.2.2.7.</span> <span class="toc-text">9.7 I&#x2F;O指令的重启及Halt重启</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#9-8-SMM%E7%9A%84%E9%80%80%E5%87%BA"><span class="toc-number">1.2.2.8.</span> <span class="toc-text">9.8 SMM的退出</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#9-9-SMBASE%E7%9A%84%E9%87%8D%E5%AE%9A%E4%BD%8D"><span class="toc-number">1.2.2.9.</span> <span class="toc-text">9.9 SMBASE的重定位</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#9-10-SMI%E5%A4%84%E7%90%86%E7%A8%8B%E5%BA%8F%E7%9A%84%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="toc-number">1.2.2.10.</span> <span class="toc-text">9.10 SMI处理程序的初始化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#9-11-SMM%E7%9A%84%E5%AE%89%E5%85%A8"><span class="toc-number">1.2.2.11.</span> <span class="toc-text">9.11 SMM的安全</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC10%E7%AB%A0-x86-x64%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F%E4%BD%93%E7%B3%BB%EF%BC%88%E4%B8%8A%EF%BC%89"><span class="toc-number">1.2.3.</span> <span class="toc-text">第10章 x86&#x2F;x64保护模式体系（上）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#10-1-x86-x64%E7%9A%84%E6%9D%83%E9%99%90"><span class="toc-number">1.2.3.1.</span> <span class="toc-text">10.1 x86&#x2F;x64的权限</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#10-2-%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F%E4%B8%8B%E7%9A%84%E7%8E%AF%E5%A2%83"><span class="toc-number">1.2.3.2.</span> <span class="toc-text">10.2 保护模式下的环境</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#10-3-%E7%89%A9%E7%90%86%E5%9C%B0%E5%9D%80%E7%9A%84%E4%BA%A7%E7%94%9F"><span class="toc-number">1.2.3.3.</span> <span class="toc-text">10.3 物理地址的产生</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#10-4-%E6%AE%B5%E5%BC%8F%E7%AE%A1%E7%90%86%E6%9C%BA%E5%88%B6"><span class="toc-number">1.2.3.4.</span> <span class="toc-text">10.4 段式管理机制</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#10-5-%E6%AE%B5%E5%BC%8F%E7%AE%A1%E7%90%86%E7%9A%84%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="toc-number">1.2.3.5.</span> <span class="toc-text">10.5 段式管理的数据结构</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#10-5-1-%E6%AE%B5%E9%80%89%E6%8B%A9%E5%AD%90%EF%BC%88Segment-Selector%EF%BC%89"><span class="toc-number">1.2.3.5.1.</span> <span class="toc-text">10.5.1 段选择子（Segment Selector）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#10-5-2-%E6%8F%8F%E8%BF%B0%E7%AC%A6%E8%A1%A8%EF%BC%88Descriptor-Table%EF%BC%89"><span class="toc-number">1.2.3.5.2.</span> <span class="toc-text">10.5.2 描述符表（Descriptor Table）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#10-5-3-%E6%AE%B5%E9%80%89%E6%8B%A9%E5%AD%90%E5%AF%84%E5%AD%98%E5%99%A8%EF%BC%88Segment-Selector-Register%EF%BC%89"><span class="toc-number">1.2.3.5.3.</span> <span class="toc-text">10.5.3 段选择子寄存器（Segment Selector Register）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#10-5-4-%E6%AE%B5%E6%8F%8F%E8%BF%B0%E7%AC%A6%EF%BC%88Segment-Descriptor%EF%BC%89"><span class="toc-number">1.2.3.5.4.</span> <span class="toc-text">10.5.4 段描述符（Segment Descriptor）</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#10-5-4-1-%E6%8F%8F%E8%BF%B0%E7%AC%A6%E7%9A%84%E7%A7%8D%E7%B1%BB"><span class="toc-number">1.2.3.5.4.1.</span> <span class="toc-text">10.5.4.1 描述符的种类</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#10-5-4-2-%E4%BB%A3%E7%A0%81%E6%AE%B5%E6%8F%8F%E8%BF%B0%E7%AC%A6"><span class="toc-number">1.2.3.5.4.2.</span> <span class="toc-text">10.5.4.2 代码段描述符</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#10-5-4-3-Long-mode%E4%B8%8B%E7%9A%84%E4%BB%A3%E7%A0%81%E6%AE%B5%E6%8F%8F%E8%BF%B0%E7%AC%A6"><span class="toc-number">1.2.3.5.4.3.</span> <span class="toc-text">10.5.4.3 Long mode下的代码段描述符</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#10-5-4-4-%E4%BB%A3%E7%A0%81%E6%AE%B5%E5%AF%84%E5%AD%98%E5%99%A8%E7%9A%84%E5%8A%A0%E8%BD%BD"><span class="toc-number">1.2.3.5.4.4.</span> <span class="toc-text">10.5.4.4 代码段寄存器的加载</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#10-5-4-5-Stack%E7%BB%93%E6%9E%84%E5%8F%8A%E5%88%87%E6%8D%A2"><span class="toc-number">1.2.3.5.4.5.</span> <span class="toc-text">10.5.4.5 Stack结构及切换</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#10-5-4-6-Data%E6%AE%B5"><span class="toc-number">1.2.3.5.4.6.</span> <span class="toc-text">10.5.4.6 Data段</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#10-6-%E5%BC%80%E5%90%AF%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F"><span class="toc-number">1.2.3.6.</span> <span class="toc-text">10.6 开启保护模式</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%BF%85%E8%A6%81%E6%AD%A5%E9%AA%A4"><span class="toc-number">1.2.3.6.1.</span> <span class="toc-text">必要步骤</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%85%B3%E9%94%AE%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="toc-number">1.2.3.6.2.</span> <span class="toc-text">关键数据结构</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96%E7%A4%BA%E4%BE%8B"><span class="toc-number">1.2.3.6.3.</span> <span class="toc-text">初始化示例</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC11%E7%AB%A0-x86-x64-%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F%E4%BD%93%E7%B3%BB%EF%BC%88%E4%B8%8B%EF%BC%89"><span class="toc-number">1.2.4.</span> <span class="toc-text">第11章 x86&#x2F;x64 保护模式体系（下）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#11-1-%E7%89%A9%E7%90%86%E9%A1%B5%E9%9D%A2"><span class="toc-number">1.2.4.1.</span> <span class="toc-text">11.1 物理页面</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#11-2-%E5%88%86%E9%A1%B5%E6%9C%BA%E5%88%B6%E4%BD%BF%E7%94%A8%E7%9A%84%E8%B5%84%E6%BA%90"><span class="toc-number">1.2.4.2.</span> <span class="toc-text">11.2 分页机制使用的资源</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#11-3-32%E4%BD%8D%E5%88%86%E9%A1%B5%E6%A8%A1%E5%BC%8F%EF%BC%88Non-PAE%E6%A8%A1%E5%BC%8F%EF%BC%89"><span class="toc-number">1.2.4.3.</span> <span class="toc-text">11.3 32位分页模式（Non-PAE模式）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#11-4-PAE%E5%88%86%E9%A1%B5%E6%A8%A1%E5%BC%8F"><span class="toc-number">1.2.4.4.</span> <span class="toc-text">11.4 PAE分页模式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#11-5-IA-32e%E5%88%86%E9%A1%B5%E6%A8%A1%E5%BC%8F%EF%BC%88Long-Mode%E5%88%86%E9%A1%B5%EF%BC%89"><span class="toc-number">1.2.4.5.</span> <span class="toc-text">11.5 IA-32e分页模式（Long Mode分页）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#11-6-TLB%E4%B8%8E%E7%BC%93%E5%AD%98"><span class="toc-number">1.2.4.6.</span> <span class="toc-text">11.6 TLB与缓存</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#11-7-%E9%A1%B5%E9%9D%A2%E7%9A%84%E5%86%85%E5%AD%98%E7%BC%93%E5%AD%98%E7%B1%BB%E5%9E%8B"><span class="toc-number">1.2.4.7.</span> <span class="toc-text">11.7 页面的内存缓存类型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#11-8-%E9%A1%B5%E7%9A%84%E4%BF%9D%E6%8A%A4%E6%8E%AA%E6%96%BD"><span class="toc-number">1.2.4.8.</span> <span class="toc-text">11.8 页的保护措施</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC12%E7%AB%A0-Long-mode"><span class="toc-number">1.2.5.</span> <span class="toc-text">第12章 Long-mode</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#x64-%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84%E6%A6%82%E8%BF%B0"><span class="toc-number">1.2.5.1.</span> <span class="toc-text">x64 体系结构概述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Long-mode-%E7%9A%84%E5%BC%80%E5%90%AF%E4%B8%8E%E6%A3%80%E6%B5%8B"><span class="toc-number">1.2.5.2.</span> <span class="toc-text">Long-mode 的开启与检测</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Long-mode-%E7%9A%84%E6%89%A7%E8%A1%8C%E7%8E%AF%E5%A2%83"><span class="toc-number">1.2.5.3.</span> <span class="toc-text">Long-mode 的执行环境</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Long-mode-%E7%9A%84%E6%8C%87%E4%BB%A4%E7%8E%AF%E5%A2%83"><span class="toc-number">1.2.5.4.</span> <span class="toc-text">Long-mode 的指令环境</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A8%A1%E5%BC%8F%E5%88%87%E6%8D%A2%E7%BC%96%E7%A8%8B"><span class="toc-number">1.2.5.5.</span> <span class="toc-text">模式切换编程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%80%80%E5%87%BA-Long-mode"><span class="toc-number">1.2.5.6.</span> <span class="toc-text">退出 Long-mode</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E7%AF%87-%E8%B0%83%E8%AF%95%E4%B8%8E%E6%80%A7%E8%83%BD%E7%9B%91%E6%8E%A7"><span class="toc-number">1.3.</span> <span class="toc-text">第三篇 调试与性能监控</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC13%E7%AB%A0-%E6%96%AD%E7%82%B9%E8%B0%83%E8%AF%95"><span class="toc-number">1.3.1.</span> <span class="toc-text">第13章 断点调试</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#13-1-%E5%8D%95%E6%AD%A5%E8%B0%83%E8%AF%95%E6%A8%A1%E5%BC%8F"><span class="toc-number">1.3.1.1.</span> <span class="toc-text">13.1 单步调试模式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#13-2-%E6%96%AD%E7%82%B9%E8%B0%83%E8%AF%95%E6%A8%A1%E5%BC%8F"><span class="toc-number">1.3.1.2.</span> <span class="toc-text">13.2 断点调试模式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#13-3-%E5%86%85%E5%AD%98%E5%92%8CI-O%E5%9C%B0%E5%9D%80%E8%B0%83%E8%AF%95%E6%A8%A1%E5%BC%8F"><span class="toc-number">1.3.1.3.</span> <span class="toc-text">13.3 内存和I&#x2F;O地址调试模式</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#13-3-1-%E6%96%AD%E7%82%B9%E5%AF%84%E5%AD%98%E5%99%A8-DR0%E2%80%93DR3"><span class="toc-number">1.3.1.3.1.</span> <span class="toc-text">13.3.1 断点寄存器 DR0–DR3</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#13-3-2-%E7%8A%B6%E6%80%81%E5%AF%84%E5%AD%98%E5%99%A8-DR6"><span class="toc-number">1.3.1.3.2.</span> <span class="toc-text">13.3.2 状态寄存器 DR6</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#13-3-3-%E6%8E%A7%E5%88%B6%E5%AF%84%E5%AD%98%E5%99%A8-DR7"><span class="toc-number">1.3.1.3.3.</span> <span class="toc-text">13.3.3 控制寄存器 DR7</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#13-3-4-Fault%E4%B8%8ETrap%E7%B1%BB%E5%9E%8B%E7%9A%84%E8%B0%83%E8%AF%95%E5%BC%82%E5%B8%B8"><span class="toc-number">1.3.1.3.4.</span> <span class="toc-text">13.3.4 Fault与Trap类型的调试异常</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#13-3-5-General-Detect%E4%BA%A7%E7%94%9F%E7%9A%84-DB%E5%BC%82%E5%B8%B8"><span class="toc-number">1.3.1.3.5.</span> <span class="toc-text">13.3.5 General Detect产生的#DB异常</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#13-3-6-%E6%89%A7%E8%A1%8C%E6%96%AD%E7%82%B9%E6%8C%87%E4%BB%A4%E4%BA%A7%E7%94%9F%E7%9A%84-DB%E5%BC%82%E5%B8%B8"><span class="toc-number">1.3.1.3.6.</span> <span class="toc-text">13.3.6 执行断点指令产生的#DB异常</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#13-3-7-%E8%AE%BF%E9%97%AE%E6%95%B0%E6%8D%AE%E6%96%AD%E7%82%B9%E4%BA%A7%E7%94%9F%E7%9A%84-DB%E5%BC%82%E5%B8%B8"><span class="toc-number">1.3.1.3.7.</span> <span class="toc-text">13.3.7 访问数据断点产生的#DB异常</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#13-3-8-%E8%AE%BF%E9%97%AEI-O%E6%96%AD%E7%82%B9%E4%BA%A7%E7%94%9F%E7%9A%84-DB%E5%BC%82%E5%B8%B8"><span class="toc-number">1.3.1.3.8.</span> <span class="toc-text">13.3.8 访问I&#x2F;O断点产生的#DB异常</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#13-3-9-%E4%BB%BB%E5%8A%A1%E5%88%87%E6%8D%A2%E6%97%B6%E4%BA%A7%E7%94%9F%E7%9A%84Trap%E8%B0%83%E8%AF%95%E5%BC%82%E5%B8%B8"><span class="toc-number">1.3.1.3.9.</span> <span class="toc-text">13.3.9 任务切换时产生的Trap调试异常</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC14%E7%AB%A0-%E5%88%86%E6%94%AF%E8%AE%B0%E5%BD%95"><span class="toc-number">1.3.2.</span> <span class="toc-text">第14章 分支记录</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#14-1-%E6%A3%80%E6%B5%8B%E5%A4%84%E7%90%86%E5%99%A8%E7%9A%84%E5%AE%B6%E6%97%8F%E5%92%8C%E5%9E%8B%E5%8F%B7"><span class="toc-number">1.3.2.1.</span> <span class="toc-text">14.1 检测处理器的家族和型号</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#14-2-%E5%88%9D%E8%AF%86%E5%88%86%E6%94%AF%E8%AE%B0%E5%BD%95"><span class="toc-number">1.3.2.2.</span> <span class="toc-text">14.2 初识分支记录</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#14-3-IA32-DEBUGCTL%E5%AF%84%E5%AD%98%E5%99%A8"><span class="toc-number">1.3.2.3.</span> <span class="toc-text">14.3 IA32_DEBUGCTL寄存器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#14-4-LBR%E6%A0%88"><span class="toc-number">1.3.2.4.</span> <span class="toc-text">14.4 LBR栈</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#14-5-%E4%BD%BF%E7%94%A8LBR%E6%8D%95%E6%8D%89%E5%88%86%E6%94%AF%E8%BD%A8%E8%BF%B9"><span class="toc-number">1.3.2.5.</span> <span class="toc-text">14.5 使用LBR捕捉分支轨迹</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#14-6-DB%E5%BC%82%E5%B8%B8%E4%B8%8B%E7%9A%84LBR"><span class="toc-number">1.3.2.6.</span> <span class="toc-text">14.6 #DB异常下的LBR</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#14-7-IA-32e%E6%A8%A1%E5%BC%8F%E4%B8%8B%E7%9A%84LBR%E6%A0%88"><span class="toc-number">1.3.2.7.</span> <span class="toc-text">14.7 IA-32e模式下的LBR栈</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#14-8-%E4%BD%BF%E7%94%A8Single-step-on-branch%E5%8A%9F%E8%83%BD"><span class="toc-number">1.3.2.8.</span> <span class="toc-text">14.8 使用Single-step on branch功能</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#14-9-BTS%E6%9C%BA%E5%88%B6"><span class="toc-number">1.3.2.9.</span> <span class="toc-text">14.9 BTS机制</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#14-9-1-%E6%A3%80%E6%B5%8BDS%E6%94%AF%E6%8C%81"><span class="toc-number">1.3.2.9.1.</span> <span class="toc-text">14.9.1 检测DS支持</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#14-9-2-DS%E5%8C%BA%E5%9F%9F%E8%AE%BE%E7%BD%AE"><span class="toc-number">1.3.2.9.2.</span> <span class="toc-text">14.9.2 DS区域设置</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#14-9-3-BTS%E8%AE%B0%E5%BD%95%E6%A0%BC%E5%BC%8F"><span class="toc-number">1.3.2.9.3.</span> <span class="toc-text">14.9.3 BTS记录格式</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#14-9-4-%E4%BD%BF%E7%94%A8BTS%E7%BC%93%E5%86%B2%E5%8C%BA"><span class="toc-number">1.3.2.9.4.</span> <span class="toc-text">14.9.4 使用BTS缓冲区</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#14-9-5-DS%E4%B8%AD%E6%96%AD%E5%A4%84%E7%90%86"><span class="toc-number">1.3.2.9.5.</span> <span class="toc-text">14.9.5 DS中断处理</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#14-9-6-%E8%BF%87%E6%BB%A4BTS%E8%AE%B0%E5%BD%95"><span class="toc-number">1.3.2.9.6.</span> <span class="toc-text">14.9.6 过滤BTS记录</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#14-9-7-64%E4%BD%8D%E6%A8%A1%E5%BC%8F%E4%B8%8B%E7%9A%84BTS"><span class="toc-number">1.3.2.9.7.</span> <span class="toc-text">14.9.7 64位模式下的BTS</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC15%E7%AB%A0-%E6%80%A7%E8%83%BD%E7%9B%91%E6%8E%A7"><span class="toc-number">1.3.3.</span> <span class="toc-text">第15章 性能监控</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#15-1-%E6%80%A7%E8%83%BD%E7%9B%91%E6%8E%A7%E6%9C%BA%E5%88%B6%E6%A6%82%E8%BF%B0"><span class="toc-number">1.3.3.1.</span> <span class="toc-text">15.1 性能监控机制概述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#15-2-%E6%80%A7%E8%83%BD%E7%9B%91%E6%8E%A7%E6%9C%BA%E5%88%B6%E7%9A%84%E7%89%88%E6%9C%AC%E4%B8%8E%E5%8A%9F%E8%83%BD"><span class="toc-number">1.3.3.2.</span> <span class="toc-text">15.2 性能监控机制的版本与功能</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#15-3-Nehalem%E6%9E%B6%E6%9E%84%E4%B8%8B%E7%9A%84%E6%80%A7%E8%83%BD%E7%9B%91%E6%8E%A7%E6%9C%BA%E5%88%B6"><span class="toc-number">1.3.3.3.</span> <span class="toc-text">15.3 Nehalem架构下的性能监控机制</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#15-4-PEBS%EF%BC%88Precise-Event-Based-Sampling%EF%BC%89%E6%9C%BA%E5%88%B6"><span class="toc-number">1.3.3.4.</span> <span class="toc-text">15.4 PEBS（Precise Event Based Sampling）机制</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#15-5-%E4%BD%BF%E7%94%A8Fixed%E8%AE%A1%E6%95%B0%E5%99%A8"><span class="toc-number">1.3.3.5.</span> <span class="toc-text">15.5 使用Fixed计数器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#15-6-Time-Stamp-Counter%EF%BC%88TSC%EF%BC%89%E4%B8%8EClock"><span class="toc-number">1.3.3.6.</span> <span class="toc-text">15.6 Time-Stamp Counter（TSC）与Clock</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E5%9B%9B%E7%AF%87-%E4%B8%AD%E6%96%AD%E4%BD%93%E7%B3%BB"><span class="toc-number">1.4.</span> <span class="toc-text">第四篇 中断体系</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC16%E7%AB%A0-%E4%B8%AD%E6%96%AD%E4%B8%8E%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86"><span class="toc-number">1.4.1.</span> <span class="toc-text">第16章 中断与异常处理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#16-1-%E4%B8%AD%E6%96%AD%E6%BA%90"><span class="toc-number">1.4.1.1.</span> <span class="toc-text">16.1 中断源</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#16-2-%E5%BC%82%E5%B8%B8%E6%BA%90"><span class="toc-number">1.4.1.2.</span> <span class="toc-text">16.2 异常源</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#16-3-%E5%BC%82%E5%B8%B8%E7%9A%84%E7%B1%BB%E5%9E%8B%E4%B8%8E%E6%81%A2%E5%A4%8D"><span class="toc-number">1.4.1.3.</span> <span class="toc-text">16.3 异常的类型与恢复</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#16-4-%E4%B8%AD%E6%96%AD%E5%90%91%E9%87%8F-Vector"><span class="toc-number">1.4.1.4.</span> <span class="toc-text">16.4 中断向量 (Vector)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#16-5-%E4%B8%AD%E6%96%AD%E7%9A%84%E5%B1%8F%E8%94%BD"><span class="toc-number">1.4.1.5.</span> <span class="toc-text">16.5 中断的屏蔽</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#16-6-IDTR-%E5%AF%84%E5%AD%98%E5%99%A8"><span class="toc-number">1.4.1.6.</span> <span class="toc-text">16.6 IDTR 寄存器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#16-7-IVT-%E4%B8%AD%E6%96%AD%E5%90%91%E9%87%8F%E8%A1%A8-%E5%AE%9E%E6%A8%A1%E5%BC%8F"><span class="toc-number">1.4.1.7.</span> <span class="toc-text">16.7 IVT (中断向量表) - 实模式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#16-8-IDT-%E4%B8%AD%E6%96%AD%E6%8F%8F%E8%BF%B0%E7%AC%A6%E8%A1%A8-%E4%BF%9D%E6%8A%A4-%E9%95%BF%E6%A8%A1%E5%BC%8F"><span class="toc-number">1.4.1.8.</span> <span class="toc-text">16.8 IDT (中断描述符表) - 保护&#x2F;长模式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#16-9-%E9%97%A8%E6%8F%8F%E8%BF%B0%E7%AC%A6-Gate-Descriptor"><span class="toc-number">1.4.1.9.</span> <span class="toc-text">16.9 门描述符 (Gate Descriptor)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#16-10-%E4%B8%AD%E6%96%AD-%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E6%B5%81%E7%A8%8B%EF%BC%88%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F%EF%BC%89"><span class="toc-number">1.4.1.10.</span> <span class="toc-text">16.10 中断&#x2F;异常处理流程（保护模式）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#16-11-%E4%BB%BB%E5%8A%A1%E5%88%87%E6%8D%A2%EF%BC%88%E4%BB%85-Legacy-%E6%A8%A1%E5%BC%8F%EF%BC%89"><span class="toc-number">1.4.1.11.</span> <span class="toc-text">16.11 任务切换（仅 Legacy 模式）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#16-12-%E4%B8%AD%E6%96%AD-%E5%BC%82%E5%B8%B8%E8%BF%94%E5%9B%9E-IRET-IRETQ"><span class="toc-number">1.4.1.12.</span> <span class="toc-text">16.12 中断&#x2F;异常返回 (IRET&#x2F;IRETQ)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#16-13-%E9%94%99%E8%AF%AF%E7%A0%81-Error-Code"><span class="toc-number">1.4.1.13.</span> <span class="toc-text">16.13 错误码 (Error Code)</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC17%E7%AB%A0-8259%E4%B8%AD%E6%96%AD%E6%8E%A7%E5%88%B6%E5%99%A8"><span class="toc-number">1.4.2.</span> <span class="toc-text">第17章 8259中断控制器</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#17-1-8259-%E7%BB%93%E6%9E%84"><span class="toc-number">1.4.2.1.</span> <span class="toc-text">17.1 8259 结构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#17-2-8259-%E7%BC%96%E7%A8%8B"><span class="toc-number">1.4.2.2.</span> <span class="toc-text">17.2 8259 编程</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC18%E7%AB%A0-Local-APIC%E4%BD%93%E7%B3%BB"><span class="toc-number">1.4.3.</span> <span class="toc-text">第18章 Local APIC体系</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#18-1-APIC%E4%BD%93%E7%B3%BB%E6%A6%82%E8%BF%B0"><span class="toc-number">1.4.3.1.</span> <span class="toc-text">18.1 APIC体系概述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#18-1-1-Local-APIC%E7%9A%84%E4%B8%AD%E6%96%AD%E6%BA%90"><span class="toc-number">1.4.3.2.</span> <span class="toc-text">18.1.1 Local APIC的中断源</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#18-1-2-APIC%E7%89%88%E6%9C%AC%E6%BC%94%E8%BF%9B"><span class="toc-number">1.4.3.3.</span> <span class="toc-text">18.1.2 APIC版本演进</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#18-2-Local-APIC%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-number">1.4.3.4.</span> <span class="toc-text">18.2 Local APIC的使用</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#18-2-1-%E6%A3%80%E6%B5%8B%E4%B8%8E%E5%90%AF%E7%94%A8"><span class="toc-number">1.4.3.4.1.</span> <span class="toc-text">18.2.1 检测与启用</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#18-3-Local-APIC%E5%AF%84%E5%AD%98%E5%99%A8"><span class="toc-number">1.4.3.5.</span> <span class="toc-text">18.3 Local APIC寄存器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#18-4-Local-APIC-ID"><span class="toc-number">1.4.3.6.</span> <span class="toc-text">18.4 Local APIC ID</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#18-4-3-%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%A4%84%E7%90%86%E5%99%A8%E7%BC%96%E7%A8%8B"><span class="toc-number">1.4.3.7.</span> <span class="toc-text">18.4.3 多线程处理器编程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#18-5-LVT%E5%AF%84%E5%AD%98%E5%99%A8"><span class="toc-number">1.4.3.8.</span> <span class="toc-text">18.5 LVT寄存器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#18-6-ICR%E5%AF%84%E5%AD%98%E5%99%A8"><span class="toc-number">1.4.3.9.</span> <span class="toc-text">18.6 ICR寄存器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#18-7-%E4%B8%AD%E6%96%AD%E5%A4%84%E7%90%86%E4%B8%8E%E4%BB%B2%E8%A3%81"><span class="toc-number">1.4.3.10.</span> <span class="toc-text">18.7 中断处理与仲裁</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#18-8-APIC-Timer"><span class="toc-number">1.4.3.11.</span> <span class="toc-text">18.8 APIC Timer</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#18-9-%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86"><span class="toc-number">1.4.3.12.</span> <span class="toc-text">18.9 错误处理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#18-10-LINT0%E4%B8%8ELINT1"><span class="toc-number">1.4.3.13.</span> <span class="toc-text">18.10 LINT0与LINT1</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#18-11-Performance-Monitoring"><span class="toc-number">1.4.3.14.</span> <span class="toc-text">18.11 Performance Monitoring</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#18-12-%E5%B0%8F%E7%BB%93"><span class="toc-number">1.4.3.15.</span> <span class="toc-text">18.12 小结</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC19%E7%AB%A0-I-O-APIC"><span class="toc-number">1.4.4.</span> <span class="toc-text">第19章 I&#x2F;O APIC</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#19-1-I-O-APIC%E5%AF%84%E5%AD%98%E5%99%A8"><span class="toc-number">1.4.4.1.</span> <span class="toc-text">19.1 I&#x2F;O APIC寄存器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#19-1-3-I-O-APIC%E7%9A%84IRQ%E7%BA%BF"><span class="toc-number">1.4.4.2.</span> <span class="toc-text">19.1.3 I&#x2F;O APIC的IRQ线</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#19-1-4-%E4%B8%AD%E6%96%AD%E5%A4%84%E7%90%86%E6%B5%81%E7%A8%8B"><span class="toc-number">1.4.4.3.</span> <span class="toc-text">19.1.4 中断处理流程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#19-2-HPET%EF%BC%88%E9%AB%98%E7%B2%BE%E5%BA%A6%E5%AE%9A%E6%97%B6%E5%99%A8%EF%BC%89"><span class="toc-number">1.4.4.4.</span> <span class="toc-text">19.2 HPET（高精度定时器）</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#19-2-1-HPET%E5%AF%84%E5%AD%98%E5%99%A8"><span class="toc-number">1.4.4.4.1.</span> <span class="toc-text">19.2.1 HPET寄存器</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#19-2-2-%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="toc-number">1.4.4.4.2.</span> <span class="toc-text">19.2.2 工作原理</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#19-2-3-%E5%88%9D%E5%A7%8B%E5%8C%96%E4%B8%8E%E4%BD%BF%E7%94%A8"><span class="toc-number">1.4.4.4.3.</span> <span class="toc-text">19.2.3 初始化与使用</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#19-3-%E5%B0%8F%E7%BB%93"><span class="toc-number">1.4.4.5.</span> <span class="toc-text">19.3 小结</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%BA%94%E7%AF%87-%E6%B5%AE%E7%82%B9%E4%B8%8ESIMD%E6%8C%87%E4%BB%A4%E7%8E%AF%E5%A2%83"><span class="toc-number">1.5.</span> <span class="toc-text">第五篇 浮点与SIMD指令环境</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC20%E7%AB%A0-x87-FPU%E5%8D%95%E5%85%83%E4%B8%8EMMX%E6%8A%80%E6%9C%AF"><span class="toc-number">1.5.1.</span> <span class="toc-text">第20章 x87 FPU单元与MMX技术</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#x87-FPU%E6%A6%82%E8%BF%B0"><span class="toc-number">1.5.1.1.</span> <span class="toc-text">x87 FPU概述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#MMX%E6%8A%80%E6%9C%AF%E7%AE%80%E4%BB%8B"><span class="toc-number">1.5.1.2.</span> <span class="toc-text">MMX技术简介</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#x87-FPU%E6%89%A7%E8%A1%8C%E7%8E%AF%E5%A2%83"><span class="toc-number">1.5.1.3.</span> <span class="toc-text">x87 FPU执行环境</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%B8%8E%E6%8C%87%E4%BB%A4%E5%88%86%E7%B1%BB"><span class="toc-number">1.5.1.4.</span> <span class="toc-text">数据类型与指令分类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#x87-FPU%E6%95%B0%E6%8D%AE%E5%AF%84%E5%AD%98%E5%99%A8%E4%B8%8E%E6%A0%88%E7%BB%93%E6%9E%84"><span class="toc-number">1.5.1.5.</span> <span class="toc-text">x87 FPU数据寄存器与栈结构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%8A%B6%E6%80%81%E5%AF%84%E5%AD%98%E5%99%A8%E4%B8%8E%E6%9D%A1%E4%BB%B6%E7%A0%81"><span class="toc-number">1.5.1.6.</span> <span class="toc-text">状态寄存器与条件码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#x87-FPU%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86"><span class="toc-number">1.5.1.7.</span> <span class="toc-text">x87 FPU异常处理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#MMX%E6%8C%87%E4%BB%A4%E7%8E%AF%E5%A2%83"><span class="toc-number">1.5.1.8.</span> <span class="toc-text">MMX指令环境</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#x87-FPU%E4%B8%8EMMX%E7%8A%B6%E6%80%81%E4%BF%9D%E5%AD%98%E4%B8%8E%E5%88%87%E6%8D%A2"><span class="toc-number">1.5.1.9.</span> <span class="toc-text">x87 FPU与MMX状态保存与切换</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8E%A8%E8%8D%90%E8%AE%BE%E7%BD%AE"><span class="toc-number">1.5.1.10.</span> <span class="toc-text">推荐设置</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC21%E7%AB%A0-SSE%E7%B3%BB%E5%88%97%E6%8C%87%E4%BB%A4%E7%8E%AF%E5%A2%83"><span class="toc-number">1.5.2.</span> <span class="toc-text">第21章 SSE系列指令环境</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#SSE%E7%B3%BB%E5%88%97%E6%A6%82%E8%BF%B0"><span class="toc-number">1.5.2.1.</span> <span class="toc-text">SSE系列概述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%84%E7%90%86%E5%99%A8%E4%B8%8E%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%94%AF%E6%8C%81"><span class="toc-number">1.5.2.2.</span> <span class="toc-text">处理器与操作系统支持</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#XMM%E5%AF%84%E5%AD%98%E5%99%A8%E4%B8%8EMXCSR"><span class="toc-number">1.5.2.3.</span> <span class="toc-text">XMM寄存器与MXCSR</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%B8%8E%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86"><span class="toc-number">1.5.2.4.</span> <span class="toc-text">数据类型与异常处理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#SSE%E6%8C%87%E4%BB%A4%E6%93%8D%E4%BD%9C%E7%B1%BB%E5%9E%8B"><span class="toc-number">1.5.2.5.</span> <span class="toc-text">SSE指令操作类型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%8A%B6%E6%80%81%E4%BF%9D%E5%AD%98%E4%B8%8E%E6%81%A2%E5%A4%8D"><span class="toc-number">1.5.2.6.</span> <span class="toc-text">状态保存与恢复</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83%E8%AE%BE%E7%BD%AE%E4%B8%8E%E8%BF%9B%E7%A8%8B%E5%88%87%E6%8D%A2"><span class="toc-number">1.5.2.7.</span> <span class="toc-text">环境设置与进程切换</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%A4%84%E7%90%86%E6%8C%87%E4%BB%A4%E5%BA%94%E7%94%A8"><span class="toc-number">1.5.2.8.</span> <span class="toc-text">字符串处理指令应用</span></a></li></ol></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/18/%E7%AE%97%E6%B3%95/" title="算法">算法</a><time datetime="2026-01-18T21:52:00.000Z" title="发表于 2026-01-18 21:52:00">2026-01-18</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/17/%E6%A5%A0%E5%AF%BB%E7%9C%BC%E4%B8%AD%E7%9A%84%E7%94%B7%E9%A2%91/" title="楠寻眼中的男频">楠寻眼中的男频</a><time datetime="2026-01-17T17:52:00.000Z" title="发表于 2026-01-17 17:52:00">2026-01-17</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/14/%E6%A5%A0%E5%AF%BB%E7%9C%BC%E4%B8%AD%E7%9A%84%E5%A5%B3%E9%A2%91/" title="楠寻眼中的女频">楠寻眼中的女频</a><time datetime="2026-01-14T12:52:00.000Z" title="发表于 2026-01-14 12:52:00">2026-01-14</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/14/%E6%A5%A0%E5%AF%BB%E7%9C%BC%E4%B8%AD%E7%9A%84%E7%9F%AD%E5%89%A7/" title="楠寻眼中的短剧">楠寻眼中的短剧</a><time datetime="2026-01-14T12:52:00.000Z" title="发表于 2026-01-14 12:52:00">2026-01-14</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/05/ace/" title="ace">ace</a><time datetime="2026-01-05T04:00:00.000Z" title="发表于 2026-01-05 04:00:00">2026-01-05</time></div></div></div></div></div></div></main><footer id="footer" style="background: transparent"><div id="footer-wrap"><div class="copyright">&copy;2024 - 2026 By 楠寻njmxye</div><div class="footer_custom_text"><a href="https://icp.gov.moe/?keyword=20252779" target="_blank">萌ICP备20252779号</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.13.0"></script><script src="/js/main.js?v=4.13.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page@5.2.0/instantpage.min.js" type="module"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.1
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, '']
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.min.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typesetPromise()
+}</script><script>(() => {
+  const initValine = () => {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: '',
+      appKey: '',
+      avatar: '',
+      serverURLs: '',
+      emojiMaps: "",
+      path: window.location.pathname,
+      visitor: false
+    }, null))
+  }
+
+  const loadValine = async () => {
+    if (typeof Valine === 'function') initValine()
+    else {
+      await getScript('https://cdn.jsdelivr.net/npm/valine@1.5.1/dist/Valine.min.js')
+      initValine()
+    }
+  }
+
+  if ('Valine' === 'Valine' || !false) {
+    if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+    else setTimeout(loadValine, 0)
+  } else {
+    window.loadOtherComment = loadValine
+  }
+})()</script></div><div><div class="aplayer aplayer-tag-marker aplayer-withlrc aplayer-withlist aplayer-arrow" id="aplayer-VbASGHkA" style="margin-bottom:20px"><script>var options = {"narrow":false,"autoplay":true,"mode":"random","order":"random","mutex":true,"fixed":"true","theme":"#e6d0b2","preload":"metadata","listmaxheight":"200px","volume":0.06,"music":[{"title":"难断","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/难断.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"吹灭小山河","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/吹灭小山河.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"3 Strikes","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/3%20Strikes.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"ALL MY PEOPLE","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/ALL%20MY%20PEOPLE.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"After The Wind","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/After%20The%20Wind.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"All For Love","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/All%20For%20Love.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"Baby love you","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/Baby%20love%20you.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"Constant Moderato","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/Constant%20Moderato.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"Dancing With Your Ghost","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/Dancing%20With%20Your%20Ghost.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"Daylight","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/Daylight.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"Different Lives (Explicit)","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/Different%20Lives%20(Explicit).mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"Dreamer","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/Dreamer.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"Drown (feat. Clinton Kane)(Alle Farben Remix)","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/Drown%20(feat.%20Clinton%20Kane)(Alle%20Farben%20Remix).mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"Fearless Pt. II","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/Fearless%20Pt.%20II.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"Fractures","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/Fractures.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"Home (Radio Edit)","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/Home%20(Radio%20Edit).mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"Lose Control","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/Lose%20Control.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"MONTAGEM XONADA","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/MONTAGEM%20XONADA.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"Meant To Be","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/Meant%20To%20Be.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"Minor Forever","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/Minor%20Forever.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"Montagem Nada Tropica","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/Montagem%20Nada%20Tropica.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"Power","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/Power.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"Sacred Play Secret Place","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/Sacred%20Play%20Secret%20Place.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"Save Me","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/Save%20Me.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"Secret Labs","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/Secret%20Labs.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"Taped Up Heart (feat. Clara Mae)","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/Taped%20Up%20Heart%20(feat.%20Clara%20Mae).mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"The Hills (Slap House Mix)","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/The%20Hills%20(Slap%20House%20Mix).mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"WHOOPTY (Remix)","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/WHOOPTY%20(Remix).mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"aLIEz","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/aLIEz.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"おはなばたけ","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/おはなばたけ.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"三拜红尘凉","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/三拜红尘凉.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"不是相思是离别","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/不是相思是离别.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"东南西北中","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/东南西北中.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"乘风游","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/乘风游.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"人间惊鸿宴","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/人间惊鸿宴.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"人间烟火","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/人间烟火.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"今世债","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/今世债.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"他乡的月亮","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/他乡的月亮.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"伴你成长","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/伴你成长.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"你的答案","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/你的答案.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"使一颗心免于哀伤","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/使一颗心免于哀伤.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"关山酒 (DJ版)","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/关山酒%20(DJ版).mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"关山酒","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/关山酒.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"其实都没有","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/其实都没有.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"冬眠","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/冬眠.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"冬眠·2023","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/冬眠·2023.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"别回头","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/别回头.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"半入清风半入喉","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/半入清风半入喉.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"半生雪","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/半生雪.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"半生风雪","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/半生风雪.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"厚颜无耻","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/厚颜无耻.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"叹云兮","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/叹云兮.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"叹人间","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/叹人间.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"同进退","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/同进退.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"听花","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/听花.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"唯一","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/唯一.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"壁上观","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/壁上观.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"大笑人间","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/大笑人间.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"天亮以前说再见","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/天亮以前说再见.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"妈妈的话","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/妈妈的话.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"姑娘别哭泣","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/姑娘别哭泣.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"姑娘在远方","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/姑娘在远方.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"孤城","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/孤城.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"安和桥","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/安和桥.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"室内系的TrackMaker","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/室内系的TrackMaker.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"寄明月","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/寄明月.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"年轮","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/年轮.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"归途有风","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/归途有风.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"待我踏过彼岸花 (DJ版)","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/待我踏过彼岸花%20(DJ版).mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"御龙定乾坤","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/御龙定乾坤.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"循风","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/循风.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"忘川彼岸 (DJ名龙版)","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/忘川彼岸%20(DJ名龙版).mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"念","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/念.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"思念绕指尖 (DJ名龙版)","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/思念绕指尖%20(DJ名龙版).mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"恋愛サーキュレーション","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/恋愛サーキュレーション.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"想你时风起","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/想你时风起.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"愿与愁","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/愿与愁.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"折芙蓉","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/折芙蓉.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"折风渡夜 (DJ名龙版)","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/折风渡夜%20(DJ名龙版).mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"捂住耳朵 (DJ版)","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/捂住耳朵%20(DJ版).mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"提笔问飞花","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/提笔问飞花.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"旧梦一场","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/旧梦一场.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"时光背面的我","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/时光背面的我.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"明月不照离别人","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/明月不照离别人.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"明月天涯","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/明月天涯.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"星光就在前方","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/星光就在前方.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"星月落","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/星月落.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"春分","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/春分.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"月华落","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/月华落.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"月色倒映在西湖","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/月色倒映在西湖.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"本日は晴天なり","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/本日は晴天なり.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"梦中客","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/梦中客.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"江南烟雨色","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/江南烟雨色.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"江湖之间","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/江湖之间.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"江湖之间·2025","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/江湖之间·2025.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"沈园外","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/沈园外.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"没有意外","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/没有意外.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"沦陷 (DJ阿幻版)","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/沦陷%20(DJ阿幻版).mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"洛南·仓颉颂","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/洛南·仓颉颂.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"海市蜃楼","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/海市蜃楼.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"游京 (燃情版)","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/游京%20(燃情版).mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"潮汐","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/潮汐.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"燕无歇","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/燕无歇.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"爱是无畏的冒险","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/爱是无畏的冒险.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"牵丝戏 (DJ亚明版)","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/牵丝戏%20(DJ亚明版).mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"画离弦","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/画离弦.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"盐渍月亮 Salty Moon","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/盐渍月亮%20Salty%20Moon.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"盗墓笔记·十年人间","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/盗墓笔记·十年人间.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"知我","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/知我.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"破茧","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/破茧.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"破阵舞","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/破阵舞.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"离人殇","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/离人殇.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"离人赋 (治愈版)","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/离人赋%20(治愈版).mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"离别开出花","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/离别开出花.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"笔下江湖","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/笔下江湖.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"红尘回眸","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/红尘回眸.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"纵此生","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/纵此生.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"纸上风雅","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/纸上风雅.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"芒种","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/芒种.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"花开花谢花又飞","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/花开花谢花又飞.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"若月亮没来 (DJ铁柱版)","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/若月亮没来%20(DJ铁柱版).mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"若月亮没来","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/若月亮没来.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"荒","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/荒.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"莫问归期","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/莫问归期.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"落","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/落.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"诛神诀 (DJ R7版)","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/诛神诀%20(DJ%20R7版).mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"谁家","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/谁家.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"赐我","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/赐我.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"赤伶","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/赤伶.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"跳楼机","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/跳楼机.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"踏山河","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/踏山河.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"辞·九门回忆","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/辞·九门回忆.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"过此生","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/过此生.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"速度与坚果 Fast & Furynuts","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/速度与坚果%20Fast%20&%20Furynuts.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"遗失的心跳","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/遗失的心跳.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"邀","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/邀.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"酒家解相思","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/酒家解相思.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"醉春风 (DJ版)","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/醉春风%20(DJ版).mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"长安姑娘","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/长安姑娘.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"难却","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/难却.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"难得真兄弟","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/难得真兄弟.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"难断","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/难断.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"雾里","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/雾里.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"风催雨","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/风催雨.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"飘浮","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/飘浮.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"飞鸟和蝉","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/飞鸟和蝉.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"马步谣","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/马步谣.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"鸳鸯戏","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/鸳鸯戏.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"},{"title":"龙游万里","author":"寻","url":"https://gh-proxy.org/https://raw.githubusercontent.com/njmxye/cdn_ms/refs/heads/main/龙游万里.mp3","pic":"https://gh-proxy.org/https://github.com/njmxye/cdn_ms/blob/main/1716767227197.jpg"}]};options.element = document.getElementById("aplayer-VbASGHkA");var ap = new APlayer(options);window.aplayers || (window.aplayers = []);window.aplayers.push(ap)</script></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/metingjs/dist/Meting.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener
+  btf.removeGlobalFnEvent('pjax')
+  btf.removeGlobalFnEvent('themeChange')
+
+  document.getElementById('rightside').classList.remove('rightside-show')
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+  typeof disqusjs === 'object' && disqusjs.destroy()
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":300,"height":600},"mobile":{"show":false},"rect":"opacity:0.7","log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body></html>
